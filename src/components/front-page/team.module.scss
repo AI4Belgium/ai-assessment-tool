@@ -36,13 +36,12 @@
   figure figcaption {
     margin-top: 32px;
     text-align: center;
-    color: var(--color-gray-700);
+    color: #2CB8A5;
     a {
       display: block;
       font-size: 21px;
       font-weight: 400;
       text-transform: uppercase;
-      color: hsl(265deg 100% 80%);
       margin-bottom: 8px;
     }
     a:hover {
@@ -62,7 +61,6 @@
     text-align: center;
     margin: 0 16px;
     padding: 0 16px;
-    color: #ffffff;
     @media (max-width: 700px) {
       & {
         font-size: 1em;

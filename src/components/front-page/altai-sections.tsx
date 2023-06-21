@@ -1,6 +1,7 @@
 
-import { Box, Text, Heading } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 import style from './altai-sections.module.scss'
+import { Heading1, Heading2, TextBody } from './content'
 
 const altaiSections = [
   {
@@ -37,13 +38,13 @@ const altaiSections = [
   }
 ]
 
-export const AltaiSections = (): JSX.Element => {
+export const AltaiSections = (props: BoxProps): JSX.Element => {
   return (
-    <Box justifyContent='center' color='white' bgColor='rgba(14, 16, 18)'>
+    <Box justifyContent='center' color='black' {...props}>
       <div className={style.centralised_container}>
-        <Heading fontSize={['0.8em', '1,2em']} className={style['centralised-sunshine-gradient-title']}>Description</Heading>
-        <Text fontSize={['0.7em', '1em']}>This tool was designed to enable team members with diverse expertise to collaborate and have conversations about key topics related to the trustworthiness of their AI implementation.</Text>
-        <Text fontSize={['0.7em', '1em']} my='2em'>Topics assessed</Text>
+        <Heading1>Description</Heading1>
+        <TextBody>This tool was designed to enable team members with diverse expertise to collaborate and have conversations about key topics related to the trustworthiness of their AI implementation.</TextBody>
+        <Heading2>Topics assessed</Heading2>
         <Box position='relative'>
           <div className={style.section_container}>
             <ul className={style['section-list']}>
@@ -66,7 +67,10 @@ export const AltaiSections = (): JSX.Element => {
                       <polyline points='12 5 19 12 12 19' />
                     </svg>
                   </span>
-                  <div role='listitem'><strong>{altaiSection.title}</strong> {altaiSection.description}
+                  <div role='listitem'>
+                    <TextBody>
+                      <strong>{altaiSection.title}</strong> {altaiSection.description}
+                    </TextBody>
                   </div>
                 </li>
               ))}

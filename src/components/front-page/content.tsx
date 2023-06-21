@@ -1,13 +1,20 @@
 import React from 'react'
-import { Box, Flex, Text, Center, Image, Wrap, Heading, Spacer } from '@chakra-ui/react'
+import { Box, Flex, Text, Center, Image, Wrap, Heading, Spacer, HeadingProps, TextProps } from '@chakra-ui/react'
 import Typed from 'typed.js'
 import { TeamMembersContainer } from './team'
 import { AltaiSections } from './altai-sections'
-import { TryItOutButton } from './try-out-button'
+import { LinkButton } from './link-button'
 // import checkEnvironment from '@/util/check-environment'
 // import { WaveBlackToGray, WavePurple, WavesOutline } from './waves'
 // import { Waves2 } from '@/src/components/front-page/waves2'
 import style from './content.module.scss'
+
+export const TEXT_COLOR = '#09181B'
+
+export const Heading1 = (props: HeadingProps): JSX.Element => <Heading fontSize={['1.875rem', '2.5rem']} {...props}>{props.children}</Heading>
+export const Heading2 = (props: HeadingProps): JSX.Element => <Heading mt='1.5rem' mb='1rem' fontSize={['1.5625rem', '1.875rem']} color='#00566B' {...props}>{props.children}</Heading>
+export const Heading3 = (props: HeadingProps): JSX.Element => <Heading fontSize={['1.25', '1.5625rem']} {...props}>{props.children}</Heading>
+export const TextBody = (props: TextProps): JSX.Element => <Text fontSize={['1.125rem', '1.25rem']} mt={['1.125rem', '1.25rem']} {...props}>{props.children}</Text>
 
 export const Content = (): JSX.Element => {
   return (
@@ -19,9 +26,9 @@ export const Content = (): JSX.Element => {
       {/* <Waves /> */}
       <Part3 />
       {/* <WaveBlackToGray /> */}
-      <TeamMembersContainer />
+      <TeamMembersContainer color={TEXT_COLOR} />
       {/* <WavePurple /> */}
-      <AltaiSections />
+      <AltaiSections color={TEXT_COLOR} />
       {/* <WaveBlackToGray /> */}
     </Flex>
   )
@@ -29,16 +36,16 @@ export const Content = (): JSX.Element => {
 
 const Part1 = (): JSX.Element => {
   return (
-    <Box py='2em' color='white' fontSize='1em' textAlign={['center', 'left']} bgColor='rgba(20, 17, 24)' className={style.part1}>
-      <Flex className={style.intro} mt='5em' flexWrap='wrap'>
+    <Box pb='2rem' color={TEXT_COLOR} textAlign={['center', 'left']} className={style.part1}>
+      <Flex className={style.intro} mt='1.5rem' flexWrap='wrap'>
         <TypingEffect texts={['ethical?', 'trustworthy?', 'racially unbiased?']} />
         <Box>
           <Image src='/frontpage/demo1.png' alt='Demo image' height='30vh' width='50vh' />
         </Box>
       </Flex>
-      <Box mt='10vh'>
-        <Text fontSize={['0.8em', '1.5em']}>Welcome to our <span className='text-gradient-purple-light-blue'>Open Source</span> <span className='wave-underline yellow'>multidisciplinary</span> and <span className='wave-underline green'>interactive</span> online tool for assessing the trustworthiness of an organization's AI implementation.</Text>
-        <Text fontSize={['0.8em', '1.5em']} mt='3em'>The tool is based on the <span className='wave-underline purple'>ALTAI</span> recommendations published by the <span className='text-gradient-light-blue-purple'>European Commission</span> and is designed to help organizations ensure their AI systems are transparent, robust, and trustworthy.</Text>
+      <Box mt='2rem'>
+        <TextBody>Welcome to our Open Source <span className='underline'>multidisciplinary</span> and <span className='underline'>interactive</span> online tool for assessing the trustworthiness of an organization's AI implementation.</TextBody>
+        <TextBody>The tool is based on the <a href='https://digital-strategy.ec.europa.eu/en/library/assessment-list-trustworthy-artificial-intelligence-altai-self-assessment' target='_blank' rel='noreferrer'>ALTAI recommendations</a> published by the European Commission and is designed to help organizations ensure their AI systems are transparent, robust, and trustworthy.</TextBody>
       </Box>
     </Box>
   )
@@ -64,20 +71,18 @@ const Part1 = (): JSX.Element => {
 
 const Part2 = (): JSX.Element => {
   return (
-    <Box py='2em' color='white' fontSize='1em' bgColor='rgba(14, 16, 18)' boxSizing='border-box'>
-      <Heading fontSize={['0.8em', '1.2em']} className='heading-gradient-pink-yellow-white'>Highlight Areas of Risk</Heading>
-      <Text fontSize={['0.7em', '1em']} mt='1.5em'>In today's fast-paced world, organizations are increasingly adopting AI to streamline operations and improve decision-making. However, AI systems must be developed and <Text as='span'>implemented with caution</Text>, ensuring that they do not compromise fundamental human rights or perpetuate bias and discrimination. Our tool provides a comprehensive assessment of your organization's AI implementation, <Text as='span'>highlighting areas of strength and areas for improvement.</Text></Text>
-      <Heading mt='2em' className='highlight pink' fontSize={['0.8em', '1.2em']}>
-        Recommendations Report
-      </Heading>
-      <Text fontSize={['0.7em', '1em']} mt='2em'>You will also receive detailed <Text as='span'>suggestions and guidance</Text> for improving the trustworthiness of your AI system. This will enable you to build and maintain <Text as='span'>trust</Text> with your customers, employees, and other stakeholders, and <Text as='span'>mitigate the risks</Text> associated with AI implementation.</Text>
-      <Heading mt='2em' className='highlight pink' fontSize={['0.8em', '1.2em']}>You are in control</Heading>
-      <Text fontSize={['0.7em', '1em']} mt='2em'>One of the key benefits of our <Text as='span'>open-source</Text> tool is that it can be <Text as='span'>hosted and fully controlled by your organization</Text>. This means that you can maintain complete ownership and control over your data and assessments.</Text>
-      <Text fontSize={['0.7em', '1em']} mt='2em'>Host the tool on your own servers, you can also ensure that the tool <Text as='span'>meets your</Text> organization's specific <Text as='span'>security and privacy requirements</Text>.</Text>
-      <Text fontSize={['0.7em', '1em']} mt='2em'><Text as='span' textDecoration='underline' fontWeight='bold'>OPEN-SOURCE</Text>, modify and adapt the tool to fit your <Text as='span'>organization's unique needs</Text>.</Text>
-      <Text fontSize={['0.7em', '1em']} mt='2em'>This flexibility and control make our tool an ideal solution for organizations looking to assess the trustworthiness of their AI systems while maintaining full control over their data and assessments.</Text>
-      <Center mt='10vh'>
-        <TryItOutButton link='https://github.com/ai4be/AI-Assessment-Tool' label='Install it here' />
+    <Box py='2rem' color={TEXT_COLOR}>
+      <Heading1>Highlight Areas of Risk</Heading1>
+      <TextBody mt='2.5rem'>In today's fast-paced world, organizations are increasingly adopting AI to streamline operations and improve decision-making. However, AI systems must be developed and <Text as='span'>implemented with caution</Text>, ensuring that they do not compromise fundamental human rights or perpetuate bias and discrimination. Our tool provides a comprehensive assessment of your organization's AI implementation, highlighting areas of strength and areas for improvement.</TextBody>
+      <Heading2>Recommendations Report</Heading2>
+      <TextBody>You will also receive detailed <Text as='span'>suggestions and guidance</Text> for improving the trustworthiness of your AI system. This will enable you to build and maintain <Text as='span'>trust</Text> with your customers, employees, and other stakeholders, and <Text as='span'>mitigate the risks</Text> associated with AI implementation.</TextBody>
+      <Heading2>You are in control</Heading2>
+      <TextBody>One of the key benefits of our <Text as='span'>open-source</Text> tool is that it can be <Text as='span'>hosted and fully controlled by your organization</Text>. This means that you can maintain complete ownership and control over your data and assessments.</TextBody>
+      <TextBody>Host the tool on your own servers, you can also ensure that the tool <Text as='span'>meets your</Text> organization's specific <Text as='span'>security and privacy requirements</Text>.</TextBody>
+      <TextBody><Text as='span' textDecoration='underline' fontWeight='bold'>OPEN-SOURCE</Text>, modify and adapt the tool to fit your <Text as='span'>organization's unique needs</Text>.</TextBody>
+      <TextBody>This flexibility and control make our tool an ideal solution for organizations looking to assess the trustworthiness of their AI systems while maintaining full control over their data and assessments.</TextBody>
+      <Center mt='2rem'>
+        <LinkButton link='https://github.com/ai4be/AI-Assessment-Tool' label='Install it here' />
       </Center>
     </Box>
   )
@@ -85,26 +90,26 @@ const Part2 = (): JSX.Element => {
 
 const Part3 = (): JSX.Element => {
   return (
-    <Box py='2em' color='white' fontSize='1em' bgColor='rgba(20, 17, 24)'>
-      <Heading className='highlight dark-yellow' fontSize={['0.8em', '1.2em']} textAlign='center'>TRY THE DEMO INSTANCE</Heading>
-      <Flex flexDirection='column' alignItems='center' pt='2em'>
+    <Box py='2rem' color={TEXT_COLOR}>
+      <Heading2 textAlign='center'>TRY THE DEMO INSTANCE</Heading2>
+      <Flex flexDirection='column' alignItems='center' pt='1rem'>
         <Image src='/frontpage/demo2.png' alt='Demo image' width='100%' px='2em' />
-        <Flex justifyContent='space-between' mt='10vh'>
+        <Flex justifyContent='space-between' mt='2rem'>
           <Wrap>
             <Box>
-              <Text fontSize={['0.7em', '1em']}>The demo instance is a publicly available instance for trying out the AI Ethics Assessment Tool and can be found at altai.ai4belgium.be.
+              <TextBody>The demo instance is a publicly available instance for trying out the AI Ethics Assessment Tool and can be found at <a href='//altai.ai4belgium.be' target='_blank' rel='noreferrer'>altai.ai4belgium.be</a>.
 
                 While projects and accounts on the demo instance are not deleted periodically, you should <strong>not rely</strong> on the demo instance for production use.
                 We cannot guarantee that your projects won’t be lost. This is mainly due to the fact that this instance runs on a small virtual machine with limited resources.
                 We generally recommend hosting your own instance.
-              </Text>
+              </TextBody>
             </Box>
             <Spacer />
           </Wrap>
         </Flex>
       </Flex>
-      <Center mt='10vh'>
-        <TryItOutButton link='https://altai.ai4belgium.be/login' label='Try it here' />
+      <Center mt='2rem'>
+        <LinkButton link='https://altai.ai4belgium.be/login' label='Try it here' />
       </Center>
     </Box>
   )
@@ -125,8 +130,9 @@ const TypingEffect = ({ texts }: { texts: string[] }): JSX.Element => {
 
   return (
     <Box>
-      <Text className='text-gradient-purple-light-blue' style={{ fontSize: '2em' }}>Is your AI</Text>
-      <span className='text-gradient-purple-light-blue' style={{ fontSize: '2em', width: 'fit-content' }} ref={el} />
+      <Heading2 className='text-gradient-purple-light-blue'>
+        Is your AI <span ref={el} />
+      </Heading2>
     </Box>
   )
 }

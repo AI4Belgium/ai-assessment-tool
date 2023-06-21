@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Center, Heading, Flex } from '@chakra-ui/react'
+import { Box, Center, Flex, BoxProps } from '@chakra-ui/react'
 import style from './team.module.scss'
+import { Heading1, TEXT_COLOR } from './content'
 
 const teamMemberData = [
   {
@@ -51,9 +52,9 @@ const TeamMemberAvatarBlock = ({ teamMember: { src, quote, social, name, workTit
   return (
     <Box className={style.team_member}>
       <figure>
-        <img src={src} />
+        <img src={src} alt={`${name} - ${workTitle}`} />
         <figcaption><a href={social}>{name}</a>{workTitle}</figcaption>
-        <blockquote className='not-safari'>
+        <blockquote className='not-safari' style={{ color: TEXT_COLOR }}>
           {quote}
         </blockquote>
       </figure>
@@ -61,12 +62,12 @@ const TeamMemberAvatarBlock = ({ teamMember: { src, quote, social, name, workTit
   )
 }
 
-export const TeamMembersContainer = (): JSX.Element => {
+export const TeamMembersContainer = (props: BoxProps): JSX.Element => {
   return (
-    <Box py={['2em', '4em']} fontSize='1em' className={style.team_container}>
+    <Box py={['2rem']} className={style.team_container} {...props}>
       <Box as='section' position='relative' zIndex='2'>
         <Center>
-          <Heading fontSize={['0.8em', '1.2em']} className='highlight dark-yellow'>Meet the <span className='text-white'>AI</span><span className='text-sky-600'>4</span><span className='text-white'>Belgium</span> Ethics <span className='text-base'>&</span> Law <span className='text-white'>advisory board</span></Heading>
+          <Heading1>Meet the <span className='icon-grey-color'>AI</span><sub className='icon-blue-color' style={{ fontSize: '1em' }}>4</sub><span className='icon-grey-color'>Belgium</span> Ethics <span className='text-base'>&</span> Law advisory board</Heading1>
         </Center>
         <Flex mt='10vh' flexDirection='column' alignItems='center'>
           {teamMemberData.map((tm, i) => <TeamMemberAvatarBlock key={i} teamMember={tm} />)}

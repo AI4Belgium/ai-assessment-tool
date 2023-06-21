@@ -108,11 +108,12 @@
   top: 0;
   right: 0;
   bottom: 0;
+  margin-right: -2px;
   width: 100px;
   background: linear-gradient(
     to right,
-    hsl(274deg 16% 8% / 0),
-    hsl(274deg 16% 8% / 1)
+    transparent,
+    white
   );
   pointer-events: none;
 }
@@ -130,8 +131,8 @@
   height: 100px;
   background: linear-gradient(
     to var(--gradient-direction),
-    hsl(274deg 16% 8% / 0),
-    hsl(274deg 16% 8% / 1)
+    transparent,
+    white
   );
   -webkit-transition: opacity 250ms;
   transition: opacity 250ms;

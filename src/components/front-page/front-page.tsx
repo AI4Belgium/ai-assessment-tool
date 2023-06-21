@@ -27,8 +27,14 @@ In case you need to clone Josh website for reference, use: https://saveweb2zip.c
 */
 const FrontPage = (): JSX.Element => {
   const css = `body {
-    background-color: rgba(14,16,18);
-  }`
+    background-color: white;
+    font-size: 16px;
+  }
+  a {
+    color: #057A8B;
+    text-decoration: underline;
+  }
+  `
   return (
     <>
       <style>
