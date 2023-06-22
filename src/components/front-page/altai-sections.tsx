@@ -36,7 +36,7 @@ export const AltaiSections = (props: BoxProps): JSX.Element => {
                     </svg>
                   </span>
                   <div role='listitem'>
-                    <TextBody>
+                    <TextBody textAlign='left'>
                       <strong>{t(`altai_sections.topics.${i}.title`)}</strong> {t(`altai_sections.topics.${i}.description`)}
                     </TextBody>
                   </div>

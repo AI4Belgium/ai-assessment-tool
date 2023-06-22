@@ -87,9 +87,9 @@
   -webkit-text-fill-color: transparent;
   background: linear-gradient(
     90deg,
-    #00566B,
-    #057A8B,
-    #2CB8A5
+    #00566B 10%,
+    #057A8B 20%,
+    rgba(44,184,165, 0.3)
   );
   -webkit-background-clip: text;
   background-clip: text;

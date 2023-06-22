@@ -12,7 +12,7 @@ export const TEXT_COLOR = '#09181B'
 export const Heading1 = (props: HeadingProps): JSX.Element => <Heading fontSize={['1.875rem', '2.5rem']} {...props}>{props.children}</Heading>
 export const Heading2 = (props: HeadingProps): JSX.Element => <Heading mt='1.5rem' mb='1rem' fontSize={['1.5625rem', '1.875rem']} color='#00566B' {...props}>{props.children}</Heading>
 export const Heading3 = (props: HeadingProps): JSX.Element => <Heading fontSize={['1.25', '1.5625rem']} {...props}>{props.children}</Heading>
-export const TextBody = (props: TextProps): JSX.Element => <Text fontSize={['1.125rem', '1.25rem']} mt={['1.125rem', '1.25rem']} {...props}>{props.children}</Text>
+export const TextBody = (props: TextProps): JSX.Element => <Text textAlign='justify' fontSize={['1.125rem', '1.25rem']} mt={['1.125rem', '1.25rem']} {...props}>{props.children}</Text>
 
 export const Content = (): JSX.Element => {
   useEffect(() => {
