@@ -3,6 +3,8 @@ import { AI4BelgiumIcon } from '@/src/components/navbar'
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, Flex } from '@chakra-ui/react'
 import LocaleSwitcher from '@/src/components/locale-switcher'
 
+export const GITHUB_URL = 'https://github.com/AI4Belgium/ai-assessment-tool'
+
 export const AI4BelgiumHeader = (): JSX.Element => {
   const url = `${checkEnvironment()}/login`
   return (
@@ -15,7 +17,7 @@ export const AI4BelgiumHeader = (): JSX.Element => {
         </Flex>
         <Breadcrumb opacity='0.75' px='3' py='5' fontWeight='medium' fontSize='lg'>
           <BreadcrumbItem>
-            <BreadcrumbLink href='https://github.com/AI4Belgium/AI-Assessment-Tool'>Source</BreadcrumbLink>
+            <BreadcrumbLink href={GITHUB_URL}>Source</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbItem>
             <BreadcrumbLink href={url}>Demo</BreadcrumbLink>

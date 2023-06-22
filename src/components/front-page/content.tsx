@@ -6,6 +6,7 @@ import { TeamMembersContainer } from './team'
 import { AltaiSections } from './altai-sections'
 import { LinkButton } from './link-button'
 import style from './content.module.scss'
+import { GITHUB_URL } from './header'
 
 export const TEXT_COLOR = '#09181B'
 
@@ -75,7 +76,7 @@ const Part2 = (): JSX.Element => {
       </TextBody>
       <TextBody><Trans t={t}>{t('part2.txt6')}</Trans></TextBody>
       <Center mt='2rem'>
-        <LinkButton link='https://github.com/ai4be/AI-Assessment-Tool' label={t('part2.action1')} />
+        <LinkButton link={GITHUB_URL} label={t('part2.action1')} />
       </Center>
     </Box>
   )

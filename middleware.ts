@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import i18n from './i18.config'
+import { i18n } from './next-i18next.config'
 
 const PUBLIC_FILE = /\.(.*)$/
 

@@ -4,6 +4,7 @@ import { FaGithub } from 'react-icons/fa'
 import { AI4BelgiumIcon } from '@/src/components/navbar'
 import { TextBody } from './content'
 import { useTranslation, Trans } from 'next-i18next'
+import { GITHUB_URL } from './header'
 
 const Logo = (): JSX.Element => {
   return (
@@ -47,15 +48,15 @@ export const Footer = (): JSX.Element => {
       <Logo />
       <TextBody textAlign='center' mt='0'>
         <Trans components={[
-          <a href='https://michel.belgium.be/fr/cellule-strat%C3%A9gique-et-secr%C3%A9tariat' key='0' />,
-          <a href='https://desutter.belgium.be/fr/contact' key='1' />
+          <a href='https://michel.belgium.be/cellule-strat%C3%A9gique-et-secr%C3%A9tariat' key='0' />,
+          <a href='https://desutter.belgium.be/contact' key='1' />
         ]}
         >
           {t('footer.txt')}
         </Trans>
       </TextBody>
       <Box mt='1em' />
-      <SocialButton label='GitHub' href='https://github.com/ai4be/AI-Assessment-Tool'>
+      <SocialButton label='GitHub' href={GITHUB_URL}>
         <FaGithub />
       </SocialButton>
     </Flex>
