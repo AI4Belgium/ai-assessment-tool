@@ -1,0 +1,97 @@
+{
+  "part1": {
+    "title1": "Votre IA est-elle éthique?",
+    "title2": "Votre IA est-elle fiable?",
+    "title3": "Votre IA est-elle impartiale sur le plan racial?",
+    "txt1": "Bienvenue sur notre outil en ligne <0>multidisciplinaire</0> et <0>interactif</0> en source ouverte pour évaluer la fiabilité de la mise en œuvre de l'IA au sein d'une organisation.",
+    "txt2": "Cet outil est basé sur les <0>recommandations ALTAI</0> publiées par la Commission européenne et vise à aider les organisations à garantir que leurs systèmes d'IA sont transparents, robustes et dignes de confiance."
+  },
+  "part2": {
+    "title1": "Mettre en évidence les domaines à risque",
+    "txt1": "Dans le monde d'aujourd'hui où tout va vite, les organisations adoptent de plus en plus l'IA pour optimiser leurs opérations et améliorer la prise de décision. Cependant, les systèmes d'IA doivent être développés et <strong>implémentés avec prudence</strong>, en veillant à ne pas compromettre les droits fondamentaux de l'homme ni perpétuer les biais et discriminations. Notre outil offre une évaluation complète de la mise en œuvre de l'IA au sein de votre organisation, en mettant en évidence les points forts et les domaines à améliorer.",
+    "title2": "Rapport de recommandations",
+    "txt2": "Vous recevrez également des suggestions détaillées et des conseils pour améliorer la fiabilité de votre système d'IA. Cela vous permettra de construire et de maintenir <strong>la confiance</strong> auprès de vos clients, employés et autres parties prenantes, et de <strong>mitiger les risques</strong> liés à la mise en œuvre de l'IA.",
+    "title3": "Vous êtes aux commandes",
+    "txt3": "L'un des principaux avantages de notre outil <strong>open source</strong> est qu'il peut être <strong>hébergé et entièrement contrôlé par votre organisation</strong>. Cela signifie que vous pouvez conserver la propriété et le contrôle total sur vos données et évaluations.",
+    "txt4": "En hébergeant l'outil sur vos propres serveurs, vous pouvez également vous assurer que l'outil <strong>répond aux exigences spécifiques</strong> de sécurité et de confidentialité de votre organisation.",
+    "txt5": "<0 className='underline bold'>OPEN-SOURCE</0>, modifiez et adaptez l'outil pour répondre aux <strong>besoins uniques de votre organisation</strong>.",
+    "txt6": "Cette flexibilité et ce contrôle font de notre outil une solution idéale pour les organisations souhaitant évaluer la fiabilité de leurs systèmes d'IA tout en conservant un contrôle total sur leurs données et évaluations.",
+    "action1": "Installez-le ici"
+  },
+  "part3": {
+    "title1": "ESSAYEZ L'INSTANCE DE DÉMO",
+    "txt1": "L'instance de démonstration est une instance publiquement accessible pour essayer l'outil d'évaluation de l'éthique de l'IA et peut être trouvée à l'adresse suivante : <0>altai.ai4belgium.be</0>.<br/><br/>Bien que les projets et les comptes sur l'instance de démonstration ne soient pas supprimés périodiquement, vous ne devriez <strong>pas compter</strong> sur l'instance de démonstration pour une utilisation en production. Nous ne pouvons pas garantir que vos projets ne seront pas perdus. Cela est principalement dû au fait que cette instance fonctionne sur une petite machine virtuelle avec des ressources limitées. Nous vous recommandons généralement d'héberger votre propre instance.",
+    "action1": "Essayez-le ici"
+  },
+  "team": {
+    "title1": "Rencontrez le conseil consultatif d'<0>AI</0><1>4</1><2>Belgium</2> Éthique <3>&</3> Droit",
+    "members": {
+      "Nathalie Smuha": {
+        "workTitle": "Chercheuse à la KU Leuven",
+        "quote": "Nathalie Smuha est une spécialiste du droit et une philosophe à la Faculté de droit de la KU Leuven, où elle examine les questions juridiques, éthiques et philosophiques liées à l'intelligence artificielle (IA) et aux autres technologies numériques."
+      },
+      "Nele Roekens": {
+        "workTitle": "Conseillère juridique - Unia • Centre interfédéral pour l'égalité des chances",
+        "quote": "Nele est conseillère juridique chez Unia, l'Institution belge des droits de l'homme et de l'égalité des chances. Elle se spécialise dans les technologies et les droits de l'homme, notamment la non-discrimination."
+      },
+      "Jelle Hoedemaekers": {
+        "workTitle": "Expert en normalisation chez Agoria",
+        "quote": "Jelle est un expert en réglementation de l'IA. Il travaille en tant qu'expert en normalisation des TIC chez Agoria, où il se concentre sur la normalisation et la réglementation des nouvelles technologies telles que l'intelligence artificielle. Au sein d'Agoria, il travaille également sur les politiques entourant les nouvelles technologies. Jelle co-dirige également le groupe de travail AI4belgium sur l'éthique et le droit, qui examine les implications éthiques et juridiques de l'IA dans l'écosystème belge."
+      },
+      "Carl Mörch": {
+        "workTitle": "Co-directeur - FARI • Institut de l'IA pour le Bien Commun",
+        "quote": "Je co-dirige FARI - Institut de l'IA pour le Bien Commun. Ce projet est une initiative conjointe de l'Université libre de Bruxelles (ULB) et de la Vrije Universiteit Brussel (VUB). Je suis également chercheur associé au laboratoire Algora (UdeM, Mila, Canada) et professeur adjoint (UQAM, Canada). J'ai développé et publié un outil d'éthique de l'IA, et je travaille sur l'utilisation responsable des technologies dans le domaine de la santé."
+      },
+      "Rob Heyman": {
+        "workTitle": "Directeur - Centre de connaissances Data & Maatschappij",
+        "quote": "Plus nous vivons dans un monde numérisé, plus nous prenons des décisions personnalisées basées sur nos informations. Mon objectif est de comprendre comment ces choses fonctionnent et d'amener les gens à comprendre ce qui se passe avec les données. Je trouve curieux que si peu de choses soient connues sur les données à l'ère du big data. Ma méthode consiste à révéler la vie cachée des données en les cartographiant à travers des textes, des scénarios et des visualisations faciles à comprendre. Nous utilisons ensuite des séances de co-création pour cartographier les pratiques actuelles en fonction des attentes des utilisateurs finaux, des régulateurs ou des innovateurs."
+      },
+      "Nathanaël Ackerman": {
+        "workTitle": "Responsable BOSA - Équipe IA - Minds",
+        "quote": "Nathanaël Ackerman est le directeur général de la coalition AI4Belgium et de Digital Mind pour la Belgique, nommé par le Secrétaire d'État à la Digitalisation. Il est également responsable de l'équipe « IA - Blockchain & Digital Minds » pour le Service public fédéral Stratégie et Appui (BoSa) en Belgique."
+      }
+    }
+  },
+  "altai_sections": {
+    "title1": "Description",
+    "txt1": "Cet outil a été conçu pour permettre aux membres de l'équipe ayant des expertises diverses de collaborer et d'avoir des conversations sur les principaux sujets liés à la fiabilité de leur mise en œuvre de l'IA.",
+    "title2": "Sujets évalués",
+    "topics": [
+      {
+        "title": "1. Droits fondamentaux",
+        "description": "Cette section met l'accent sur la nécessité de respecter les droits fondamentaux de l'homme dans le développement et le déploiement des systèmes d'IA. Elle comprend des lignes directrices visant à garantir que les systèmes d'IA ne violent pas la dignité humaine, la vie privée ou d'autres droits fondamentaux."
+      },
+      {
+        "title": "2. Agence humaine et supervision",
+        "description": "Cette section souligne l'importance de la supervision humaine dans la prise de décision de l'IA. Elle fournit des lignes directrices pour veiller à ce que les humains restent aux commandes des systèmes d'IA et que les décisions prises par les systèmes d'IA soient explicables et vérifiables."
+      },
+      {
+        "title": "3. Robustesse technique et sécurité",
+        "description": "Cette section fournit des lignes directrices pour garantir la robustesse technique et la sécurité des systèmes d'IA. Elle couvre des sujets tels que la fiabilité du système, la cybersécurité et la résilience."
+      },
+      {
+        "title": "4. Confidentialité et gouvernance des données",
+        "description": "Cette section met l'accent sur la nécessité de protéger les données personnelles et de garantir une gouvernance appropriée des données dans le développement et le déploiement de systèmes d'IA. Elle fournit des lignes directrices pour veiller à ce que les données personnelles soient collectées, traitées et stockées de manière transparente et sécurisée."
+      },
+      {
+        "title": "5. Transparence",
+        "description": "Cette section souligne l'importance de la transparence dans la prise de décision de l'IA. Elle fournit des lignes directrices pour veiller à ce que les processus de prise de décision de l'IA soient explicables et que les utilisateurs puissent comprendre comment les décisions sont prises."
+      },
+      {
+        "title": "6. Diversité, non-discrimination et équité",
+        "description": "Cette section fournit des lignes directrices pour veiller à ce que les systèmes d'IA ne perpétuent pas les biais et discriminations. Elle aborde des sujets tels que les biais de données, l'équité dans la prise de décision et l'inclusion."
+      },
+      {
+        "title": "7. Bien-être sociétal et environnemental",
+        "description": "Cette section met l'accent sur la nécessité de prendre en compte l'impact sociétal et environnemental des systèmes d'IA. Elle fournit des lignes directrices pour veiller à ce que les systèmes d'IA soient développés et déployés de manière à promouvoir le bien-être social et environnemental."
+      },
+      {
+        "title": "8. Responsabilité",
+        "description": "Cette section fournit des lignes directrices pour garantir la responsabilité dans le développement et le déploiement de l'IA. Elle aborde des sujets tels que la conformité juridique, la gestion des risques et l'engagement des parties prenantes."
+      }
+    ]
+  },
+  "footer": {
+    "txt": "Avec le soutien du <0>cabinet Michel</0> et du <1>cabinet De Sutter</1>."
+  }
+}

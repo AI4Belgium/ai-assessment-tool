@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { i18n } from './next-i18next.config'
 
 const PUBLIC_FILE = /\.(.*)$/
 
@@ -11,8 +12,9 @@ export async function middleware (req: NextRequest): Promise<undefined | NextRes
     return
   }
 
-  if (req.nextUrl.locale === 'default') {
-    const locale = String((req.cookies.get('NEXT_LOCALE') != null) || 'en')
+  let locale = String(req.cookies.get('NEXT_LOCALE')?.value ?? i18n.defaultLocale)
+  if (!i18n.locales.includes(locale)) locale = i18n.defaultLocale
+  if (req.nextUrl.locale !== locale) {
     return NextResponse.redirect(
       new URL(`/${locale}${req.nextUrl.pathname}${req.nextUrl.search}`, req.url)
     )

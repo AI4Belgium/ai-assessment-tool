@@ -25,7 +25,7 @@ Work on accessibility.
 In case you need to clone Josh website for reference, use: https://saveweb2zip.com/en
 
 */
-const FrontPage = (): JSX.Element => {
+const FrontPage = (props: any): JSX.Element => {
   const css = `body {
     background-color: white;
     font-size: 16px;

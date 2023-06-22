@@ -1,0 +1,97 @@
+{
+  "part1": {
+    "title1": "Is your AI ethical?",
+    "title2": "Is your AI trustworthy?",
+    "title3": "Is your AI racially unbiased?",
+    "txt1": "Welcome to our Open Source <0>multidisciplinary</0> and <0>interactive</0> online tool for assessing the trustworthiness of an organization's AI implementation.",
+    "txt2": "The tool is based on the <0>ALTAI recommendations</0> published by the European Commission and is designed to help organizations ensure their AI systems are transparent, robust, and trustworthy."
+  },
+  "part2": {
+    "title1": "Highlight Areas of Risk",
+    "txt1": "In today's fast-paced world, organizations are increasingly adopting AI to streamline operations and improve decision-making. However, AI systems must be developed and <strong>implemented with caution</strong>, ensuring that they do not compromise fundamental human rights or perpetuate bias and discrimination. Our tool provides a comprehensive assessment of your organization's AI implementation, highlighting areas of strength and areas for improvement.",
+    "title2": "Recommendations Report",
+    "txt2": "You will also receive detailed suggestions and guidance for improving the trustworthiness of your AI system. This will enable you to build and maintain <strong>trust</strong> with your customers, employees, and other stakeholders, and <strong>mitigate the risks</strong> associated with AI implementation.",
+    "title3": "You are in control",
+    "txt3": "One of the key benefits of our <strong>open-source</strong> tool is that it can be <strong>hosted and fully controlled by your organization</strong>. This means that you can maintain complete ownership and control over your data and assessments.",
+    "txt4": "Host the tool on your own servers, you can also ensure that the tool <strong>meets your</strong> organization's specific <strong>security and privacy requirements</strong>.",
+    "txt5": "<0 className='underline bold'>OPEN-SOURCE</0>, modify and adapt the tool to fit your <strong>organization's unique needs</strong>.",
+    "txt6": "This flexibility and control make our tool an ideal solution for organizations looking to assess the trustworthiness of their AI systems while maintaining full control over their data and assessments.",
+    "action1": "Install it here"
+  },
+  "part3": {
+    "title1": "TRY THE DEMO INSTANCE",
+    "txt1": "The demo instance is a publicly available instance for trying out the AI Ethics Assessment Tool and can be found at <0>altai.ai4belgium.be</0>.<br/><br/>While projects and accounts on the demo instance are not deleted periodically, you should <strong>not rely</strong> on the demo instance for production use. We cannot guarantee that your projects won't be lost. This is mainly due to the fact that this instance runs on a small virtual machine with limited resources. We generally recommend hosting your own instance.",
+    "action1": "Try it here"
+  },
+  "team": {
+    "title1": "Meet the <0>AI</0><1>4</1><2>Belgium</2> Ethics <3>&</3> Law advisory board",
+    "members": {
+      "Nathalie Smuha": {
+        "workTitle": "Researcher at KU Leuven",
+        "quote": "Nathalie Smuha is a legal scholar and philosopher at the KU Leuven Faculty of Law, where she examines legal, ethical and philosophical questions around Artificial Intelligence (AI) and other digital technologies."
+      },
+      "Nele Roekens": {
+        "workTitle": "Legal Advisor - Unia • Interfederal Centre for Equal Opportunities",
+        "quote": "Nele is legal advisor at Unia, the Belgian National Human Rights Institution and Equality Body. She specializes in tech and human rights, most notably non-discrimination."
+      },
+      "Jelle Hoedemaekers": {
+        "workTitle": "Stadardization Expert at Agoria",
+        "quote": "Jelle is an expert in AI Regulation. He works as ICT Normalisation expert at Agoria, where he is focused on the standardisation and regulation of new technologies such as Artificial Intelligence. Within Agoria he also works on policies surrounding new technologies. Jelle also co-leads the AI4belgium work group on Ethics and Law, which looks at the ethical and juridical implications of AI on the Belgian ecosystem."
+      },
+      "Carl Mörch": {
+        "workTitle": "Co-manager - FARI • AI Institute for Common Good",
+        "quote": "I am co-directing FARI - AI for the Common Good Institute. This project is a joint initiative between Université Libre de Bruxelles (ULB) and the Vrije Universiteit Brussel (VUB).I am also an associate researcher at Algora Lab (UdeM, Mila, Canada) and an adjunct professor (UQAM, Canada). I have developed and published an AI Ethics Tool, and I work on the responsible use of technologies in healthcare."
+      },
+      "Rob Heyman": {
+        "workTitle": "Director - Data & Maatschappij Kennis Centrum",
+        "quote": "The more digitalised we live, the more we get personalised decisions based on our information. My goal is to uncover how these things work and get people to understand what happens with data. I find it curious that so little is known about data in the age of big data. My method consists of uncovering the hidden life of data by mapping these processes in easy to digest, texts, scenarios and visuals. We then use co-creation sessions to map current practices with end-users expectations, regulators or innovators."
+      },
+      "Nathanaël Ackerman": {
+        "workTitle": "Manager BOSA - AI - Minds Team",
+        "quote": "Nathanaël Ackerman is the managing director of the AI4Belgium coalition and Digital Mind for Belgium appointed by the Secretary of State for Digitalization. He is also head of the “AI – Blockchain & Digital Minds” team for the Belgian Federal Public Service Strategy and Support (BoSa)."
+      }
+    }
+  },
+  "altai_sections": {
+    "title1": "Description",
+    "txt1": "This tool was designed to enable team members with diverse expertise to collaborate and have conversations about key topics related to the trustworthiness of their AI implementation.",
+    "title2": "Topics assessed",
+    "topics": [
+      {
+        "title": "1. Fundamental rights",
+        "description": "This section emphasizes the need to respect fundamental human rights in the development and deployment of AI systems. It includes guidelines for ensuring that AI systems do not violate human dignity, privacy, or other fundamental rights."
+      },
+      {
+        "title": "2. Human agency and oversight",
+        "description": "This section stresses the importance of human oversight in AI decision-making. It provides guidelines for ensuring that humans remain in control of AI systems and that decisions made by AI systems are explainable and auditable."
+      },
+      {
+        "title": "3. Technical robustness and safety",
+        "description": "This section provides guidelines for ensuring the technical robustness and safety of AI systems. It covers topics such as system reliability, cybersecurity, and resilience."
+      },
+      {
+        "title": "4. Privacy and data governance",
+        "description": "This section focuses on the need to protect personal data and ensure proper data governance in the development and deployment of AI systems. It provides guidelines for ensuring that personal data is collected, processed, and stored in a transparent and secure manner."
+      },
+      {
+        "title": "5. Transparency",
+        "description": "This section stresses the importance of transparency in AI decision-making. It provides guidelines for ensuring that AI decision-making processes are explainable and that users can understand how decisions are made."
+      },
+      {
+        "title": "6. Diversity, non-discrimination, and fairness",
+        "description": "This section provides guidelines for ensuring that AI systems do not perpetuate bias and discrimination. It covers topics such as data bias, fairness in decision-making, and inclusivity."
+      },
+      {
+        "title": "7. Societal and environmental wellbeing",
+        "description": "This section emphasizes the need to consider the societal and environmental impact of AI systems. It provides guidelines for ensuring that AI systems are developed and deployed in a way that promotes social and environmental wellbeing."
+      },
+      {
+        "title": "8. Accountability",
+        "description": "This section provides guidelines for ensuring accountability in AI development and deployment. It covers topics such as legal compliance, risk management, and stakeholder engagement."
+      }
+    ]
+  },
+  "footer": {
+    "txt": "With the support of <0>cabinet Michel</0> and <1>cabinet De Sutter</1>."
+  }
+}

@@ -9,7 +9,6 @@ export const LinkButton = ({ link, label }: { link: string, label: string }): JS
       fontSize={['1.25rem', '1.5625rem']}
       fontWeight='600'
       color={color}
-      target='blank'
       padding='0.625rem 2.1875rem'
       className='button nav-link'
       borderWidth='0.1875rem'
