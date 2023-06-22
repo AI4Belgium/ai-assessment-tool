@@ -51,7 +51,7 @@ const namespaces = [
   'signup',
   'titles',
   'validations',
-  'welcome'
+  'front-page'
 ]
 
 let initTranslationPromise: Promise<void> | null = null

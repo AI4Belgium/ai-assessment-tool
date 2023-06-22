@@ -1,11 +1,8 @@
-const path = require('path')
+
+const i18n = require('./i18.config')
 
 module.exports = {
-  i18n: {
-    defaultLocale: 'default',
-    locales: ['default', 'en', 'fr', 'nl'],
-    localeDetection: false
-  },
-  localePath: path.resolve('./public/locales'),
-  trailingSlash: true
+  i18n,
+  trailingSlash: true,
+  localePath: typeof window === 'undefined' ? require('path').resolve('./public/locales') : '/locales'
 }

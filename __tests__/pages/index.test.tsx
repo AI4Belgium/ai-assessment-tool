@@ -5,8 +5,9 @@ import Index from '@/pages/index'
 // https://www.paigeniedringhaus.com/blog/how-to-unit-test-next-js-api-routes-with-typescript
 // import { logRoles } from '@testing-library/dom'
 import { useSession } from 'next-auth/react'
-import enWelcomeJson from '@/public/locales/en/welcome.json'
-import nlWelcomeJson from '@/public/locales/nl/welcome.json'
+import enJson from '@/public/locales/en/front-page.json'
+import nlJson from '@/public/locales/nl/front-page.json'
+import frJson from '@/public/locales/fr/front-page.json'
 
 // need to mock next-auth/react
 // https://github.com/nextauthjs/next-auth/issues/775
@@ -28,20 +29,25 @@ const renderIndexAndAssert = async (valuesInHtml: string[], locale = 'en'): Prom
   for (const e of elements) {
     strings.push(e.innerHTML)
   }
-  expect(strings).toContain('Highlight Areas of Risk')
-  // for (const val of valuesInHtml) {
-  //   expect(strings).toContain(val)
-  // }
+  // expect(strings).toContain('Highlight Areas of Risk')
+  for (const val of valuesInHtml) {
+    expect(strings).toContain(val)
+  }
 }
 
 describe('Index page', () => {
   it('Renders the paragraphs with the default locale text values', async () => {
-    const vals = Object.values(enWelcomeJson)
+    const vals = [enJson.part2.title1, enJson.part2.title2]
     await renderIndexAndAssert(vals)
   })
 
   it('Renders the paragraphs with the "nl" locale text values', async () => {
-    const vals = Object.values(nlWelcomeJson)
+    const vals = [nlJson.part2.title1, nlJson.part2.title2]
     await renderIndexAndAssert(vals, 'nl')
+  })
+
+  it('Renders the paragraphs with the "fr" locale text values', async () => {
+    const vals = [frJson.part2.title1, frJson.part2.title2]
+    await renderIndexAndAssert(vals, 'fr')
   })
 })

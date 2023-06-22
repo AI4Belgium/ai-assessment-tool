@@ -1,0 +1,97 @@
+{
+  "part1": {
+    "title1": "Is uw AI ethisch?",
+    "title2": "Is uw AI betrouwbaar?",
+    "title3": "Is uw AI vrij van raciale vooringenomenheid?",
+    "txt1": "Welkom bij onze Open Source <0>multidisciplinaire</0> en <0>interactieve</0> online tool voor het beoordelen van de betrouwbaarheid van de AI-implementatie van een organisatie.",
+    "txt2": "Deze tool is gebaseerd op de <0>ALTAI-aanbevelingen</0> die zijn gepubliceerd door de Europese Commissie en is ontworpen om organisaties te helpen ervoor te zorgen dat hun AI-systemen transparant, robuust en betrouwbaar zijn."
+  },
+  "part2": {
+    "title1": "Vermijd Risicogebieden",
+    "txt1": "In de snel veranderende wereld van vandaag maken organisaties steeds vaker gebruik van AI om processen te stroomlijnen en besluitvorming te verbeteren. Het is echter belangrijk dat AI-systemen met voorzichtigheid worden ontwikkeld en <strong>geïmplementeerd, zodat ze geen inbreuk maken op fundamentele mensenrechten of vooroordelen en discriminatie in stand houden</strong>. Onze tool biedt een uitgebreide beoordeling van de AI-implementatie binnen uw organisatie, waarbij zowel sterke punten als verbeterpunten worden belicht.",
+    "title2": "Aanbevelingsrapport",
+    "txt2": "U ontvangt tevens gedetailleerde suggesties en begeleiding om de betrouwbaarheid van uw AI-systeem te verbeteren. Dit stelt u in staat om <strong>vertrouwen</strong> op te bouwen en te behouden bij uw klanten, werknemers en andere belanghebbenden, en <strong>risico's</strong> die gepaard gaan met AI-implementatie te beperken.",
+    "title3": "U heeft de controle",
+    "txt3": "Een van de belangrijkste voordelen van onze <strong>open-source</strong> tool is dat deze <strong>gehost en volledig beheerd kan worden door uw organisatie</strong>. Dit betekent dat u volledige eigendom en controle heeft over uw gegevens en beoordelingen.",
+    "txt4": "Door de tool op uw eigen servers te hosten, kunt u er ook voor zorgen dat de tool <strong>voldoet aan de</strong> specifieke <strong>beveiligings- en privacyvereisten</strong> van uw organisatie.",
+    "txt5": "<0 className='underline bold'>OPEN-SOURCE</0>, pas de tool aan om te voldoen aan de <strong>unieke behoeften van uw organisatie</strong>.",
+    "txt6": "Deze flexibiliteit en controle maken onze tool een ideale oplossing voor organisaties die de betrouwbaarheid van hun AI-systemen willen beoordelen en tegelijkertijd volledige controle willen behouden over hun gegevens en beoordelingen.",
+    "action1": "Installeer het"
+  },
+  "part3": {
+    "title1": "TEST HET IN DE DEMO-OMGEVING",
+    "txt1": "De demo-omgeving is een publiekelijk beschikbare omgeving om de AI Ethics Assessment Tool uit te proberen en is te vinden op <0>altai.ai4belgium.be</0>.<br/><br/>Hoewel projecten en accounts in de demo-omgeving niet periodiek worden verwijderd, moet je <strong>niet vertrouwen</strong> op de demo-omgeving voor productiegebruik. We kunnen niet garanderen dat je projecten niet verloren zullen gaan. Dit komt voornamelijk doordat deze omgeving draait op een kleine virtuele machine met beperkte middelen. We raden over het algemeen aan om je eigen omgeving te hosten.",
+    "action1": "Probeer het hier"
+  },
+  "team": {
+    "title1": "Ontmoet de adviesraad <0>AI</0><1>4</1><2>Belgium</2> Ethiek <3>&</3> Wetgeving",
+    "members": {
+      "Nathalie Smuha": {
+        "workTitle": "Onderzoeker aan de KU Leuven",
+        "quote": "Nathalie Smuha is een juridisch geleerde en filosoof aan de Faculteit Rechten van de KU Leuven, waar ze juridische, ethische en filosofische vraagstukken onderzoekt met betrekking tot Artificiële Intelligentie (AI) en andere digitale technologieën."
+      },
+      "Nele Roekens": {
+        "workTitle": "Juridisch Adviseur - Unia • Interfederaal Gelijkekansencentrum",
+        "quote": "Nele is juridisch adviseur bij Unia, het Belgisch Nationaal Instituut voor de Rechten van de Mens en de Gelijkekansencentrale. Ze is gespecialiseerd in technologie en mensenrechten, met name non-discriminatie."
+      },
+      "Jelle Hoedemaekers": {
+        "workTitle": "Expert op het gebied van Standaardisatie bij Agoria",
+        "quote": "Jelle is een expert op het gebied van AI-regulering. Hij werkt als ICT-normalisatie-expert bij Agoria, waar hij zich richt op de standaardisatie en regulering van nieuwe technologieën zoals Artificiële Intelligentie. Binnen Agoria werkt hij ook aan het beleid rondom nieuwe technologieën. Jelle co-leidt ook de AI4belgium werkgroep Ethiek en Recht, die kijkt naar de ethische en juridische implicaties van AI in het Belgische ecosysteem."
+      },
+      "Carl Mörch": {
+        "workTitle": "Co-manager - FARI • AI Institute for Common Good",
+        "quote": "Ik coördineer FARI - AI Institute for Common Good. Dit project is een gezamenlijk initiatief van de Université Libre de Bruxelles (ULB) en de Vrije Universiteit Brussel (VUB). Ik ben ook een geassocieerd onderzoeker bij Algora Lab (UdeM, Mila, Canada) en een adjunct-professor (UQAM, Canada). Ik heb een AI Ethics Tool ontwikkeld en gepubliceerd, en ik werk aan het verantwoord gebruik van technologieën in de gezondheidszorg."
+      },
+      "Rob Heyman": {
+        "workTitle": "Directeur - Data & Maatschappij Kennis Centrum",
+        "quote": "Hoe meer gedigitaliseerd we leven, hoe meer gepersonaliseerde beslissingen we krijgen op basis van onze informatie. Mijn doel is om te achterhalen hoe deze zaken werken en mensen te laten begrijpen wat er gebeurt met data. Ik vind het opmerkelijk dat er zo weinig bekend is over data in het tijdperk van big data. Mijn methode bestaat uit het blootleggen van het verborgen leven van data door deze processen in begrijpelijke teksten, scenario's en visuals in kaart te brengen. Vervolgens gebruiken we co-creatie sessies om de huidige praktijken af te stemmen op de verwachtingen van eindgebruikers, regelgevers of vernieuwers."
+      },
+      "Nathanaël Ackerman": {
+        "workTitle": "Manager BOSA - AI - Minds Team",
+        "quote": "Nathanaël Ackerman is de algemeen directeur van de AI4Belgium-coalitie en Digital Mind voor België, aangesteld door de Staatssecretaris voor Digitalisering. Hij is ook hoofd van het team 'AI - Blockchain & Digital Minds' voor de Belgische Federale Overheidsdienst Strategie en Ondersteuning (BoSa)."
+      }
+    }
+  },
+  "altai_sections": {
+    "title1": "Beschrijving",
+    "txt1": "Deze tool is ontworpen om teamleden met uiteenlopende expertise in staat te stellen samen te werken en gesprekken te voeren over belangrijke onderwerpen met betrekking tot de betrouwbaarheid van hun AI-implementatie.",
+    "title2": "Beoordeelde onderwerpen",
+    "topics": [
+      {
+        "title": "1. Fundamentele rechten",
+        "description": "Dit gedeelte benadrukt de noodzaak om fundamentele mensenrechten te respecteren bij de ontwikkeling en implementatie van AI-systemen. Het bevat richtlijnen om ervoor te zorgen dat AI-systemen geen inbreuk maken op menselijke waardigheid, privacy of andere fundamentele rechten."
+      },
+      {
+        "title": "2. Menselijke controle en toezicht",
+        "description": "Dit gedeelte benadrukt het belang van menselijk toezicht bij AI-besluitvorming. Het biedt richtlijnen om ervoor te zorgen dat mensen de controle behouden over AI-systemen en dat beslissingen die door AI-systemen worden genomen, verklaarbaar en controleerbaar zijn."
+      },
+      {
+        "title": "3. Technische robuustheid en veiligheid",
+        "description": "Dit gedeelte biedt richtlijnen om de technische robuustheid en veiligheid van AI-systemen te waarborgen. Het behandelt onderwerpen zoals systeembetrouwbaarheid, cyberbeveiliging en veerkracht."
+      },
+      {
+        "title": "4. Privacy en gegevensbeheer",
+        "description": "Dit gedeelte richt zich op de noodzaak om persoonlijke gegevens te beschermen en een adequaat gegevensbeheer te waarborgen bij de ontwikkeling en implementatie van AI-systemen. Het biedt richtlijnen om ervoor te zorgen dat persoonlijke gegevens op een transparante en veilige manier worden verzameld, verwerkt en opgeslagen."
+      },
+      {
+        "title": "5. Transparantie",
+        "description": "Dit gedeelte benadrukt het belang van transparantie bij AI-besluitvorming. Het biedt richtlijnen om ervoor te zorgen dat AI-besluitvormingsprocessen verklaarbaar zijn en dat gebruikers kunnen begrijpen hoe beslissingen worden genomen."
+      },
+      {
+        "title": "6. Diversiteit, non-discriminatie en rechtvaardigheid",
+        "description": "Dit gedeelte biedt richtlijnen om ervoor te zorgen dat AI-systemen geen vooroordelen en discriminatie in stand houden. Het behandelt onderwerpen zoals gegevensvooringenomenheid, rechtvaardigheid in besluitvorming en inclusiviteit."
+      },
+      {
+        "title": "7. Maatschappelijk en ecologisch welzijn",
+        "description": "Dit gedeelte benadrukt de noodzaak om rekening te houden met de maatschappelijke en ecologische impact van AI-systemen. Het biedt richtlijnen om ervoor te zorgen dat AI-systemen worden ontwikkeld en geïmplementeerd op een manier die het maatschappelijk en ecologisch welzijn bevordert."
+      },
+      {
+        "title": "8. Verantwoordelijkheid",
+        "description": "Dit gedeelte biedt richtlijnen om verantwoordelijkheid te waarborgen bij de ontwikkeling en implementatie van AI. Het behandelt onderwerpen zoals wettelijke naleving, risicobeheer en betrokkenheid van belanghebbenden."
+      }
+    ]
+  },
+  "footer": {
+    "txt": "Met de steun van <0>kabinet Michel</0> en <1>kabinet De Sutter</1>."
+  }
+}

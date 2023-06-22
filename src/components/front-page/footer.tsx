@@ -3,14 +3,15 @@ import { Box, Flex, Image, Button, useColorModeValue, VisuallyHidden } from '@ch
 import { FaGithub } from 'react-icons/fa'
 import { AI4BelgiumIcon } from '@/src/components/navbar'
 import { TextBody } from './content'
+import { useTranslation, Trans } from 'next-i18next'
 
 const Logo = (): JSX.Element => {
   return (
     <Flex className='px-3 py-5 font-semibold text-lg cursor-pointer' alignItems='center'>
-      <a href='https://bosa.belgium.be' target='_blank' rel='noreferrer'>
+      <a href='https://bosa.belgium.be' title='BOSA home page'>
         <Image src='/frontpage/bosa-logo.svg' alt='BOSA logo' height='30px' mr='2vh' />
       </a>
-      <a href='https://ai4belgium.be' target='_blank' rel='noreferrer' style={{ textDecoration: 'none' }}>
+      <a href='https://ai4belgium.be' title='AI 4 Belgium home page' style={{ textDecoration: 'none' }}>
         <AI4BelgiumIcon />
       </a>
     </Flex>
@@ -40,10 +41,19 @@ const SocialButton = ({ children, label, href }: { children: ReactNode, label: s
 }
 
 export const Footer = (): JSX.Element => {
+  const { t } = useTranslation('front-page')
   return (
     <Flex flexDirection='column' bgColor='transparent' pb='30%' mt='3em' alignItems='center'>
       <Logo />
-      <TextBody textAlign='center' mt='0'>With the support of <a href='https://michel.belgium.be/fr/cellule-strat%C3%A9gique-et-secr%C3%A9tariat' target='blank'>cabinet Michel</a> and <a href='https://desutter.belgium.be/fr/contact' target='blank'>cabinet De Sutter</a>.</TextBody>
+      <TextBody textAlign='center' mt='0'>
+        <Trans components={[
+          <a href='https://michel.belgium.be/fr/cellule-strat%C3%A9gique-et-secr%C3%A9tariat' key='0' />,
+          <a href='https://desutter.belgium.be/fr/contact' key='1' />
+        ]}
+        >
+          {t('footer.txt')}
+        </Trans>
+      </TextBody>
       <Box mt='1em' />
       <SocialButton label='GitHub' href='https://github.com/ai4be/AI-Assessment-Tool'>
         <FaGithub />

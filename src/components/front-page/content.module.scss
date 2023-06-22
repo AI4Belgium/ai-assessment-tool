@@ -82,3 +82,16 @@
     }
   }
 }
+
+.text_gradient {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    90deg,
+    #00566B,
+    #057A8B,
+    #2CB8A5
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+

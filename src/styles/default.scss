@@ -119,69 +119,12 @@ mentions {
   height: 100% !important;
 }
 
-.text-gradient-purple-light-blue {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(92, 92, 153, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-.text-gradient-light-blue-purple {
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(0, 212, 255, 1) 0%,
-    rgba(92, 92, 153, 1) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-weight: bold;
-}
-
-.wave-underline {
-  text-decoration: underline;
-  font-style: italic;
-
-  &.yellow {
-    -webkit-text-decoration-color: rgba(251, 230, 122); /* Safari */
-    text-decoration-color: rgba(251, 230, 122);
-  }
-
-  &.green {
-    -webkit-text-decoration-color: rgba(152, 242, 176); /* Safari */
-    text-decoration-color: rgba(152, 242, 176);
-  }
-
-  &.purple {
-    -webkit-text-decoration-color: rgba(139, 128, 225); /* Safari */
-    text-decoration-color: rgba(139, 128, 225);
-  }
-}
-
 .container {
   line-height: 1.4;
   text-align: center;
   padding: 44px;
   color: #333;
 }
-
-// h1 {
-//   font-size: 50px;
-// }
-
-// p {
-//   font-size: 18px;
-// }
-// p small {
-//   font-size: 80%;
-//   color: #666;
-// }
 
 .highlight-container,
 .highlight {
@@ -206,26 +149,6 @@ mentions {
   border-radius: 20% 25% 20% 24%;
   padding: 10px 3px 3px 10px;
 }
-
-.heading-gradient-pink-yellow-white {
-  font-size: min(72px, 8vw);
-  font-weight: 500;
-  width: max-content;
-  text-align: center;
-  background-color: rgb(255, 178, 62);
-  background-image: linear-gradient(
-    268.67deg,
-    rgb(255, 255, 255) 3.43%,
-    rgb(255, 240, 102) 15.69%,
-    rgb(255, 163, 26) 55.54%,
-    rgb(255, 0, 115) 99%
-  );
-  background-size: 100%;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0px;
-}
-//
 
 .highlight {
   &.yellow {

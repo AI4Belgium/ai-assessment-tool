@@ -54,7 +54,6 @@ export const addRoleAndCreateActivity = async (projectId: ObjectId | string, rol
 export const removeRole = async (projectId: ObjectId | string, roldId: ObjectId | string): Promise<boolean> => {
   const { db } = await connectToDatabase()
   projectId = toObjectId(projectId)
-  console.log('removeRole', projectId, roldId, TABLE_NAME)
   const res = await db
     .collection(TABLE_NAME)
     .updateOne({ _id: projectId }, { $pull: { roles: { _id: toObjectId(roldId) } } })
