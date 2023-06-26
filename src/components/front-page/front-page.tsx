@@ -3,7 +3,7 @@ import React from 'react'
 import { Content } from './content'
 import { Footer } from './footer'
 import { AI4BelgiumHeader } from './header'
-import { Waves } from './waves'
+// import { Waves } from './waves'
 
 /* TODO frontpage
 Test page using different dimension. I've used iPhone SE resolution for mobile test.
@@ -46,7 +46,7 @@ const FrontPage = (props: any): JSX.Element => {
           <Content />
           <Footer />
         </Flex>
-        <Waves />
+        {/* <Waves /> */}
       </Box>
     </>
   )
