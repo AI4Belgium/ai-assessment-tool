@@ -2,11 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 
 :root {
-  --main-blue: #0000e6;
-  --main-light-blue: #f0eef9;
-  --text-grey: #6b6b6b;
+  --main-blue: #00566B;
+  --main-light-blue:  #B6E7DD;
+  --text-grey: x #535D5F;
   --color-background: hsl(274deg 16% 8%);
-  --color-primary: hsl(333deg, 100%, 52%);
   --color-gray-700: hsl(223deg, 5%, 60%);
 }
 html,
@@ -45,10 +44,6 @@ body {
 
 .background-blue {
   background-color: var(--main-blue) !important;
-}
-
-.background-light-blue {
-  background-color: var(--main-light-blue) !important;
 }
 
 .icon-blue-color {

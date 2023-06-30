@@ -71,8 +71,9 @@ const CreateProjectModal = ({ fetchProjects }: { fetchProjects: Function }): JSX
       <Button
         onClick={onOpen}
         leftIcon={<AiOutlinePlus />}
-        className='background-blue'
-        color='white'
+        variant='bosa'
+        // className='background-blue'
+        // color='white'
         size='lg'
         mt='1rem'
       >

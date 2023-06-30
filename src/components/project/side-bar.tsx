@@ -44,8 +44,7 @@ const SideBar = (props: Props): JSX.Element => {
         padding='0'
         w='100%'
         className='capitalize whitespace-normal'
-        bgColor={cat._id === selectedCategoryId ? 'var(--main-light-blue)' : 'white'}
-        color={cat._id === selectedCategoryId ? '#25282B' : 'var(--text-grey)'}
+        color={cat._id === selectedCategoryId ? 'var(--main-blue)' : 'var(--text-grey)'}
         whiteSpace='normal'
         _hover={{ bg: 'var(--main-light-blue)' }}
         _focus={{ boxShadow: 'none' }}

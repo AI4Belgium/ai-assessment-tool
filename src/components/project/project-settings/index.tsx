@@ -101,8 +101,6 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
       </FormControl>
       <Box>
         <Button
-          backgroundColor='success'
-          color='white'
           onClick={() => { void handleSave() }}
           disabled={isLoading || projectName == null || projectName === '' || isBusy}
           isLoading={isLoading}
@@ -197,7 +195,7 @@ const ProjectSettings = ({ project }: { project: Project }): JSX.Element => {
 
   return (
     <>
-      <Button onClick={onOpen} size='xs' as={Button} m='5px' disabled={isBusy}>
+      <Button onClick={onOpen} size='xs' as={Button} m='5px' disabled={isBusy} variant='outline' color='var(--main-blue)' _hover={{ color: 'var(--main-blue)', bg: 'var(--chakra-colors-gray-100)' }}>
         <AiFillSetting />
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} size='xl' isCentered scrollBehavior='inside' closeOnOverlayClick={!isBusy} closeOnEsc={!isBusy}>

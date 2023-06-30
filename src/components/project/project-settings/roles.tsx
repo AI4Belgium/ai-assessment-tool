@@ -146,7 +146,7 @@ export const RoleBox = ({ project, role, deleteRole, saveRole, index }: RoleBoxP
               <RiDeleteBin6Line onClick={onOpen} color='var(--main-blue)' cursor='pointer' />
             </Flex>}
           {isEditing &&
-            <Button onClick={(e) => { void handleSave(e) }} size='sm' bg='var(--main-blue)' color='white' className='ml-1'>Save</Button>}
+            <Button onClick={(e) => { void handleSave(e) }} size='sm' className='ml-1'>Save</Button>}
         </Flex>
         <Textarea
           rows={rows}

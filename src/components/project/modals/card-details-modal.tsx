@@ -163,7 +163,7 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
                   {/* <AccordionItemStyled title='Recommendation' desc={loremIpsum} /> */}
                 </Accordion>}
 
-              <Accordion defaultIndex={0} allowToggle borderRadius='lg' className='shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]' border='1px solid var(--main-blue)' marginY='1rem' mx={['5px', '5px', 0]}>
+              <Accordion defaultIndex={0} allowToggle borderRadius='lg'border='1px solid var(--main-blue)' marginY='1rem' mx={['5px', '5px', 0]}>
                 <AccordionItem
                   border='none'
                   isFocusable={false}
@@ -194,7 +194,7 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
                 </AccordionItem>
               </Accordion>
               {scoredQuestions?.length > 0 &&
-                <Box marginBottom='1rem' borderRadius='lg' className='shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]' border='1px solid var(--main-blue)' paddingY='1rem' mx={['5px', '5px', 0]}>
+                <Box marginBottom='1rem' borderRadius='lg' border='1px solid var(--main-blue)' paddingY='1rem' mx={['5px', '5px', 0]}>
                   {scoredQuestions.map((q: DisplayQuestion, index: number) =>
                     <QuestionAndComments key={`${cardId}-${q.id}-${index}`} p={3} question={q} cardId={cardId} projectId={projectId} questionSaveCallback={recalculateEnableing} />)}
                 </Box>}
@@ -316,7 +316,7 @@ const Sidebar = ({ card, ...boxProps }: SidebarProps): JSX.Element => {
   }
 
   return (
-    <Flex flexDirection='column' backgroundColor='#FAFAFA' justifyContent='space-between' p={3} pt={[0]} {...props}>
+    <Flex flexDirection='column' justifyContent='space-between' p={3} pt={[0]} {...props}>
       <Box position='sticky' top='0' {...boxProps2}>
         <Flex flexDirection='column' position='relative'>
           {isMobile &&
