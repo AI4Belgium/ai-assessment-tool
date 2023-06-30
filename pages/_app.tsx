@@ -12,19 +12,41 @@ import AppLogo from '@/src/components/app-logo'
 
 import 'nprogress/nprogress.css'
 
+const MAIN_COLOR = '#057A8B'
+
 export const theme = extendTheme({
-  colors: {
-    brand: '#0079bf',
-    success: '#70b500',
-    danger: '#eb5a46',
-    info: '#ff9f1a',
-    warning: '#f2d600',
-    darkblue: '#eae6ff',
-    lightblue: '#f2faf9',
-    performance: '#0079bf',
-    bug: '#eb5a46',
-    feature: '#61bd4f',
-    information: '#ff9f1a'
+  // the code below matches BOSA style guide
+  // edit to match your own style template
+  components: {
+    Button: {
+      variants: {
+        bosa: {
+          color: MAIN_COLOR,
+          borderWidth: '0.1875rem',
+          borderColor: MAIN_COLOR,
+          borderRadius: '0.5rem',
+          backgroundColor: 'white',
+          _hover: {
+            backgroundColor: MAIN_COLOR,
+            color: 'white'
+          }
+        }
+      },
+      defaultProps: {
+        variant: 'bosa'
+      }
+    }
+  },
+  styles: {
+    global: {
+      body: {
+        color: '#057A8B',
+        fontSize: '16px'
+      },
+      a: {
+        color: '#057A8B'
+      }
+    }
   }
 })
 

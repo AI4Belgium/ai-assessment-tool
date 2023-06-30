@@ -140,8 +140,8 @@ const Column = ({ showCardDetail, column, index, cards, projectId, ...boxProps }
       key={index}
       height='calc(100vh - 70px)'
       overflowY='auto'
-      className='background-light-blue'
       {...boxProps}
+      border='1px solid var(--main-blue)'
       rounded='lg'
       display='flex'
       flexDirection='column'

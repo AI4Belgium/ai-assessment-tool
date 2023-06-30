@@ -182,12 +182,9 @@ const PasswordSettings = (): JSX.Element => {
         </Text>
       </FormControl>
       <Button
-        fontWeight='semibold'
         width='full'
         mt={4}
         disabled={isDisabled}
-        bg='success'
-        color='white'
         onClick={changePassword} // eslint-disable-line @typescript-eslint/no-misused-promises
         isLoading={isLoading}
         loadingText={`${t('settings:updating')}`}

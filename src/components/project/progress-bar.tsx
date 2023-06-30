@@ -4,12 +4,12 @@ import { Flex, FlexProps } from '@chakra-ui/react'
 import { STAGE_VALUES } from '@/src/types/card'
 import { QueryFilterKeys } from '@/src/components/project/project-bar/filter-menu'
 
-const borderWidth = '5px'
+// const borderWidth = '5px'
 const borderRadiusOutside = '10px'
 const borderRadiusInner = '50px'
 const marginLeft = '10px'
 
-const gradientBGC = 'linear-gradient(89.87deg, #182FFF 7.28%, rgba(234, 226, 253, 0) 158.64%)'
+const gradientBGC = 'linear-gradient(89.87deg, #00566B 7.28%, rgba(234, 226, 253, 0) 158.64%)'
 
 const SECTION_ALL: string = 'all'
 
@@ -30,7 +30,18 @@ const ProgressBar: FC<any> = ({ ...flexProps }: FlexProps): JSX.Element => {
   const SECTIONS_MAX_IDX = SECTIONS.length - 1
 
   return (
-    <Flex width='100%' justifyContent='center' alignItems='center' backgroundColor='white' className='print:hidden' maxW={['100%', '100%', 'calc(272px * 4)']} {...flexProps}>
+    <Flex
+      width='100%'
+      justifyContent='center'
+      alignItems='center'
+      backgroundColor='white'
+      className='print:hidden'
+      border='1px solid #B6E7DD'
+      borderRadius={borderRadiusOutside}
+      overflow='hidden'
+      maxW={['100%', '100%', 'calc(272px * 4)']}
+      {...flexProps}
+    >
       {SECTIONS.map((s, idx) => (
         <Flex
           onClick={(): void => stageClickHandler(router, s === SECTION_ALL ? null : s.toUpperCase())}
@@ -41,15 +52,14 @@ const ProgressBar: FC<any> = ({ ...flexProps }: FlexProps): JSX.Element => {
           justifyContent='center'
           alignItems='center'
           className='capitalize'
-          background={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? gradientBGC : '#E9E9E9'}
+          background={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? gradientBGC : 'white'}
+          borderRight={String(stage).toUpperCase() === s.toUpperCase() ? 'none' : '1px solid #B6E7DD'}
           lineHeight='32px'
-          color={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? 'white' : '#6B6B6B'}
+          color={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? 'white' : 'var(--main-blue)'}
           fontFamily='Noto Sans'
           fontSize={['0.6rem', '1rem']}
           fontStyle='normal'
           fontWeight='500'
-          borderWidth={borderWidth}
-          borderColor='white'
           borderLeftRadius={idx === 0 ? borderRadiusOutside : '0px'}
           borderRightRadius={idx !== SECTIONS_MAX_IDX ? borderRadiusInner : borderRadiusOutside}
           marginLeft={idx > 0 ? `-${marginLeft}` : 0}

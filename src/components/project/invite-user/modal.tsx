@@ -68,11 +68,7 @@ const InviteModal = ({ project, callback }: { project: Project, callback: Functi
   return (
     <>
       <Box>
-        <Button
-          backgroundColor='success'
-          color='white'
-          onClick={onOpen}
-        >
+        <Button onClick={onOpen}>
           {t('buttons:invite')}
         </Button>
       </Box>
@@ -95,7 +91,6 @@ const InviteModal = ({ project, callback }: { project: Project, callback: Functi
           <ModalFooter>
             <Button
               disabled={!isEmailValid(email)}
-              colorScheme='blue'
               mr={3}
               onClick={handleClick}
               isLoading={isMailSending}
