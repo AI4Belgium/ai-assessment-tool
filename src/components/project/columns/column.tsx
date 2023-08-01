@@ -100,7 +100,7 @@ const Column = ({ showCardDetail, column, index, cards, projectId, ...boxProps }
     }
 
     return (
-      <Heading as='h6' size='sm' ml='10px' mt='5px' textAlign='center' className='text-grey uppercase'>
+      <Heading as='h6' size='sm' ml='10px' mt='5px' textAlign='center' className='uppercase'>
         {t(`column-dashboard:${columnName.replaceAll(' ', '')}`)}
       </Heading>
     )
@@ -141,12 +141,12 @@ const Column = ({ showCardDetail, column, index, cards, projectId, ...boxProps }
       height='calc(100vh - 70px)'
       overflowY='auto'
       {...boxProps}
-      border='1px solid var(--main-blue)'
+      border='1px solid var(--primary-color)'
       rounded='lg'
       display='flex'
       flexDirection='column'
     >
-      <Box display='flex' alignItems='center' justifyContent='center' className='mt-1.5'>
+      <Box display='flex' alignItems='center' justifyContent='center' className='mt-1.5' color='var(--text-secondary)'>
         {loadColumnTitle()}
       </Box>
       <Droppable2 droppableId={column._id} type='card'>

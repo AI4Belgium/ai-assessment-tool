@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 
 :root {
-  --main-blue: #00566B;
-  --main-light-blue:  #B6E7DD;
-  --text-grey: x #535D5F;
+  --primary-color: #00566B;
+  --secondary-color:  #B6E7DD;
+  --text-grey: #535D5F;
+  --text-secondary: #09181B;
   --color-background: hsl(274deg 16% 8%);
   --color-gray-700: hsl(223deg, 5%, 60%);
 }
@@ -35,7 +36,7 @@ body {
 }
 
 .text-blue {
-  color: var(--main-blue) !important;
+  color: var(--primary-color) !important;
 }
 
 .text-grey {
@@ -43,11 +44,11 @@ body {
 }
 
 .background-blue {
-  background-color: var(--main-blue) !important;
+  background-color: var(--primary-color) !important;
 }
 
 .icon-blue-color {
-  color: var(--main-blue);
+  color: var(--primary-color);
 }
 
 .icon-grey-color {

@@ -36,17 +36,17 @@ const ChecklistTopBar = (props: Props): JSX.Element => {
         borderWidth='0'
         maxW={['100px', '100px', 'unset']}
         className='capitalize whitespace-normal'
-        bgColor={cat._id === selectedCategoryId ? 'var(--main-light-blue)' : 'white'}
-        color={cat._id === selectedCategoryId ? '#25282B' : 'var(--text-grey)'}
+        bgColor={cat._id === selectedCategoryId ? 'var(--secondary-color)' : 'white'}
+        color={cat._id === selectedCategoryId ? 'var(--primary-color)' : 'var(--text-secondary)'}
         // border='4px solid transparent'
         whiteSpace='normal'
-        _hover={{ bg: 'var(--main-light-blue)' }}
+        _hover={{ bg: 'var(--secondary-color)' }}
         _focus={{ boxShadow: 'none' }}
         onClick={() => context.categoryClickHandler(cat)}
       >
         {/* <Box display='block' height='4px' width='100%' backgroundColor='transparent' /> */}
         <Box paddingX='0.5rem' display='block' boxSizing='border-box'>{cat.name}</Box>
-        <Box display='block' height='4px' width='100%' backgroundColor={cat._id === selectedCategoryId ? 'var(--main-blue)' : 'transparent'} />
+        <Box display='block' height='4px' width='100%' backgroundColor={cat._id === selectedCategoryId ? 'var(--primary-color)' : 'transparent'} />
       </Button>
     ))
     : null

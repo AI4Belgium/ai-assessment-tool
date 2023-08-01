@@ -34,18 +34,18 @@ const CategoryQuestions: FC<Props> = ({ project, categories, cards, ...boxProps 
           <Box display='flex' flexDirection='column'>
             {category.sections?.map((section, idx) =>
               <Grid templateColumns='min-content auto 8rem' key={`${category._id}-${section.id ?? idx}`} _last={{ marginBottom: '1rem' }} alignItems='center'>
-                {!isEmpty(section.title) && <GridItem colSpan={3} marginTop={idx !== 0 ? '1rem' : '0'}><Text textTransform='uppercase' color='var(--main-blue)' fontSize={['sm', 'sm', 'md']} marginBottom={['0.5rem', '0.5rem', '1rem']} marginLeft='1rem'>{section.title}</Text></GridItem>}
+                {!isEmpty(section.title) && <GridItem colSpan={3} marginTop={idx !== 0 ? '1rem' : '0'}><Text textTransform='uppercase' color='var(--primary-color)' fontSize={['sm', 'sm', 'md']} marginBottom={['0.5rem', '0.5rem', '1rem']} marginLeft='1rem'>{section.title}</Text></GridItem>}
                 {section.cards?.map((c, idxc, cards) => c.questions.filter((q: Question) => q.isScored).map((q: Question, idxq, questions) =>
                   <Fragment key={q.id}>
                     {(idxq !== 0 || idxc !== 0) && <><GridItem colSpan={1} height='3rem' justifySelf='center' paddingY='0.5rem' className='print:pt-0'><Divider orientation='vertical' height='100%' color='#9f9e9f' /></GridItem><GridItem colSpan={2} /></>}
                     <GridItem colSpan={1}>
-                      <Box height='2rem' width='2rem' borderRadius='full' backgroundColor='var(--main-light-blue)' className='print:background' />
+                      <Box height='2rem' width='2rem' borderRadius='full' backgroundColor='var(--secondary-color)' className='print:background' />
                     </GridItem>
                     <GridItem colSpan={1} paddingLeft='1rem' onClick={() => { void setCardQuery(c._id, q.id) }} cursor='pointer'>
                       <Text fontWeight='semibold' fontSize={['xs', 'xs', 'sm']} cursor='pointer'>{(q as DisplayQuestion).cleanTitle}</Text>
                     </GridItem>
                     <GridItem colSpan={1}>
-                      <Text fontWeight='semibold' fontSize={['xs', 'xs', 'sm']} color='var(--main-blue)' textAlign='center' onClick={() => { void setCardQuery(c._id, q.id) }} cursor='pointer'>
+                      <Text fontWeight='semibold' fontSize={['xs', 'xs', 'sm']} color='var(--primary-color)' textAlign='center' onClick={() => { void setCardQuery(c._id, q.id) }} cursor='pointer'>
                         {Array.isArray(q.responses) && !isEmpty(q.responses) ? q.answers[q.responses[0]].answer : '-'}
                       </Text>
                     </GridItem>

@@ -44,14 +44,14 @@ const SideBar = (props: Props): JSX.Element => {
         padding='0'
         w='100%'
         className='capitalize whitespace-normal'
-        color={cat._id === selectedCategoryId ? 'var(--main-blue)' : 'var(--text-grey)'}
+        color={cat._id === selectedCategoryId ? 'var(--primary-color)' : 'var(--text-secondary)'}
         whiteSpace='normal'
-        _hover={{ bg: 'var(--main-light-blue)' }}
+        _hover={{ bg: 'var(--secondary-color)' }}
         _focus={{ boxShadow: 'none' }}
         onClick={(e) => clickHandler(e, cat)}
       >
         <Box display='flex' justifyContent='space-between' width='100%' height='100%' alignItems='center'>
-          <Box width='4px' height='100%' bgColor={cat._id === selectedCategoryId ? 'var(--main-blue)' : 'white'} borderRightRadius='5px' />
+          <Box width='4px' height='100%' bgColor={cat._id === selectedCategoryId ? 'var(--primary-color)' : 'white'} borderRightRadius='5px' />
           <Box px='1rem'>{cat.name}</Box>
           <Box width='4px' height='100%' bgColor='transparent' />
         </Box>

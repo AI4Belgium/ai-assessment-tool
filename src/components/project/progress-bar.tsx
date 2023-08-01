@@ -53,9 +53,9 @@ const ProgressBar: FC<any> = ({ ...flexProps }: FlexProps): JSX.Element => {
           alignItems='center'
           className='capitalize'
           background={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? gradientBGC : 'white'}
-          borderRight={String(stage).toUpperCase() === s.toUpperCase() ? 'none' : '1px solid #B6E7DD'}
+          borderRight={String(stage).toUpperCase() === s.toUpperCase() ? 'none' : '1px solid var(--secondary-color)'}
           lineHeight='32px'
-          color={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? 'white' : 'var(--main-blue)'}
+          color={String(stage).toUpperCase() === s.toUpperCase() || (stage == null && s === SECTION_ALL) ? 'white' : 'var(--text-secondary)'}
           fontFamily='Noto Sans'
           fontSize={['0.6rem', '1rem']}
           fontStyle='normal'

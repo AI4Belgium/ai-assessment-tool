@@ -59,7 +59,7 @@ const AccordionItemStyled = ({ title, desc }: { title: string, desc: string | st
         }}
         _focus={{ boxShadow: 'none !important' }}
       >
-        <Text color='var(--main-blue)' fontSize={['xs', 'xs', 'sm']} as='b'>{title}</Text>
+        <Text color='var(--primary-color)' fontSize={['xs', 'xs', 'sm']} as='b'>{title}</Text>
         <AccordionIcon />
       </AccordionButton>
       <AccordionPanel pb={[2, 2, 4]} border='none' fontSize={['xs', 'xs', 'sm']}>
@@ -151,7 +151,7 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
           <Box display='flex' height='100%'>
             <Box pt='2rem' px={[0, 0, '4']} minW='0'>
               <Box ml={[0, 0, '-4']} position='relative'>
-                <Box width='4px' bgColor='var(--main-blue)' borderRightRadius='15px' height='100%' position='absolute' left='0' top='0' />
+                <Box width='4px' bgColor='var(--primary-color)' borderRightRadius='15px' height='100%' position='absolute' left='0' top='0' />
                 <Text fontSize={[14, 16, 20]} fontWeight='400' px='4'>
                   {card.TOCnumber} {card.title.replace(/=g(b|e)=/g, '')}
                 </Text>
@@ -163,7 +163,7 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
                   {/* <AccordionItemStyled title='Recommendation' desc={loremIpsum} /> */}
                 </Accordion>}
 
-              <Accordion defaultIndex={0} allowToggle borderRadius='lg'border='1px solid var(--main-blue)' marginY='1rem' mx={['5px', '5px', 0]}>
+              <Accordion defaultIndex={0} allowToggle borderRadius='lg'border='1px solid var(--primary-color)' marginY='1rem' mx={['5px', '5px', 0]}>
                 <AccordionItem
                   border='none'
                   isFocusable={false}
@@ -194,7 +194,7 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
                 </AccordionItem>
               </Accordion>
               {scoredQuestions?.length > 0 &&
-                <Box marginBottom='1rem' borderRadius='lg' border='1px solid var(--main-blue)' paddingY='1rem' mx={['5px', '5px', 0]}>
+                <Box marginBottom='1rem' borderRadius='lg' border='1px solid var(--primary-color)' paddingY='1rem' mx={['5px', '5px', 0]}>
                   {scoredQuestions.map((q: DisplayQuestion, index: number) =>
                     <QuestionAndComments key={`${cardId}-${q.id}-${index}`} p={3} question={q} cardId={cardId} projectId={projectId} questionSaveCallback={recalculateEnableing} />)}
                 </Box>}
@@ -336,7 +336,7 @@ const Sidebar = ({ card, ...boxProps }: SidebarProps): JSX.Element => {
             <ModalCloseButton position='relative' {...(isMobile ? { top: 0, right: 0 } : {})} />
           </Flex>
           <Flex justifyContent='space-between' alignItems='center'>
-            <Text color='var(--main-blue)' fontSize='sm' as='b' mb='2'>{t('sidebar:due-date')}</Text>
+            <Text color='var(--primary-color)' fontSize='sm' as='b' mb='2'>{t('sidebar:due-date')}</Text>
           </Flex>
           <SingleDatepicker2 name='date-input' date={card.dueDate != null ? new Date(card.dueDate) : null} onDateChange={setDate}>
             <Flex justifyContent='space-between' alignItems='center'>
@@ -347,7 +347,7 @@ const Sidebar = ({ card, ...boxProps }: SidebarProps): JSX.Element => {
             </Flex>
           </SingleDatepicker2>
           <Flex justifyContent='space-between' alignItems='center'>
-            <Text color='var(--main-blue)' fontSize='sm' as='b' mt='3' mb='2'>{t('sidebar:assigned-to')}</Text>
+            <Text color='var(--primary-color)' fontSize='sm' as='b' mt='3' mb='2'>{t('sidebar:assigned-to')}</Text>
             <UserMenu users={nonDeletedUsers ?? []} includedUserIds={card.userIds ?? []} onUserAdd={onUserAdd} onUserRemove={onUserRemove} userIdTrigger={renderTrigger}>
               <FiEdit2 color='#C9C9C9' cursor='pointer' />
             </UserMenu>
@@ -358,7 +358,7 @@ const Sidebar = ({ card, ...boxProps }: SidebarProps): JSX.Element => {
               <Text fontSize='sm' fontWeight='600' ml='2'>{getUserDisplayName(user)}</Text>
             </Flex>))}
           <label>
-            <Text color='var(--main-blue)' fontSize='sm' as='b' mb='2'>{t('sidebar:stage')}</Text>
+            <Text color='var(--primary-color)' fontSize='sm' as='b' mb='2'>{t('sidebar:stage')}</Text>
             <Select size='xs' value={card.stage ?? CardStage.DEVELOPMENT} onChange={(e) => setStage((e?.target?.value ?? card.stage) as CardStage)}>
               {STAGE_VALUES.map(stage => <option key={stage} value={stage} style={{ textTransform: 'capitalize' }}>{stage.toLowerCase()}</option>)}
             </Select>

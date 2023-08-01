@@ -165,7 +165,7 @@ export const FilterMenu = (props: any): JSX.Element => {
 
   return (
     <Menu key='filter-menu' closeOnSelect={false}>
-      <MenuButton {...props} as={Button} rightIcon={<FiFilter />} variant='outline' color='var(--main-blue)' size={['xs', 'sm']}>
+      <MenuButton {...props} as={Button} rightIcon={<FiFilter />} variant='outline' color='var(--primary-color)' size={['xs', 'sm']}>
         {isMobile ? '' : t('filter-sort:filter.filter')}
         {filterCounter > 0 &&
           <Badge ml='1' size='sm' variant='solid' colorScheme='green' borderRadius='full'>

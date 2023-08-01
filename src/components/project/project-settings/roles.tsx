@@ -133,7 +133,7 @@ export const RoleBox = ({ project, role, deleteRole, saveRole, index }: RoleBoxP
   }
 
   return (
-    <Box display='flex' flexDirection='column' justifyContent='space-between' overflow='hidden' width={[200, 350]} height={[120, 168]} border='2px solid var(--main-blue)' borderRadius='15px' boxShadow='0px 4px 25px rgba(0, 0, 0, 0.07)' className='mt-1 p-2'>
+    <Box display='flex' flexDirection='column' justifyContent='space-between' overflow='hidden' width={[200, 350]} height={[120, 168]} border='2px solid var(--primary-color)' borderRadius='15px' boxShadow='0px 4px 25px rgba(0, 0, 0, 0.07)' className='mt-1 p-2'>
       <Box>
         <Flex justifyContent='space-between'>
           <Input
@@ -142,8 +142,8 @@ export const RoleBox = ({ project, role, deleteRole, saveRole, index }: RoleBoxP
           />
           {!isEditing &&
             <Flex>
-              <HiOutlinePencil onClick={() => setIsEditingWrapper(true)} color='var(--main-blue)' cursor='pointer' />
-              <RiDeleteBin6Line onClick={onOpen} color='var(--main-blue)' cursor='pointer' />
+              <HiOutlinePencil onClick={() => setIsEditingWrapper(true)} color='var(--primary-color)' cursor='pointer' />
+              <RiDeleteBin6Line onClick={onOpen} color='var(--primary-color)' cursor='pointer' />
             </Flex>}
           {isEditing &&
             <Button onClick={(e) => { void handleSave(e) }} size='sm' className='ml-1'>Save</Button>}
@@ -162,7 +162,7 @@ export const RoleBox = ({ project, role, deleteRole, saveRole, index }: RoleBoxP
               {includedUsers.map(user => <Avatar key={user?._id} name={getUserDisplayName(user)} src={user.xsAvatar} />)}
             </AvatarGroup>
             <UserMenuMemo users={nonDeletedUsers} includedUserIds={role.userIds ?? []} onUserAdd={onUserAdd} onUserRemove={onUserRemove} userIdTrigger={userIdTrigger}>
-              <FiUserPlus color='var(--main-blue)' cursor='pointer' />
+              <FiUserPlus color='var(--primary-color)' cursor='pointer' />
             </UserMenuMemo>
           </Flex>
         )}

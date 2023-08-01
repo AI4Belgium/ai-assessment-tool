@@ -87,7 +87,7 @@ const Team = ({ project }: { project: Project }): JSX.Element => {
               <Box>{getUserDisplayName(user)}</Box>
             </Flex>
             {user._id.toString() !== project.createdBy.toString()
-              ? (<RiDeleteBin6Line cursor='pointer' onClick={() => setDeleteHandlerWrapper(user)} color='var(--main-blue)' />)
+              ? (<RiDeleteBin6Line cursor='pointer' onClick={() => setDeleteHandlerWrapper(user)} color='var(--primary-color)' />)
               : (<></>)}
           </Flex>
         ))}
@@ -98,7 +98,7 @@ const Team = ({ project }: { project: Project }): JSX.Element => {
             {data.map((token) => (
               <Flex key={token._id} justifyContent='space-between' alignItems='center' paddingY='1'>
                 <Box>{token.email}</Box>
-                <RiDeleteBin6Line cursor='pointer' onClick={() => setDeleteHandlerWrapper(token, false)} color='var(--main-blue)' />
+                <RiDeleteBin6Line cursor='pointer' onClick={() => setDeleteHandlerWrapper(token, false)} color='var(--primary-color)' />
               </Flex>
             ))}
           </>}
