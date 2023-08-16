@@ -87,11 +87,8 @@ const NotificationSettings = (): JSX.Element => {
       </FormControl>
       <Text fontSize='sm' color='var(--chakra-colors-gray-500)'>{t('settings:mentions-caption')}</Text>
       <Button
-        fontWeight='semibold'
         width='full'
         mt={4}
-        bg='success'
-        color='white'
         onClick={changeNotifications} // eslint-disable-line @typescript-eslint/no-misused-promises
         isLoading={isLoading}
         loadingText={`${t('settings:updating')}`}

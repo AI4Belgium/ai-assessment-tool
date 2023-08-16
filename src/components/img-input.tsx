@@ -103,7 +103,7 @@ export default function ImgInput ({ onChange, data, placeholder }: { onChange?: 
         />
       </Box>
       <Box alignSelf='flex-end'>
-        <RiDeleteBin6Line color='var(--main-blue)' opacity={disabled ? 0.2 : 1} cursor={!disabled ? 'pointer' : ''} onClick={deleteAvatar} />
+        <RiDeleteBin6Line color='var(--primary-color)' opacity={disabled ? 0.2 : 1} cursor={!disabled ? 'pointer' : ''} onClick={deleteAvatar} />
       </Box>
     </Flex>
   )

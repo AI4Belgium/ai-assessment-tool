@@ -24,7 +24,7 @@ const defaultConfig = {
     scales: {
       r: {
         pointLabels: {
-          color: 'blue',
+          color: '#00566B',
           font: {
             size: '14px'
             // weight: 'bold'

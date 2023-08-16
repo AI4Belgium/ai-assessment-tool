@@ -23,7 +23,7 @@ const ProjectBar = ({ project, ...flexProps }: Props): JSX.Element => {
         <SortMenu />
         <FilterMenu ml='1' />
       </Box>
-      <Text color='var(--main-blue)' fontSize={['0.8rem', '1rem']} as='b' textDecoration='underline' maxWidth={['75px', '200px']} whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
+      <Text color='var(--text-secondary)' fontSize={['0.8rem', '1rem']} as='b' textDecoration='underline' maxWidth={['75px', '200px']} whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
         {project.name}
       </Text>
       <Flex

@@ -181,7 +181,7 @@ const CommentComponent = ({ comment, onSave, onCancel, onDelete, setNewCommentPa
       <GridItem colSpan={1} display='flex' flexDirection='column' justifyContent='flex-end'>
         {comment._id != null && comment.deletedAt == null &&
           <Tooltip label='Reply' fontSize='sm' aria-label='Reply'>
-            <BsReply size='20px' className='ml-1 cursor-pointer -scale-x-100 mb-0.5' color='var(--main-blue)' onClick={replyToHandler} />
+            <BsReply size='20px' className='ml-1 cursor-pointer -scale-x-100 mb-0.5' color='var(--primary-color)' onClick={replyToHandler} />
           </Tooltip>}
       </GridItem>
       <ConfirmDialog isOpen={isOpen} onClose={onClose} confirmHandler={(e: MouseEvent) => onDelete != null ? onDelete(comment) : null} />
@@ -215,7 +215,7 @@ const ParentComment = ({ comment, ...rest }: CommentProps): JSX.Element => {
   }
 
   return (
-    <Box backgroundColor='lightcyan' borderLeftColor='var(--main-blue)' borderLeftWidth='2px' borderRadius='0.5rem' {...rest} p='1' cursor='pointer'>
+    <Box backgroundColor='lightcyan' borderLeftColor='var(--primary-color)' borderLeftWidth='2px' borderRadius='0.5rem' {...rest} p='1' cursor='pointer'>
       <Box display='flex'>
         <Avatar size='2xs' name={userName} src={comment.user?.xsAvatar} mr='1' display='block' />
         <Text fontSize='x-small' fontWeight='600' ml='1' mr='1'>{userName}</Text>

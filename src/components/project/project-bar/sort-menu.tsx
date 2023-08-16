@@ -67,7 +67,7 @@ export const SortMenu = (props: SortMenuProps): JSX.Element => {
 
   return (
     <Menu>
-      <MenuButton {...props} as={Button} rightIcon={sortIcon} variant='outline' color='var(--main-blue)' size={['xs', 'sm']}>
+      <MenuButton {...props} as={Button} rightIcon={sortIcon} variant='outline' color='var(--primary-color)' size={['xs', 'sm']}>
         {isMobile ? '' : SortLabelMapping[selectedSort]}
       </MenuButton>
       <MenuList>

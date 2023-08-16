@@ -20,6 +20,8 @@ import ToastContext from '@/src/store/toast-context'
 import { useTranslation } from 'next-i18next'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
+const color = '#057A8B'
+
 const Login = ({ onSubmit }: { onSubmit?: Function }): JSX.Element => {
   const { t } = useTranslation()
   const { showToast } = useContext(ToastContext)
@@ -193,19 +195,28 @@ const Login = ({ onSubmit }: { onSubmit?: Function }): JSX.Element => {
                 mt={4}
                 bg='success'
                 name='login'
-                color='white'
+                fontWeight='600'
                 onClick={loginUser}
                 isLoading={isFetching}
                 loadingText={`${t('login:logging')}`}
                 disabled={disabled}
+                color={color}
+                borderWidth='0.1875rem'
+                borderColor={color}
+                borderRadius='0.5rem'
+                backgroundColor='white'
+                _hover={{
+                  backgroundColor: color,
+                  color: 'white'
+                }}
               >
                 {t('buttons:sign-in')}
               </Button>
               <Box m='5' textAlign='center'>
-                <Link href='/signup' color='brand' p='2' display='block'>
+                <Link href='/signup' p='2' display='block'>
                   {t('links:sign-up-caption')}
                 </Link>
-                <Link href='/reset-password' color='brand' p='2'>
+                <Link href='/reset-password' p='2'>
                   {t('links:forget-password')}
                 </Link>
               </Box>

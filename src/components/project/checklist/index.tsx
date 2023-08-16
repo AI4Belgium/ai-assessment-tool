@@ -114,7 +114,7 @@ const Checklist: FC<Props> = ({ project, categories, sections }): JSX.Element =>
   return (
     <Box backgroundColor='white' padding='2rem' paddingTop='1rem' borderRadius='1rem' className='print:p-0'>
       <Flex justifyContent='flex-end' className='print:hidden'>
-        <Button size={['xs', 'sm', 'md']} backgroundColor='#2811ED' color='white' onClick={() => window?.print()}>{t('buttons:export')}</Button>
+        <Button size={['xs', 'sm', 'md']} onClick={() => window?.print()}>{t('buttons:export')}</Button>
       </Flex>
       <Text color='#1C1E20' fontSize='18px' className='hidden print:block'>1. Overview</Text>
       <OverviewComponent categories={categoriesToShow} scoresPerCatId={normalizedScoredPerCategory} />

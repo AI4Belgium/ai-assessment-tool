@@ -189,12 +189,9 @@ const Profile = (): JSX.Element => {
         />
       </FormControl>
       <Button
-        fontWeight='semibold'
         width='full'
         mt={4}
         disabled={isDisabled}
-        bg='success'
-        color='white'
         onClick={updateProfile} // eslint-disable-line @typescript-eslint/no-misused-promises
         isLoading={isLoading}
         loadingText={`${t('settings:updating')}`}

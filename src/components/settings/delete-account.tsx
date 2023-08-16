@@ -20,12 +20,15 @@ const DeleteAccountSettings = (): JSX.Element => {
       <Box p='2' height='fit-content' minW={300}>
         <Heading size='md'>{t('settings:delete-account')}</Heading>
         <Button
-          fontWeight='semibold'
           width='full'
+          borderColor='red'
+          color='red'
+          _hover={{
+            backgroundColor: 'red',
+            color: 'white'
+          }}
           mt={4}
           disabled={isDisabled}
-          bg='danger'
-          color='white'
           onClick={() => setShowModal(true)}
           isLoading={isLoading}
           loadingText={`${t('settings:deleting')}`}

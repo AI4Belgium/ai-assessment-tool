@@ -77,12 +77,9 @@ const EmailSettings = (): JSX.Element => {
           </Text>
         </FormControl>
         <Button
-          fontWeight='semibold'
           width='full'
           mt={4}
           disabled={isDisabled}
-          bg='success'
-          color='white'
           onClick={() => setShowModal(true)}
           isLoading={isLoading}
           loadingText={`${t('settings:updating')}`}

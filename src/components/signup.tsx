@@ -279,12 +279,11 @@ const SignUp = (): JSX.Element => {
               {confirmPasswordErr && <Text size='xs' color='red'>{t('validations:passwords-unmatch')}</Text>}
             </FormControl>
             <Button
-              fontWeight='semibold'
               width='full'
               mt={4}
+              variant='bosa'
+              colorScheme='gray'
               disabled={isButtonDisabled}
-              bg='success'
-              color='white'
               onClick={(e) => { void registerUser(e) }}
               isLoading={isCreating}
               loadingText={`${t('signup:registering')}`}

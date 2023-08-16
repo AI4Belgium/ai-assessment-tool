@@ -144,17 +144,17 @@ export const QuestionComp = ({ question, onChange, ...rest }: { question: Displa
 
   return (
     <>
-      <Text color='var(--main-blue)' fontSize={['xs', 'sm']} as='b' display='block' opacity={question.enabled === true ? 1 : 0.5} ref={element}>
+      <Text color='var(--primary-color)' fontSize={['xs', 'sm']} as='b' display='block' opacity={question.enabled === true ? 1 : 0.5} ref={element}>
         {`${question.TOCnumber as string} ${question.title?.replace(/=g(b|e)=/g, '').replace(/=hb=.*=he=/g, '')}`}
         <QuestionHelp question={question} />
       </Text>
       {question.enabled === false &&
-        <Text color='var(--main-blue)' fontSize='xs' as='b' textDecoration='underline' display='block'>
+        <Text color='var(--primary-color)' fontSize='xs' as='b' textDecoration='underline' display='block'>
           {question.enabledCondition?.disabledText}
         </Text>}
       <Box pl={[0, 0, '1.5']}>
         <QuestionAnswers question={question} onChange={(value: any) => onChange(question, value)} marginY='1rem' />
-        <Text color='var(--main-blue)' fontSize={['xs', 'sm']} as='b' display='block' opacity={question.enabled === true ? 1 : 0.5}>
+        <Text color='var(--primary-color)' fontSize={['xs', 'sm']} as='b' display='block' opacity={question.enabled === true ? 1 : 0.5}>
           Justification
         </Text>
         <Textarea
