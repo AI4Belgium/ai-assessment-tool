@@ -1,6 +1,6 @@
 import React, { useState, FC, useEffect } from 'react'
 import { Box, useDisclosure } from '@chakra-ui/react'
-import CardDetailsModal from '@/src/components/project/modals/card-details-modal'
+import CardDetailsModal from '@/src/components/project/modals/card-details-modal/index'
 import ColumnComponent from '@/src/components/project/columns/column'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import useSWR from 'swr'
