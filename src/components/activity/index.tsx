@@ -321,8 +321,8 @@ function ActivityRenderer (props: { displayActivity: DisplayActivity, currentUse
     case ActivityType.ROLE_CREATE: {
       const { data } = displayActivity
       text = 'created role'
-      if (data?.title != null) {
-        text = <Text display='inline'>{text}: "{data.title}"</Text>
+      if (data?.title != null || data?.name != null) {
+        text = <Text display='inline'>{text}: "{data.title ?? data.name}"</Text>
       }
       break
     }
