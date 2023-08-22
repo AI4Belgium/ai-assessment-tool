@@ -47,6 +47,17 @@ export const AI4BelgiumIcon = (): JSX.Element => (
   </div>
 )
 
+function removeDuplicatesById (arr: any[]): any[] {
+  const seenIds = new Set()
+  return arr.filter(item => {
+    if (seenIds.has(item._id)) {
+      return false // Skip duplicates
+    }
+    seenIds.add(item.id)
+    return true // Keep non-duplicates
+  })
+}
+
 function ActivityDrawer (): JSX.Element {
   const { t } = useTranslation()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -60,8 +71,11 @@ function ActivityDrawer (): JSX.Element {
 
   useEffect(() => {
     if (data?.data != null) {
-      const dataToAdd = data.data.filter((a: DisplayActivity) => !activities.some((b: DisplayActivity) => a._id === b._id))
-      const dataUpdated = activities.map((a: DisplayActivity) => data.data.find((b: DisplayActivity) => a._id === b._id) ?? a)
+      const newData = removeDuplicatesById(data.data)
+      const currentActivitiesIds = activities.map(a => a._id)
+      const currentActivitiesIdsSet = new Set(currentActivitiesIds)
+      const dataToAdd = newData.filter((a: DisplayActivity) => !currentActivitiesIdsSet.has(a._id))
+      const dataUpdated = activities.map((a: DisplayActivity) => newData.find((b: DisplayActivity) => a._id === b._id) ?? a)
       const newActivities = [...dataUpdated, ...dataToAdd]
       newActivities.sort((a: DisplayActivity, b: DisplayActivity) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
       setActivities(newActivities)
@@ -80,7 +94,7 @@ function ActivityDrawer (): JSX.Element {
   }
 
   useEffect(() => {
-    const intervalId = setInterval(() => loadLatestFn(), 10000) // eslint-disable-line @typescript-eslint/no-misused-promises,@typescript-eslint/promise-function-async
+    const intervalId = setInterval(loadLatestFn, 10000) // eslint-disable-line @typescript-eslint/no-misused-promises,@typescript-eslint/promise-function-async
     return () => clearInterval(intervalId)
   }, [])
 

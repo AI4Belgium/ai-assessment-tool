@@ -1,4 +1,7 @@
-import { Db, MongoClient, ObjectId } from 'mongodb'
+import {
+  // Logger,
+  Db, MongoClient, ObjectId
+} from 'mongodb'
 import { isEmpty } from '@/util/index'
 
 const { MONGODB_URI, MONGODB_DB } = process.env
@@ -63,6 +66,7 @@ export async function connectToDatabase (mongoDbUri?: string, dbName?: string | 
       }
     })
   }
+  // Logger.setLevel('debug')
   cached.conn = await cached.promise
   return cached.conn
 }

@@ -34,8 +34,8 @@ export default class Activity extends Model {
 
   static async createRoleActivity (projectId: string, createdBy: string, roleId: string, newData: Partial<Role>, activityType: ActivityType = ActivityType.ROLE_UPDATE): Promise<string | null> {
     const data: ActivityData = {}
-    if (newData.name != null) data.title = newData.name
-    if (newData.desc !== null) data.description = true
+    if (newData.name != null) data.name = newData.name
+    if (newData.desc != null) data.description = true
     if (isEmpty(data)) return null
     return await this.createActivity(projectId, createdBy, activityType, data, { roleId })
   }
@@ -217,14 +217,14 @@ export default class Activity extends Model {
             as: 'project'
           }
         },
-        {
-          $lookup: {
-            from: 'projects',
-            localField: 'roleId',
-            foreignField: 'roles._id',
-            as: 'role'
-          }
-        },
+        // {
+        //   $lookup: {
+        //     from: 'projects',
+        //     localField: 'roleId',
+        //     foreignField: 'roles._id',
+        //     as: 'role'
+        //   }
+        // },
         {
           $lookup: {
             from: 'cards',
@@ -245,6 +245,20 @@ export default class Activity extends Model {
               { $replaceRoot: { newRoot: '$questions' } }
             ],
             as: 'questions'
+          }
+        },
+        {
+          $lookup: {
+            from: 'projects',
+            // localField: 'questionId',
+            // foreignField: 'questions.id', // doesn't work, we end up with the cards and not the questions
+            let: { role_id: '$roleId' },
+            pipeline: [
+              { $unwind: '$roles' },
+              { $match: { $expr: { $eq: ['$roles._id', '$$role_id'] } } },
+              { $replaceRoot: { newRoot: '$roles' } }
+            ],
+            as: 'roles'
           }
         },
         {
@@ -272,6 +286,7 @@ export default class Activity extends Model {
           }
         },
         { $addFields: { question: { $first: '$questions' } } },
+        { $addFields: { role: { $first: '$roles' } } },
         { $unwind: { path: '$project', preserveNullAndEmptyArrays: true } },
         { $unwind: { path: '$role', preserveNullAndEmptyArrays: true } },
         { $unwind: { path: '$card', preserveNullAndEmptyArrays: true } },
@@ -282,10 +297,14 @@ export default class Activity extends Model {
           $project: {
             'project.roles': 0,
             'project.userIds': 0,
+            'project._id': 0,
             'project.description': 0,
             'project.createdAt': 0,
             'project.createdBy': 0,
             'card.questions': 0,
+            'card.id': 0,
+            questions: 0,
+            roles: 0,
             // 'card.questions.title': 0,
             // 'card.questions.type': 0,
             // 'card.questions.isVisibleIf': 0,
@@ -299,10 +318,34 @@ export default class Activity extends Model {
             'card.createdAt': 0,
             'card.updatedAt': 0,
             'card.userIds': 0,
+            'card.example': 0,
+            'card.desc': 0,
+            'card.section': 0,
+            'card.category': 0,
+            'card.columnId': 0,
+            'card.sequence': 0,
             'creator.password': 0,
             'creator.avatar': 0,
+            'creator.emailVerified': 0,
+            'creator.email': 0,
+            'creator.organization': 0,
+            'creator.createdAt': 0,
+            'creator.department': 0,
+            'creator.xsAvatar': 0,
+            'creator._id': 0,
             'users.password': 0,
-            'users.avatar': 0
+            'users.avatar': 0,
+            'role.createdAt': 0,
+            'role.createdBy': 0,
+            'question.title': 0,
+            'question.isVisibleIf': 0,
+            'question.isScored': 0,
+            'question.answers.score': 0,
+            'comment._id': 0,
+            'comment.projectId': 0,
+            'comment.cardId': 0,
+            'comment.createdAt': 0,
+            'comment.questionId': 0
           }
         }
       ])
