@@ -12,7 +12,7 @@ import { Card, DisplayQuestion, Question } from '@/src/types/card'
 import { Category, Project } from '@/src/types/project'
 import { isEmpty } from '@/util/index'
 import { useQueryCardId } from '@/src/hooks/index'
-import CardDetailsModal from '@/src/components/project/modals/card-details-modal'
+import CardDetailsModal from '@/src/components/project/modals/card-details-modal/index'
 
 type Props = {
   project: Project

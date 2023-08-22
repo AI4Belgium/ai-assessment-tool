@@ -27,6 +27,7 @@ import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { useTranslation } from 'next-i18next'
 import { isEmpty } from '@/util/index'
 import { Question, DisplayQuestion, QuestionType, Answer } from '@/src/types/card'
+import { GlossaryLink } from '@/src/store/glossary-context'
 
 interface QuestionHelpProps {
   question: Question
@@ -92,7 +93,7 @@ export const QuestionAnswers = ({ question, onChange, ...boxProps }: QuestionAns
               key={idx} value={`${String(idx)}`} disabled={question.enabled !== true} size='sm' fontSize={['xs', 'xs', 'sm']}
               opacity={question.enabled === true ? 1 : 0.5} ml='0' marginInlineStart='0 !important' marginInlineEnd='0.5rem'
             >
-              <Box display='inline' color='var(--text-grey)'>{a?.answer.replace(/=g(b|e)=/g, '').replace(/=hb=.*=he=/g, '')}</Box>
+              <Box display='inline' color='var(--text-grey)'><GlossaryLink key={`glossary-link-${question.id}+${idx}`} title={a?.answer} /></Box>
             </Radio>
           ))}
         </Stack>
@@ -109,7 +110,7 @@ export const QuestionAnswers = ({ question, onChange, ...boxProps }: QuestionAns
               size='sm' key={idx} value={`${idx}`} disabled={question.enabled !== true} fontSize={['xs', 'xs', 'sm']}
               opacity={question.enabled === true ? 1 : 0.5} ml='0' marginInlineStart='0 !important' marginInlineEnd='0.5rem'
             >
-              <Box display='inline' color='var(--text-grey)'>{a?.answer.replace(/=g(b|e)=/g, '').replace(/=hb=.*=he=/g, '')}</Box>
+              <Box display='inline' color='var(--text-grey)'><GlossaryLink key={`glossary-link-${question.id}+${idx}`} title={a?.answer} /></Box>
             </Checkbox>
           ))}
         </Stack>
@@ -122,6 +123,7 @@ export const QuestionAnswers = ({ question, onChange, ...boxProps }: QuestionAns
 export const QuestionComp = ({ question, onChange, ...rest }: { question: DisplayQuestion, onChange: Function, [key: string]: any }): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
+
   const { question: questionId } = router.query
   const element = useRef<HTMLDivElement>(null)
   const [conclusion, setConclusion] = useState(question.conclusion ?? '')
@@ -145,7 +147,7 @@ export const QuestionComp = ({ question, onChange, ...rest }: { question: Displa
   return (
     <>
       <Text color='var(--main-blue)' fontSize={['xs', 'sm']} as='b' display='block' opacity={question.enabled === true ? 1 : 0.5} ref={element}>
-        {`${question.TOCnumber as string} ${question.title?.replace(/=g(b|e)=/g, '').replace(/=hb=.*=he=/g, '')}`}
+        {question.TOCnumber as string} <GlossaryLink title={question.title} />
         <QuestionHelp question={question} />
       </Text>
       {question.enabled === false &&
