@@ -91,7 +91,8 @@ export const QuestionAnswers = ({ question, onChange, ...boxProps }: QuestionAns
           {question?.answers?.map((a: Answer, idx) => (
             <Radio
               key={idx} value={`${String(idx)}`} disabled={question.enabled !== true} size='sm' fontSize={['xs', 'xs', 'sm']}
-              opacity={question.enabled === true ? 1 : 0.5} ml='0' marginInlineStart='0 !important' marginInlineEnd='0.5rem'
+              opacity={question.enabled === true ? 1 : 0.5} ml='0' marginInlineStart='0 !important' marginRight='0.5rem !important'
+              style={{ marginRight: '0' }}
             >
               <Box display='inline' color='var(--text-grey)'><GlossaryLink key={`glossary-link-${question.id}+${idx}`} title={a?.answer} /></Box>
             </Radio>
@@ -109,6 +110,7 @@ export const QuestionAnswers = ({ question, onChange, ...boxProps }: QuestionAns
             <Checkbox
               size='sm' key={idx} value={`${idx}`} disabled={question.enabled !== true} fontSize={['xs', 'xs', 'sm']}
               opacity={question.enabled === true ? 1 : 0.5} ml='0' marginInlineStart='0 !important' marginInlineEnd='0.5rem'
+              style={{ marginRight: '0.5rem' }}
             >
               <Box display='inline' color='var(--text-grey)'><GlossaryLink key={`glossary-link-${question.id}+${idx}`} title={a?.answer} /></Box>
             </Checkbox>

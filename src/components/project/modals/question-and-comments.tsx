@@ -3,6 +3,7 @@ import {
   Box,
   BoxProps
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { isEmpty, isEqual } from '@/util/index'
 import { defaultFetchOptions, HTTP_METHODS, getResponseHandler } from '@/util/api'
 import CommentComponent from './comment'
@@ -10,8 +11,6 @@ import { Question, DisplayQuestion } from '@/src/types/card'
 import { Comment } from '@/src/types/comment'
 import { QuestionComp } from '@/src/components/project/modals/question'
 import ToastContext from '@/src/store/toast-context'
-
-import { useRouter } from 'next/router'
 
 type Props = {
   projectId: string
