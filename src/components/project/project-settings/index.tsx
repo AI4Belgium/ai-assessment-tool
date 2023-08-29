@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import React, { createContext, useState, useContext, useEffect, ChangeEvent } from 'react'
 import {
   Button,
   Input,
@@ -26,24 +26,24 @@ import {
 } from '@chakra-ui/react'
 import { AiFillSetting, AiOutlineDelete, AiOutlineCheck } from 'react-icons/ai'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
 import { useTranslation } from 'next-i18next'
 import Roles from './roles'
 import Team from './team'
-import { defaultFetchOptions, fetcher, HTTP_METHODS } from '@/util/api'
+import { defaultFetchOptions, HTTP_METHODS } from '@/util/api'
 import ConfirmDialog from '../../confirm-dialog'
 import { isEmpty } from '@/util/index'
 import ToastContext from '@/src/store/toast-context'
 import { Project } from '@/src/types/project'
+import industries from '@/src/data/industries.json'
+import { Industry } from '@/src/types/industry'
 
 const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element => {
   const { t } = useTranslation()
-  const { data: industries } = useSWR('/api/industries', fetcher)
   const { isBusy, setIsBusy } = useContext(ProjectSettingsContext)
   const { showToast } = useContext(ToastContext)
   const [projectName, setProjectName] = useState(project.name)
   const [description, setDescription] = useState(project.description)
-  const [industry, setIndustry] = useState<string | undefined>(project.industry)
+  const [industry, setIndustry] = useState<Industry | undefined>(undefined)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -56,9 +56,9 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
 
     if (projectName !== project.name) data.name = projectName
     if (description !== project.description) data.description = description
-    if (industry !== project.industry) data.industry = industry
+    if (industry?._id !== project.industryId) data.industryId = industry?._id
     if (!isEmpty(data)) {
-      const url = `/api/projects/${String(project._id)}`
+      const url = `/api/projects/${project._id}`
       const response = await fetch(url, {
         ...defaultFetchOptions,
         method: HTTP_METHODS.PATCH,
@@ -67,13 +67,31 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
       if (response.ok) {
         project.name = projectName
         project.description = description
-        project.industry = industry
+        project.industryId = industry?._id
         showToast({ title: t('project-settings:success'), description: t('project-settings:success-save-message') })
       } else {
         showToast({ title: t('exceptions:error'), description: t('exceptions:something-went-wrong'), status: 'error' })
       }
     }
     setIsLoading(false)
+  }
+
+  useEffect(() => {
+    if (project.industryId != null) {
+      const industry = industries.find(i => i._id === project.industryId)
+      setIndustry(industry)
+    }
+  }, [project.industryId])
+
+  const handleIndustryChange = (e: ChangeEvent<HTMLSelectElement>): void => {
+    console.log(e)
+    const idx = e.target.selectedIndex
+    if (idx === 0) setIndustry(undefined) // meaning unsetting it, because first option in select is to choose an industry
+    else {
+      const industry = industries[idx - 1] // because first option is to choose an industry and in not included in the industries
+      console.log('industry', industry, industry._id)
+      setIndustry(industry)
+    }
   }
 
   return (
@@ -95,8 +113,8 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
       </FormControl>
       <FormControl id='description' my='1.5'>
         <FormLabel>{t('project-settings:project-industry')}</FormLabel>
-        <Select size='xs' placeholder={`${t('placeholders:select-industry')}`} onChange={e => setIndustry(e.target.value)} value={String(industry)}>
-          {Array.isArray(industries) && industries?.map((industry, idx) => (<option key={industry.key} value={industry.name}>{industry.name}</option>))}
+        <Select size='xs' placeholder={`${t('placeholders:select-industry')}`} onChange={handleIndustryChange} value={industry?.name}>
+          {Array.isArray(industries) && industries?.map((industry, idx) => (<option key={industry._id} value={industry.name}>{industry.name}</option>))}
         </Select>
       </FormControl>
       <Box>

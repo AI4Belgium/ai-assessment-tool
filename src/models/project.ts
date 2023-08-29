@@ -9,10 +9,11 @@ import Activity from '@/src/models/activity'
 import { ActivityType } from '@/src/types/activity'
 import { Project } from '@/src/types/project'
 import { User } from '@/src/types/user'
+import industries from '@/src/data/industries.json'
 
 export const TABLE_NAME = 'projects'
 
-export const createProject = async ({ name, createdBy, description, industry }: { name: string, createdBy: ObjectId | string, description?: string, industry?: string }, addDefaultColumns = true): Promise<string> => {
+export const createProject = async ({ name, createdBy, description, industryId }: { name: string, createdBy: ObjectId | string, description?: string, industryId?: string | ObjectId }, addDefaultColumns = true): Promise<string> => {
   const { db } = await connectToDatabase()
   name = cleanText(name)
   createdBy = toObjectId(createdBy)
@@ -25,7 +26,10 @@ export const createProject = async ({ name, createdBy, description, industry }: 
     userIds: []
   }
   if (description != null) data.description = cleanText(description)
-  if (industry != null) data.industry = cleanText(industry)
+  if (industryId != null) {
+    const validatedIndustyId = getIndustryObjectId(industryId)
+    if (validatedIndustyId != null) data.industryId = validatedIndustyId
+  }
   const result = await db.collection(TABLE_NAME).insertOne(data)
   if (addDefaultColumns) await createProjectDefaultColumns(data._id, createdBy)
   return result.insertedId
@@ -56,6 +60,14 @@ export const getProject = async (_id: ObjectId | string): Promise<Project> => {
   return await db.collection(TABLE_NAME).findOne({ _id })
 }
 
+function getIndustryObjectId (industryId: string | ObjectId): ObjectId | null {
+  const industry = industries.find(i => i._id === String(industryId))
+  if (industry != null) {
+    return toObjectId(industry._id)
+  }
+  return null
+}
+
 export const updateProjectAndCreateActivity = async (_id: ObjectId | string, data: any, userId: ObjectId | string): Promise<boolean> => {
   const res = await updateProject(_id, data)
   if (res) void Activity.createProjectUpdateActivities(_id, userId, data)
@@ -66,9 +78,15 @@ export const updateProject = async (_id: ObjectId | string, data: any): Promise<
   const { db } = await connectToDatabase()
   _id = toObjectId(_id)
   const updateData: any = {}
-  const updateableProps = ['name', 'description', 'industry', 'backgroundImage']
+  const updateableProps = ['name', 'description', 'backgroundImage']
   for (const prop of updateableProps) {
     if (data[prop] != null) updateData[prop] = cleanText(data[prop])
+  }
+  if (data.industryId != null) {
+    const validatedIndustyId = getIndustryObjectId(data.industryId)
+    if (validatedIndustyId != null) updateData.industryId = validatedIndustyId
+  } else if ('industryId' in data && data.industryId == null) {
+    updateData.industryId = null
   }
   if (isEmpty(updateableProps)) return false
   const res = await db

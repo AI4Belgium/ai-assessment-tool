@@ -23,9 +23,6 @@
         {
             "id": "1669988713",
             "title": "Evaluate the measures you have adopted to detect and avoid =gb=bias=ge=, and ensure =gb=fairness=ge=?",
-            "example" : [
-               "To ensure fairness, our healthcare AI software development team has adopted a process of validating our datasets to ensure that data points are equally distributed across all demographics and that any potential bias is detected and removed. We also use independent data sets to double-check the accuracy of our models.","Additionally, our healthcare AI software development team has adopted measures to ensure that our models are evaluated against a set of diversity and fairness metrics. This ensures that the models are trained to be unbiased with respect to gender, race, ethnicity, and other protected classes. We also use an independent audit process to evaluate our results and ensure fairness."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1669988372",
             "questions":
@@ -216,9 +213,6 @@
         {
             "id": "1669988898",
             "title": "rate the measures you implemented to ensure =gb=accessibility=ge= and =gb=Universal Design=ge=?",
-            "example" : [
-               "We implemented text-to-speech functionality in our healthcare AI software so that users with visual impairments will have the same experience as everyone else. We rated the measure 8/10 for accessibility and Universal Design.","We provided an option for users to increase the font size of the text in our healthcare AI software, so that users with low-vision can still use it. We rated the measure 9/10 for accessibility and Universal Design."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1669988459",
             "questions": [
@@ -351,9 +345,6 @@
         {
             "id": "1669988916",
             "title": "rate the measures you put in place to ensure the involvement of the relevant stakeholders?",
-            "example" : [
-                "We implemented regular check-ins with stakeholders to ensure they felt heard and their feedback was taken into account when developing the healthcare AI software.","We developed a survey to gather feedback from stakeholders on the healthcare AI software and used the results to inform our development process."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1669988588",
             "questions": [

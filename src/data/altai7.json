@@ -18,9 +18,6 @@
         {
             "id": "1670175654",
             "title": "rate the measures in place to ensure the auditability of the =gb=AI system",
-            "example" : [
-               "The AI system is designed to generate an audit trail of all decisions and transactions conducted. This way, if any issues arise, the audit trail can be used to determine the root cause.","The AI system is designed to generate an alert notification when any changes are made to the system. This alert notification is sent to the responsible personnel and a record is stored in the audit log."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1670175634",
             "questions": [
@@ -64,9 +61,6 @@
         {
             "id": "1670175662",
             "title": "Rate the risk management system you have in place.",
-            "example" : [
-               "We ran a series of tests to rate the risk management system we have in place for our healthcare AI software development. We found that the system is able to detect and flag potential risks in a timely manner with a high accuracy rate.","To rate the risk management system we have in place for our healthcare AI software development, we conducted a survey among our development team to gauge the effectiveness of the system. The results showed that the system is able to identify potential risks quickly, and the team is satisfied with its performance."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1670175641",
             "questions": [

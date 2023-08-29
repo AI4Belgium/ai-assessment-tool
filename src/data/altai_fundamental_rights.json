@@ -7,9 +7,6 @@
         {
             "id": "1673971161",
             "title": "Does the AI system potentially negatively discriminate against people on the basis of any of the following grounds (non-exhaustively)",
-            "example" : [
-                "Race examples: A healthcare AI system denies insurance coverage to certain racial groups based on the patient's race. A healthcare AI system assigns lower levels of care for certain racial groups based on the patient's race.", "Gender examples: A healthcare AI system assigns different medical treatments for men and women based on their gender. A healthcare AI system assigns different insurance coverage levels for men and women based on their gender."
-            ],
             "desc": "sex, race, colour, ethnic or social origin, genetic features, language, religion or belief, political or any other opinion, membership of a national minority, property, birth, disability, age or sexual orientation?",
             "questions": [
                 {
@@ -28,9 +25,6 @@
         {
             "id": "1673974585",
             "title": "Does the AI system respect the rights of the child",
-            "example" : [
-               "The AI system must be designed to not collect or store any data that could be used to identify an individual child, and must always obtain the informed consent of a parent or guardian before any data is collected.", "The AI system must also be designed to provide a safe and secure environment for children to interact with, and must not allow any third-party access to the data collected or stored by the AI system."
-            ],
             "desc": "",
             "questions": [
                 {
@@ -49,9 +43,6 @@
         {
             "id": "1673974845",
             "title": "Does the AI system protect personal data relating to individuals in line with GDPR?",
-            "example" : [
-                "The AI system must not store or process any personal data relating to individuals unless it is absolutely necessary for its function. Any personal data the system does process must be encrypted and stored securely in accordance with GDPR standards.", "All access to the AI system must be granted through secure authentication methods to ensure that only authorized personnel can view or modify personal data relating to individuals. Any changes to the system must also be logged to ensure GDPR compliance."
-            ],
             "desc": "",
             "questions": [
                 {
@@ -70,9 +61,6 @@
         {
             "id": "1673974964",
             "title": "Does the AI system respect the freedom of expression and information and/or freedom of assembly and association?",
-            "example" : [
-                "The AI system must not discriminate against any patient based on their beliefs, affiliations, and/or political views. The AI system must ensure that all patients are respected regardless of their opinions and have the freedom to express their views without fear of retribution.", "The AI system must allow for patients to join together for support and/or advocacy groups and must not interfere with these activities. The AI system must ensure that all patients are free to assemble and associate with whom they please."
-            ],
             "desc": "",
             "questions": [
                 {

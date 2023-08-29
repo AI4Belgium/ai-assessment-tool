@@ -9,7 +9,7 @@ export interface Project {
   backgroundImage?: string
   userIds?: string[]
   roles?: Role[]
-  industry?: string
+  industryId?: string
   description?: string
 }
 

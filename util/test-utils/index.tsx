@@ -17,7 +17,7 @@ import { connectToDatabase } from '@/src/models/mongodb'
 import { MongoClient } from 'mongodb'
 import { hashPassword } from '@/util/auth'
 import { encode } from 'next-auth/jwt'
-import { industries } from '@/pages/api/industries'
+import industries from '@/src/data/industries.json'
 import { Project } from '@/src/types/project'
 import { dataToCards } from '@/src/models/card'
 import { defaultCards, defaultRoles } from '@/src/data'
@@ -133,7 +133,7 @@ export const givenProjectData = (data: any = {}): Partial<Project> => {
   return {
     name: faker.internet.userName(),
     description: faker.lorem.paragraph(),
-    industry: faker.helpers.arrayElement(industries).name,
+    industryId: faker.helpers.arrayElement(industries)._id,
     ...data
   }
 }
