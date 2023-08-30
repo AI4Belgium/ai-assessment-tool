@@ -67,6 +67,7 @@ Install docker on your machine and start it
 - Improve styling (responsiveness styling)
 - Add Web Accessibility
 - Add request validation
+- Add database migration handling
 
 ## Tech stacks
 
