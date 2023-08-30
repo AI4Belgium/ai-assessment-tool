@@ -12,7 +12,7 @@ import {
   Text
 } from '@chakra-ui/react'
 import reactStringReplace from 'react-string-replace'
-import glossary from '../../json-altai/glossary.json'
+import glossary from '@/src/data/glossary.json'
 
 interface Glossary {
   [key: string]: string

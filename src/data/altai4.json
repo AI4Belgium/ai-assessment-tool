@@ -25,9 +25,6 @@
         {
             "id" : "1669815665",
             "title" : "Evaluate if your AI System's documentation allows for traceability",
-            "example" : [
-                "Before releasing a new version of the AI System, the system documentation must be evaluated for traceability. Each decision and code change must be traceable to its source in the documentation.","During system maintenance, the AI System documentation must be evaluated for traceability. Each system resource and component must be traceable to its source in the documentation."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669813752",
             "questions":
@@ -103,9 +100,6 @@
         {
             "id" : "1669976136",
             "title" : "Evaluate Your AI System's explainability",
-            "example" : [
-               "The healthcare AI system was trained using an explainable artificial intelligence (XAI) approach to measure its explainability. The AI system was tested by presenting it with a variety of medical datasets and then asking it to explain its decision-making process. The AI system was able to accurately explain its decisions and its reasoning for making them, which demonstrated its explainability.","The healthcare AI system was evaluated for explainability by having experts review the system's explanation outputs. The experts were asked to assess the AI system's ability to effectively explain its decisions. The experts concluded that the AI system's explanations were complete, accurate, and helpful in understanding the AI's decision-making process, which showed that the system had a high level of explainability."
-            ],
             "desc" : "This subsection is about evaluating how well an AI system can explain itself. The questions in this subsection focus on the ability of the AI system to explain both how it works and why it makes the decisions it does. It's important for AI systems to be able to explain themselves because this helps people trust them. When an AI system makes a decision, it should be able to explain why it made that decision, if possible. If it's not possible to explain why a decision was made, the system is considered a \"black box\" and requires special attention. In these cases, other ways of making the system more explainable, such as by making it easy to track its decisions or by being transparent about its capabilities, may be necessary. The amount of explainability needed depends on the situation and how serious the consequences could be if the AI system makes a mistake.",
             "section" : "1669813766",
             "questions":
@@ -154,9 +148,6 @@
         {
             "id" : "1669217872",
             "title" : "Evaluate how well people using the AI system understand its abilities and limitations.",
-            "example" : [
-               "Develop an AI system that incorporates a user survey to evaluate how well people understand the system's abilities and limitations. The survey should ask questions such as: Are you aware of what the AI system is capable of? Do you understand the system's limitations?", "Develop a tutorial page for the AI system that clearly outlines the system's abilities and limitations. The page should also include a quiz at the end to evaluate how well users have understood the information presented."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669813782",
             "questions":

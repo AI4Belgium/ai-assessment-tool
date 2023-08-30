@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react'
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import {
   Accordion,
   AccordionButton,
@@ -22,6 +22,9 @@ import { useTranslation } from 'next-i18next'
 import { GlossaryContextProvider, GlossaryLink } from '@/src/store/glossary-context'
 import Sidebar from './sidebar'
 import { isEmpty } from '@/util/index'
+import ProjectContext from '@/src/store/project-context'
+import industries from '@/src/data/industries.json'
+import { ExampleByIndustry } from '@/src/types/industry'
 
 const commonProps = {
   _hover: {
@@ -74,12 +77,14 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
   const router = useRouter()
   card.userIds = card?.userIds ?? []
   const cardId = String(card._id)
-  const projectId = String(card.projectId)
+  const projectId = card.projectId
   const { question: questionId, comment: commentId } = router.query
   const [scoredQuestions, setScoredQuestions] = useState<DisplayQuestion[]>([])
   const [unscoredQuestions, setUnscoredQuestions] = useState<DisplayQuestion[]>([])
   const [, setUnscoredQuestionsCollapsed] = useState<boolean>(true)
   const [commentsFetched, setCommentsFetched] = useState<boolean>(false)
+  const { project } = useContext(ProjectContext)
+  const [exampleByIndustry, setExampleByIndustry] = useState<ExampleByIndustry | undefined>(undefined)
 
   const fetchComments = useCallback(async (question?: Partial<DisplayQuestion>): Promise<void> => {
     const url = question != null
@@ -101,6 +106,18 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
       setCommentsFetched(true)
     }
   }, [card, setCommentsFetched])
+
+  useEffect(() => {
+    console.log(project?.industryId, cardId)
+    let localExample: ExampleByIndustry | undefined
+    if (project?.industryId != null) {
+      const industry = industries.find(i => i._id === project.industryId)
+      if (industry?.examples != null) {
+        localExample = industry?.examples.find(e => e.cardOriginalId === card?.originalId) as ExampleByIndustry
+      }
+    }
+    setExampleByIndustry(localExample)
+  }, [project?.industryId, card?.originalId])
 
   useEffect(() => {
     if (card?.dueDate != null && typeof card.dueDate === 'string') card.dueDate = new Date(card.dueDate)
@@ -155,12 +172,10 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
                 </Box>
                 {card.example != null &&
                   <Accordion allowMultiple>
-                    {Array.isArray(card.example) &&
+                    {Array.isArray(exampleByIndustry?.data) &&
                       <AccordionItemStyled title={`${t('titles:example')}`}>
-                        {card.example.map((txt, idx) => <Text key={`example-${card._id}-${idx}`} fontSize={['xs', 'xs', 'sm']}>{txt}</Text>)}
+                        {exampleByIndustry?.data.map((txt, idx) => <Text key={`example-${card._id}-${idx}`} fontSize={['xs', 'xs', 'sm']}>{txt}</Text>)}
                       </AccordionItemStyled>}
-                    {typeof card.example === 'string' && <AccordionItemStyled title={`${t('titles:example')}`} desc={card.example} />}
-                    {/* <AccordionItemStyled title='Recommendation' desc={loremIpsum} /> */}
                   </Accordion>}
 
                 <Accordion defaultIndex={0} allowToggle borderRadius='lg' className='shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]' border='1px solid var(--main-blue)' marginY='1rem' mx={['5px', '5px', 0]}>

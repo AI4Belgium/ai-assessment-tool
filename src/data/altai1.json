@@ -19,9 +19,6 @@
         {
             "id" : "1669036932",
             "title" : "Evaluate the risk that the =gb=AI system=ge= negatively affects human autonomy.",
-            "example" : [
-                "When developing an AI system that is intended to improve patient education, the developers should take into account the risk that the AI system could become overly authoritative and restrict the autonomy of patients to make decisions regarding their own healthcare.", "When developing an AI system that is intended to streamline the administrative processes within a healthcare system, the developers should consider the risk that the AI system could limit the autonomy of healthcare providers to make decisions independently and without oversight."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669036901",
             "questions":
@@ -174,9 +171,6 @@
         {
             "id" : "1669037901",
             "title" : "Evaluate the risk that your =gb=AI system=ge= creates human attachment or addiction to your platform or can be used in manipulative ways.",
-            "example" : [
-                "During the development of our AI software, we must create a feedback loop that evaluates the risk of user attachment or addiction to our platform. This feedback loop should measure key factors such as increased usage frequency, user engagement and user satisfaction levels.","Before releasing our AI software, we must ensure that the platform cannot be manipulated in unethical ways. We must build in safeguards that prevent users from taking advantage of the system, such as flagging suspicious behavior and monitoring for malicious user input."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669036901",
             "questions":
@@ -257,9 +251,6 @@
         {
             "id" : "1669045830",
             "title" : "Evaluate the oversight procedures you have set up for the =gb=AI system=ge=.",
-            "example":[
-                "We have set up an oversight procedure in our AI system that requires regular review and testing of the AI system's outputs. A team of medical experts is assigned to review the outputs and ensure that they are in line with the expected standards for accuracy and quality.","We have also set up an oversight procedure that includes checks for any potential bias in the AI system's outputs. This is done by monitoring the outputs from different demographic groups and running tests to ensure that the AI system is not over- or under-serving certain groups."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669036910",
             "questions":

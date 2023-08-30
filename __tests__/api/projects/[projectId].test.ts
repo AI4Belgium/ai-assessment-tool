@@ -78,7 +78,7 @@ describe(PATH, () => {
       const updatedProject = await getProject(project._id)
       expect(updatedProject.name).toEqual(projectData.name)
       expect(updatedProject.description).toEqual(projectData.description)
-      expect(updatedProject.industry).toEqual(projectData.industry)
+      expect(String(updatedProject.industryId)).toEqual(String(projectData.industryId))
     })
     it('a user cannot update a project that he does not belong to', async () => {
       const user = await givenAUser() as any as User
@@ -100,7 +100,7 @@ describe(PATH, () => {
       const updatedProject = await getProject(project._id)
       expect(updatedProject.name).toEqual(project.name)
       expect(updatedProject.description).toEqual(project.description)
-      expect(updatedProject.industry).toEqual(project.industry)
+      expect(String(updatedProject.industryId)).toEqual(String(project.industryId))
     })
   })
 

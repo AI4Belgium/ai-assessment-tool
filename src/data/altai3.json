@@ -8,9 +8,6 @@
         {
             "id" : "1669727403",
             "title" : "Rate the privacy & data governance measures and procedures you have set up for the AI system?",
-            "example" : [
-                "We have put in place a data governance system that includes secure encryption of patient data, an audit trail for data access, and a system for reporting any data breaches. We have also implemented a privacy policy that outlines how patient data can be used, stored and shared.","We have set up data governance and privacy measures that include a comprehensive data security system, an automated system for reporting data breaches and data access, and a policy that outlines how patient data can be used and shared. Additionally, we have implemented a system of regular monitoring and auditing of the AI system to ensure that all measures are being followed."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "questions":
             [

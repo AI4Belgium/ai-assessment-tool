@@ -17,9 +17,6 @@
         {
             "id": "1670170371",
             "title": "rate the risk that the =gb=AI system=ge= negatively affects the environment?",
-            "example" : [
-               "The development team must ensure that the AI system is powered by renewable energy sources and does not create any additional emissions. If the system is powered by renewable energy sources, the risk of negatively affecting the environment is minimal.","The development team must ensure that the AI system is programmed to identify and respond to environmental changes that could have a negative impact on the environment. This includes monitoring air and water quality, as well as identifying and responding to potential environmental hazards. By doing this, the risk of the AI system negatively affecting the environment is reduced."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1670170307",
             "questions": [
@@ -89,9 +86,6 @@
         {
             "id": "1670170378",
             "title": "Rate the risk that the =gb=AI system=ge= negatively impacts work and work arrangements?",
-            "example" : [
-               "Patient registration software that AI-enhanced with automated scheduling capabilities may negatively impact patient wait times and lead to longer shifts for medical staff.","AI-driven medical imaging software that automates diagnosis may lead to medical staff being overworked as they are expected to review the AI diagnosis and validate them."
-            ],
             "desc": "The following questions will help you in your evaluation",
             "section": "1670170336",
             "questions": [

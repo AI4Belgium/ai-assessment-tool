@@ -11,15 +11,17 @@ import { getCard } from '@/src/models/card'
 import { getColumn } from '@/src/models/column'
 import { getUser } from '@/src/models/user'
 import { getUserDisplayName } from '@/util/users'
+import industries from '@/src/data/industries.json'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class Activity extends Model {
   static TABLE_NAME = 'activities'
 
   static async createProjectCreateActivity (projectId: string, createdBy: string, project: Partial<Project>): Promise<string | null> {
+    const industry = industries.find(i => i._id === String(project.industryId))
     const data = {
       name: project.name,
-      industry: project.industry
+      industry: industry?.name
     }
     return await this.createActivity(projectId, createdBy, ActivityType.PROJECT_CREATE, data)
   }
@@ -28,7 +30,10 @@ export default class Activity extends Model {
     const newActivityIds: Array<string | null> = []
     if (newData.name != null) newActivityIds.push(await this.createActivity(projectId, createdBy, ActivityType.PROJECT_UPDATE_NAME, { name: newData.name }))
     if (newData.description != null) newActivityIds.push(await this.createActivity(projectId, createdBy, ActivityType.PROJECT_UPDATE_DESCRIPTION))
-    if (newData.industry != null) newActivityIds.push(await this.createActivity(projectId, createdBy, ActivityType.PROJECT_UPDATE_INDUSTRY, { industry: newData.industry }))
+    if (newData.industryId != null) {
+      const industry = industries.find(i => i._id === String(newData.industryId))
+      newActivityIds.push(await this.createActivity(projectId, createdBy, ActivityType.PROJECT_UPDATE_INDUSTRY, { industry: industry?.name }))
+    }
     return newActivityIds.filter(id => id != null) as string[]
   }
 

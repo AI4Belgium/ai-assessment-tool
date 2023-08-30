@@ -30,9 +30,6 @@
         {
             "id" : "1669217856",
             "title" : "Evaluate the resilience to attacks of the =gb=AI system=ge=.",
-            "example" : [
-                "Penetration Testing: A penetration test is conducted to evaluate the resilience of the AI system to potential attacks. The test includes activities such as identifying vulnerabilities and loopholes, exploiting these vulnerabilities, and validating the attack success.","Security Vulnerability Scanning: A security vulnerability scan of the AI system is conducted to evaluate the system's resilience to potential attacks. This scan includes activities such as identifying and ranking vulnerabilities, analyzing the impact of identified vulnerabilities, and developing a plan to address the vulnerabilities."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669217049",
             "questions":
@@ -155,9 +152,6 @@
         {
             "id" : "1669217872",
             "title" : "Evaluate the safety of the =gb=AI system=ge=?",
-            "example" : [
-                "The healthcare AI software development team performs a safety assessment that includes analyzing the system's failure modes and effects analysis (FMEA). This assessment helps to identify potential failures that could lead to unsafe outcomes and allows the team to evaluate the chances of such failures occurring.","The healthcare AI software development team conducts a usability study to assess the system's safety. The study involves having users interact with the system and tracking any potential safety issues that may arise. This allows the team to identify any potential safety hazards and make the necessary changes to ensure the safety of the AI system."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669217102",
             "questions":
@@ -338,9 +332,6 @@
         {
             "id" : "1669218219",
             "title" : "Evaluate the accuracy of the =gb=AI system=ge=?",
-            "example" : [
-                "A healthcare AI system was created to automatically detect possible instances of cancer in medical scans. To evaluate its accuracy, the system was tested against a set of known cancer instances from medical scans, and its performance was measured in terms of its true positive rate, false positive rate, and false negative rate.","A healthcare AI system was created to accurately predict the likelihood of a patient developing a certain medical condition in the future. To evaluate its accuracy, the system was tested against a set of known medical conditions and its performance was measured in terms of its precision, recall, and F1-score."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669217118",
             "questions":
@@ -450,9 +441,6 @@
         {
             "id" : "1669218235",
             "title" : "Evaluate the reliability, fall-back plans and reproducibility of the =gb=AI system=ge=?",
-            "example" : [
-                "For every AI system developed, the team must assess the reliability of the system by conducting stress tests and evaluating the system’s ability to perform under different scenarios. Additionally, the team must develop fall-back plans in case of system failure, as well as ensure reproducibility of the system when needed.","The development team must ensure that the AI system is reliable and can be reproduced when needed by testing the system under various conditions, creating a detailed documentation of the system, and establishing a framework of fall-back plans in case of system failure."
-            ],
             "desc" : "The following questions will help you in your evaluation",
             "section" : "1669217134",
             "questions":
