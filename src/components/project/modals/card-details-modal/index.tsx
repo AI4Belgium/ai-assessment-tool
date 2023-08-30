@@ -108,7 +108,6 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
   }, [card, setCommentsFetched])
 
   useEffect(() => {
-    console.log(project?.industryId, cardId)
     let localExample: ExampleByIndustry | undefined
     if (project?.industryId != null) {
       const industry = industries.find(i => i._id === project.industryId)
@@ -170,12 +169,11 @@ const CardDetailsModal: FC<Props> = ({ onClose, isOpen, card }) => {
                     {card.TOCnumber} <GlossaryLink title={card.title} />
                   </Text>
                 </Box>
-                {card.example != null &&
+                {Array.isArray(exampleByIndustry?.data) &&
                   <Accordion allowMultiple>
-                    {Array.isArray(exampleByIndustry?.data) &&
-                      <AccordionItemStyled title={`${t('titles:example')}`}>
-                        {exampleByIndustry?.data.map((txt, idx) => <Text key={`example-${card._id}-${idx}`} fontSize={['xs', 'xs', 'sm']}>{txt}</Text>)}
-                      </AccordionItemStyled>}
+                    <AccordionItemStyled title={`${t('titles:example')}`}>
+                      {exampleByIndustry?.data.map((txt, idx) => <Text key={`example-${card._id}-${idx}`} fontSize={['xs', 'xs', 'sm']}>{txt}</Text>)}
+                    </AccordionItemStyled>
                   </Accordion>}
 
                 <Accordion defaultIndex={0} allowToggle borderRadius='lg' className='shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]' border='1px solid var(--main-blue)' marginY='1rem' mx={['5px', '5px', 0]}>
