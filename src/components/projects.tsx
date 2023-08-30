@@ -14,23 +14,22 @@ import {
   ModalFooter,
   Input,
   Text,
-  Textarea,
-  Select
+  Textarea
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { defaultFetchOptions, fetcher } from '@/util/api'
-import useSWR from 'swr'
+import { defaultFetchOptions, HTTP_METHODS } from '@/util/api'
 import { useTranslation } from 'next-i18next'
+import { Industry } from '@/src/types/industry'
+import IndustrySelect from '@/src/components/industry-select'
 
 const CreateProjectModal = ({ fetchProjects }: { fetchProjects: Function }): JSX.Element => {
   const { t } = useTranslation('projects')
-  const { data: industries } = useSWR('/api/industries', fetcher)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const inputRef: any = useRef()
   const [description, setDescription] = useState<string>('')
-  const [industry, setIndustry] = useState<string>('')
+  const [industry, setIndustry] = useState<Industry | undefined>()
 
   // useEffect(() => {
   //   console.log('inputRef', inputRef)
@@ -49,11 +48,11 @@ const CreateProjectModal = ({ fetchProjects }: { fetchProjects: Function }): JSX
         name: inputRef?.current?.value ?? '',
         description: description ?? ''
       }
-      if (industry != null && industry.length > 0) data.industry = industry
+      if (industry != null) data.industryId = industry._id
 
       const response = await fetch('/api/projects', {
         ...defaultFetchOptions,
-        method: 'POST',
+        method: HTTP_METHODS.POST,
         body: JSON.stringify(data)
       })
 
@@ -93,9 +92,7 @@ const CreateProjectModal = ({ fetchProjects }: { fetchProjects: Function }): JSX
               placeholder={`${t('placeholders:project-description')}`}
               mt='2' onChange={(e) => setDescription(e.target.value)}
             />
-            <Select size='xs' placeholder={`${t('placeholders:select-industry')}`} onChange={e => setIndustry(e.target.value)}>
-              {Array.isArray(industries) && industries?.map(industry => (<option key={industry.key} value={industry.name}>{industry.name}</option>))}
-            </Select>
+            <IndustrySelect onSelect={(i) => setIndustry(i)} initialValue={industry} />
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => { void handleCreate() }} isLoading={isLoading} isDisabled={isLoading} loadingText={`${t('projects:creating-project')}`}>

@@ -38,7 +38,7 @@ describe(PATH, () => {
       expect(project.createdAt).toBeInstanceOf(Date)
       expect(project.name).toEqual(bodyData.name)
       expect(project.description).toEqual(bodyData.description)
-      expect(project.industry).toEqual(bodyData.industry)
+      expect(String(project.industryId)).toEqual(bodyData.industryId)
       expect(project).toHaveProperty('createdBy')
       expect(String(project.createdBy)).toEqual(String(user._id))
       expect(project.roles).toBeInstanceOf(Array)

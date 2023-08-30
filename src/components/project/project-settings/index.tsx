@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect, ChangeEvent } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 import {
   Button,
   Input,
@@ -15,7 +15,6 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
-  Select,
   Tabs,
   TabList,
   TabPanels,
@@ -36,6 +35,7 @@ import ToastContext from '@/src/store/toast-context'
 import { Project } from '@/src/types/project'
 import industries from '@/src/data/industries.json'
 import { Industry } from '@/src/types/industry'
+import IndustrySelect from '@/src/components/industry-select'
 
 const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element => {
   const { t } = useTranslation()
@@ -43,7 +43,7 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
   const { showToast } = useContext(ToastContext)
   const [projectName, setProjectName] = useState(project.name)
   const [description, setDescription] = useState(project.description)
-  const [industry, setIndustry] = useState<Industry | undefined>(undefined)
+  const [industry, setIndustry] = useState<Industry | undefined>()
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -83,17 +83,6 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
     }
   }, [project.industryId])
 
-  const handleIndustryChange = (e: ChangeEvent<HTMLSelectElement>): void => {
-    console.log(e)
-    const idx = e.target.selectedIndex
-    if (idx === 0) setIndustry(undefined) // meaning unsetting it, because first option in select is to choose an industry
-    else {
-      const industry = industries[idx - 1] // because first option is to choose an industry and in not included in the industries
-      console.log('industry', industry, industry._id)
-      setIndustry(industry)
-    }
-  }
-
   return (
     <>
       <FormControl id='name'>
@@ -113,9 +102,7 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
       </FormControl>
       <FormControl id='description' my='1.5'>
         <FormLabel>{t('project-settings:project-industry')}</FormLabel>
-        <Select size='xs' placeholder={`${t('placeholders:select-industry')}`} onChange={handleIndustryChange} value={industry?.name}>
-          {Array.isArray(industries) && industries?.map((industry, idx) => (<option key={industry._id} value={industry.name}>{industry.name}</option>))}
-        </Select>
+        <IndustrySelect onSelect={(i) => setIndustry(i)} initialValue={industry} />
       </FormControl>
       <Box>
         <Button
@@ -210,8 +197,6 @@ const ProjectSettings = ({ project }: { project: Project }): JSX.Element => {
   const { t } = useTranslation()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isBusy } = useContext(ProjectSettingsContext)
-
-  // console.log('isBusy', isBusy)
 
   return (
     <>

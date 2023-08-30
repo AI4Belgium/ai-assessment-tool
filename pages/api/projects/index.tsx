@@ -10,10 +10,10 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
   const user = anyReq.locals.user
   switch (req.method) {
     case 'POST': {
-      const { name, description, industry } = req.body
+      const { name, description, industryId } = req.body
       const cardsData = await dataToCards(defaultCards)
       const projectId = await createProjectWithDefaultColumnsAndCardsAndActivity(
-        { name, description, industry, createdBy: user?._id },
+        { name, description, industryId, createdBy: user?._id },
         cardsData,
         user?._id
       )
