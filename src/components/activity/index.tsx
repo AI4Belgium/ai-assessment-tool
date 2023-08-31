@@ -75,7 +75,11 @@ export const TimelineItem = ({ activity, placement }: { activity: DisplayActivit
       })
       setPromise(p)
       void p.then(response => {
-        if (response.ok) setSetSeenBy(true)
+        if (response.ok) {
+          setSetSeenBy(true)
+          activity.seenBy = activity.seenBy ?? []
+          activity.seenBy.push(userId)
+        }
       }).finally(() => setPromise(null))
     }
   }, [isVisible, isSeen, isCreator, promise, setSeenBy])
