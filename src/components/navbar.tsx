@@ -1,5 +1,6 @@
 import React, { FC, useContext, useState, useEffect } from 'react'
 import useSWR from 'swr'
+import useSWRMutation from 'swr/mutation'
 import { fetcher } from '@/util/api'
 import {
   Button, Flex, Box, Spacer,
@@ -21,6 +22,7 @@ import {
 } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
 import { RiArrowDropDownLine } from 'react-icons/ri'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -30,9 +32,7 @@ import { ActivityTimeline } from '@/src/components/activity'
 import NotificationIcon from '@/src/components/notification-icon'
 import { DisplayActivity } from '@/src/types/activity'
 import EmailVerificationCheck from '@/src/components/email-verification-check'
-import { useTranslation } from 'next-i18next'
 import LocaleSwitcher from './locale-switcher'
-
 interface Props {
   bg?: string
   onShowSidebar?: Function
@@ -58,6 +58,21 @@ function removeDuplicatesById (arr: any[]): any[] {
   })
 }
 
+function processActivities (currentActivities: DisplayActivity[], newActivities: DisplayActivity[], setActivities: any, setUnReadActivities: any, userId: string): void {
+  const newData = removeDuplicatesById(newActivities)
+  const currentActivitiesIds = currentActivities.map(a => a._id)
+  const currentActivitiesIdsSet = new Set(currentActivitiesIds)
+  const dataToAdd = newData.filter((a: DisplayActivity) => !currentActivitiesIdsSet.has(a._id))
+  const dataUpdated = currentActivities.map((a: DisplayActivity) => {
+    return newData.find((b: DisplayActivity) => a._id === b._id) ?? a
+  })
+  const activities = [...dataUpdated, ...dataToAdd]
+  activities.sort((a: DisplayActivity, b: DisplayActivity) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  setActivities(activities)
+  const unSeenAct = activities.filter((a: DisplayActivity) => a.createdBy !== userId && (a.seenBy == null || !a.seenBy.includes(userId)))
+  setUnReadActivities(unSeenAct)
+}
+
 function ActivityDrawer (): JSX.Element {
   const { t } = useTranslation()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -66,37 +81,29 @@ function ActivityDrawer (): JSX.Element {
   const [activities, setActivities] = useState<DisplayActivity[]>([])
   const [page, setPage] = useState<string | null>(null)
   const [unReadActivities, setUnReadActivities] = useState<DisplayActivity[]>([])
-  const { data, mutate } = useSWR(`/api/activities${page != null ? `?page=${page}` : ''}`, fetcher)
-  // console.log('fetching data activity drawer', activities.length)
+  const { data: lastestData } = useSWR('/api/activities?limit=20', fetcher, { refreshInterval: 30000 })
+  const { trigger, data, isMutating } = useSWRMutation(`/api/activities${page != null ? `?page=${page}` : ''}`, fetcher)
 
   useEffect(() => {
-    if (data?.data != null) {
-      const newData = removeDuplicatesById(data.data)
-      const currentActivitiesIds = activities.map(a => a._id)
-      const currentActivitiesIdsSet = new Set(currentActivitiesIds)
-      const dataToAdd = newData.filter((a: DisplayActivity) => !currentActivitiesIdsSet.has(a._id))
-      const dataUpdated = activities.map((a: DisplayActivity) => newData.find((b: DisplayActivity) => a._id === b._id) ?? a)
-      const newActivities = [...dataUpdated, ...dataToAdd]
-      newActivities.sort((a: DisplayActivity, b: DisplayActivity) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      setActivities(newActivities)
-      const unSeenAct = newActivities.filter((a: DisplayActivity) => a.createdBy !== userId && (a.seenBy == null || !a.seenBy.includes(userId)))
-      setUnReadActivities(unSeenAct)
-    }
+    if (data?.data != null) processActivities(activities, data.data, setActivities, setUnReadActivities, userId)
   }, [data])
 
-  const loadMoreFn = async (): Promise<void> => {
-    if (data?.page != null) setPage(data.page)
-  }
-
-  const loadLatestFn = async (): Promise<void> => {
-    setPage(null) // because we want to load the latest
-    setTimeout(mutate, 500) // eslint-disable-line @typescript-eslint/no-misused-promises,@typescript-eslint/promise-function-async
-  }
+  useEffect(() => {
+    if (lastestData?.data != null) processActivities(activities, lastestData.data, setActivities, setUnReadActivities, userId)
+  }, [lastestData])
 
   useEffect(() => {
-    const intervalId = setInterval(loadLatestFn, 10000) // eslint-disable-line @typescript-eslint/no-misused-promises,@typescript-eslint/promise-function-async
-    return () => clearInterval(intervalId)
-  }, [])
+    if (data == null && lastestData != null && lastestData.page != null) setPage(lastestData.page)
+    else if (data?.page != null) setPage(data.page)
+    else setPage(null)
+  }, [lastestData, data])
+
+  const loadMoreFn = async (): Promise<void> => {
+    if (isMutating) return
+    if (page != null) {
+      void trigger()
+    }
+  }
 
   return (
     <>
@@ -127,7 +134,7 @@ function ActivityDrawer (): JSX.Element {
           </DrawerHeader>
 
           <DrawerBody>
-            <ActivityTimeline total={data?.total ?? 0} activities={activities} loadMoreFn={loadMoreFn} />
+            <ActivityTimeline total={data?.total ?? lastestData?.total ?? 0} activities={activities} loadMoreFn={loadMoreFn} />
           </DrawerBody>
 
           <DrawerFooter>
