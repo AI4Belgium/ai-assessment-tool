@@ -63,9 +63,9 @@ function processActivities (currentActivities: DisplayActivity[], newActivities:
   const currentActivitiesIds = currentActivities.map(a => a._id)
   const currentActivitiesIdsSet = new Set(currentActivitiesIds)
   const dataToAdd = newData.filter((a: DisplayActivity) => !currentActivitiesIdsSet.has(a._id))
-  const dataUpdated = currentActivities.map((a: DisplayActivity) => {
-    return newData.find((b: DisplayActivity) => a._id === b._id) ?? a
-  })
+  const dataUpdated = currentActivities.map((a: DisplayActivity) =>
+    newData.find((b: DisplayActivity) => a._id === b._id) ?? a
+  )
   const activities = [...dataUpdated, ...dataToAdd]
   activities.sort((a: DisplayActivity, b: DisplayActivity) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
   setActivities(activities)
@@ -100,9 +100,7 @@ function ActivityDrawer (): JSX.Element {
 
   const loadMoreFn = async (): Promise<void> => {
     if (isMutating) return
-    if (page != null) {
-      void trigger()
-    }
+    if (page != null) void trigger()
   }
 
   return (
