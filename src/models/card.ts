@@ -2,7 +2,8 @@ import { ObjectId } from 'mongodb'
 import { connectToDatabase, toObjectId, sanitize } from '@/src/models/mongodb'
 import { getColumnsByProjectId } from '@/src/models/column'
 import { Card, STAGE_VALUES, Question, Answer } from '@/src/types/card'
-import { isEmpty, isEqual } from '@/util/index'
+import { isEqual } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import Activity from '@/src/models/activity'
 
 export const TABLE_NAME = 'cards'
@@ -96,6 +97,7 @@ export const cardDataSanitizer = async (cardId: string, data: any): Promise<any>
     else if ((typeof updatableFields.dueDate === 'string' || typeof updatableFields.dueDate === 'number') && UNIX_TIMESTAMP_MS_REGEX.test(`${String(updatableFields.dueDate)}`)) updatableFields.dueDate = new Date(+updatableFields.dueDate)
     else throw new Error('Invalid dueDate')
   }
+  console.log('updatableFields', updatableFields)
   return updatableFields
 }
 

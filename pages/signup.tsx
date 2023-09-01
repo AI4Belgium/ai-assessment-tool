@@ -5,7 +5,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { sanitize } from '@/src/models/mongodb'
 import { getUser } from '@/src/models/user'
 import { getToken, TokenStatus } from '@/src/models/token'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { Session } from 'next-auth'
 
 export default function SignUpPage ({ session }: { session: Session }): JSX.Element {

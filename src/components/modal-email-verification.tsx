@@ -16,7 +16,7 @@ import { useTranslation } from 'next-i18next'
 import { defaultFetchOptions, getResponseHandler, HTTP_METHODS } from '@/util/api'
 import UserContext from '@/src/store/user-context'
 import ToastContext from '@/src/store/toast-context'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 interface EmailVerificationModalProps {
   email?: string

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { toObjectId, connectToDatabase } from '@/src/models/mongodb'
 import { Activity as ActivityTypeDef, ActivityData, ActivityType, ActivityVisibility } from '@/src/types/activity'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { CardStage } from '@/src/types/card'
 import { Comment as CommentType } from '@/src/types/comment'
 import { Project, Role } from '@/src/types/project'
@@ -82,12 +82,14 @@ export default class Activity extends Model {
   }
 
   static async createCardDueDateUpdateActivity (cardId: string, createdBy: string, dueDate: Date): Promise<string | null> {
+    console.log('createCardDueDateUpdateActivity', ...arguments)
     const card = await getCard(cardId)
     if (card == null) {
       // TODO: log error
       return null
     }
     if (isEmpty(dueDate)) {
+      console.log('sEmpty(dueDate)', isEmpty(dueDate), 'createCardDueDateDeleteActivity')
       return await this.createCardDueDateDeleteActivity(card.projectId, createdBy, cardId)
     }
     return await this.createActivity(card.projectId, createdBy, ActivityType.CARD_DUE_DATE_UPDATE, { dueDate }, { cardId })

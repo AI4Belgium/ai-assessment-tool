@@ -15,7 +15,7 @@ import {
 import { useRouter } from 'next/router'
 import { AI4BelgiumIcon } from './navbar'
 import { isEmailValid } from '@/util/validator'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import ToastContext from '@/src/store/toast-context'
 import { useTranslation } from 'next-i18next'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'

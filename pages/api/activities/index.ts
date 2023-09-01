@@ -9,7 +9,8 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
   switch (req.method) {
     case 'GET': {
       const { page } = req.query
-      const projects = await getUserProjects(user?._id)
+      if (user?._id == null) return res.status(403).send({ code: 9003 })
+      const projects = await getUserProjects(user._id)
       if (projects == null || projects.length === 0) return res.status(200).send([])
 
       const result = await Activity.find({ projectId: { $in: projects.map(p => p._id) } }, 100, ['_id', -1], page != null ? String(page) : undefined)

@@ -9,10 +9,11 @@ import {
   Link,
   Text
 } from '@chakra-ui/react'
+import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
 import { AI4BelgiumIcon } from './navbar'
 import { defaultFetchOptions } from '@/util/api'
-import { debounce, isEmpty } from '@/util/index'
+import { debounce } from '@/util/index'
 import { isPasswordValid, isEmailValid } from '@/util/validator'
 import { signOut, useSession } from 'next-auth/react'
 import ToastContext from '../store/toast-context'

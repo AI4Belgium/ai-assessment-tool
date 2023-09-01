@@ -4,7 +4,7 @@ import { isConnected } from '@/util/custom-middleware'
 import { getServerSession } from 'next-auth'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { getUserProjects } from '@/src/models/project'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const session = await getServerSession(req, res, authOptions)

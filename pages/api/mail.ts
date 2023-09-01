@@ -19,6 +19,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
       email = email != null ? cleanEmail(email) : email
       projectId = projectId != null ? toObjectId(projectId) : projectId
       const creator = await getUser({ email: String(session?.user?.email) })
+      if (creator?._id == null) return res.status(400).json({ message: 'missing properties' })
       let tokenInstance
       try {
         tokenInstance = await inviteUser(projectId, email, creator?._id)

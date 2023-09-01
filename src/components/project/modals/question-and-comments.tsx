@@ -4,7 +4,8 @@ import {
   BoxProps
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { isEmpty, isEqual } from '@/util/index'
+import isEmpty from 'lodash.isempty'
+import { isEqual } from '@/util/index'
 import { defaultFetchOptions, HTTP_METHODS, getResponseHandler } from '@/util/api'
 import CommentComponent from './comment'
 import { Question, DisplayQuestion } from '@/src/types/card'

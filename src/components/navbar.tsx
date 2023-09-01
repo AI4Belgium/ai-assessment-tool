@@ -81,7 +81,7 @@ function ActivityDrawer (): JSX.Element {
   const [activities, setActivities] = useState<DisplayActivity[]>([])
   const [page, setPage] = useState<string | null>(null)
   const [unReadActivities, setUnReadActivities] = useState<DisplayActivity[]>([])
-  const { data: lastestData } = useSWR('/api/activities?limit=20', fetcher, { refreshInterval: 30000 })
+  const { data: lastestData } = useSWR('/api/activities', fetcher, { refreshInterval: 5000 })
   const { trigger, data, isMutating } = useSWRMutation(`/api/activities${page != null ? `?page=${page}` : ''}`, fetcher)
 
   useEffect(() => {

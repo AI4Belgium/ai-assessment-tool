@@ -10,7 +10,7 @@ import OverviewComponent from '@/src/components/project/checklist/overview'
 import RadarChart from '@/src/components/project/checklist/radar-chart'
 import { fetcher } from '@/util/api'
 import { QueryFilterKeys } from '@/src/components/project/project-bar/filter-menu'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { setQuestionCleanTitle } from '@/util/question'
 import { Answer, Card, Question, QuestionType } from '@/src/types/card'
 

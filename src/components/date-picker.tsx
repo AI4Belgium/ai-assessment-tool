@@ -1,6 +1,6 @@
 // https://codesandbox.io/s/chakra-ui-datepicker-demo-qmx3c?file=/src/components/Datepicker/Datepicker.tsx:1342-1461
 import React, { useRef, useState } from 'react'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import {
   Box,
   Button,

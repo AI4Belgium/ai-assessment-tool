@@ -2,7 +2,7 @@ import {
   // Logger,
   Db, MongoClient, ObjectId
 } from 'mongodb'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 const { MONGODB_URI, MONGODB_DB } = process.env
 

@@ -2,7 +2,7 @@
 import { ObjectId } from 'mongodb'
 import { cleanText, connectToDatabase, toObjectId, sanitize } from '@/src/models/mongodb'
 import { getUsers } from '@/src/models/user'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { deleteProjectCards, createCards } from '@/src/models/card'
 import { deleteProjectColumns, createProjectDefaultColumns, getTodoColumn } from '@/src/models/column'
 import Activity from '@/src/models/activity'

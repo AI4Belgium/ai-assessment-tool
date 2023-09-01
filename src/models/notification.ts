@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { connectToDatabase, toObjectId } from '@/src/models/mongodb'
 import { Notification } from '@/src/types/notification'
 

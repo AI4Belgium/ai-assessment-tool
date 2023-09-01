@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb'
 import { connectToDatabase } from '@/src/models/mongodb'
 import Model from '@/src/models/model'
 import { Job as JobInterface, JobStatus } from '@/src/types/job'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class Job extends Model implements JobInterface {

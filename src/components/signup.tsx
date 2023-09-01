@@ -12,10 +12,11 @@ import {
   InputRightElement,
   IconButton
 } from '@chakra-ui/react'
+import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
 import { AI4BelgiumIcon } from '@/src/components/navbar'
 import { defaultFetchOptions, getResponseHandler } from '@/util/api'
-import { isEmpty, debounce } from '@/util/index'
+import { debounce } from '@/util/index'
 import { isEmailValid, isPasswordValid } from '@/util/validator'
 import ToastContext from '@/src/store/toast-context'
 import { useTranslation } from 'next-i18next'

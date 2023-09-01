@@ -1,11 +1,11 @@
 import { sanitize } from '@/src/models/mongodb'
 import { ObjectId } from 'mongodb'
+import isEmpty from 'lodash.isempty'
 import { TABLE_NAME } from './project'
 import { toObjectId, connectToDatabase } from './mongodb'
 import Activity from './activity'
 import { ActivityType } from '@/src/types/activity'
 import { Role } from '@/src/types/project'
-import { isEmpty } from '@/util/index'
 
 export const getRole = async (projectId: ObjectId | string, roleId: ObjectId | string): Promise<Role> => {
   const { db } = await connectToDatabase()

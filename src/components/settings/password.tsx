@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { defaultFetchOptions } from '@/util/api'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { isPasswordValid } from '@/util/validator'
 import UserContext from '../../store/user-context'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
