@@ -22,8 +22,8 @@ import { Project } from '@/src/types/project'
 import { dataToCards } from '@/src/models/card'
 import { defaultCards, defaultRoles } from '@/src/data'
 import { addRoles } from '@/src/models/role'
-import { upsertNotification } from '@/src/models/notification'
-import { Notification } from '@/src/types/notification'
+import { upsertNotificationSetting } from '@/src/models/notification-setting'
+import { NotificationSetting } from '@/src/types/notification-setting'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConfig } = require('next-i18next/dist/commonjs/config/createConfig')
@@ -145,10 +145,10 @@ export const givenAUser = async (data = {}): Promise<User> => {
   return { ...createdUser, password: user.password }
 }
 
-export const givenAUserAcceptingNotifications = async (userData: Partial<User> = {}, notificationData: Partial<Notification> = { projectActivity: true, mentions: true }): Promise<User> => {
+export const givenAUserAcceptingNotifications = async (userData: Partial<User> = {}, notificationData: Partial<NotificationSetting> = { projectActivity: true, mentions: true }): Promise<User> => {
   const user = await givenAUser(userData)
   if (user?._id == null) throw new Error('User not created')
-  await upsertNotification({ mentions: true, projectActivity: true, ...notificationData, _id: user._id })
+  await upsertNotificationSetting({ mentions: true, projectActivity: true, ...notificationData, _id: user._id })
   return user
 }
 

@@ -10,7 +10,7 @@ import { getProjectActivityHtml } from '@/util/mail/templates'
 import { sendMailWithSelfInBcc } from '@/util/mail'
 import { User } from '@/src/types/user'
 import { toObjectId } from '@/src/models/mongodb'
-import { getNotifications } from '@/src/models/notification'
+import { getNotificationSetting } from '@/src/models/notification-setting'
 
 export type PartialActivityTypeDef = Pick<ActivityTypeDef, 'createdAt' | '_id' | 'projectId' | 'type' | 'createdBy'> & { sent?: boolean }
 
@@ -116,7 +116,7 @@ export class JobProjectActivityNotification extends Job {
       this.result = 'User email not verified'
       return
     }
-    const notification = await getNotifications(user._id)
+    const notification = await getNotificationSetting(user._id)
     if (notification == null || !notification.projectActivity) {
       this.result = 'User has disabled project activity notifications'
       return
