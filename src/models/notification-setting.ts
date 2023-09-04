@@ -17,12 +17,12 @@ export const upsertNotificationSetting = async ({ _id, mentions, projectActivity
   if (isEmpty(notificationExists)) {
     await db.collection(TABLE_NAME).insertOne(data)
   } else {
-    await db.collection(TABLE_NAME).updateOne({ _id }, { $set: { mentions, projectActivity } })
+    await db.collection(TABLE_NAME).updateOne({ _id: data._id }, { $set: { mentions, projectActivity } })
   }
 }
 
 export const getNotificationSetting = async (_id: ObjectId | string): Promise<NotificationSetting> => {
   const { db } = await connectToDatabase()
-  const response = await db.collection(TABLE_NAME).findOne({ _id })
+  const response = await db.collection(TABLE_NAME).findOne({ _id: toObjectId(_id) })
   return response
 }
