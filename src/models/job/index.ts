@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb'
-import { connectToDatabase } from '@/src/models/mongodb'
+import isEmpty from 'lodash.isempty'
+import { connectToDatabase, toObjectId } from '@/src/models/mongodb'
 import Model from '@/src/models/model'
 import { Job as JobInterface, JobStatus } from '@/src/types/job'
-import isEmpty from 'lodash.isempty'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class Job extends Model implements JobInterface {
@@ -26,7 +26,7 @@ export default class Job extends Model implements JobInterface {
 
   constructor (job: JobInterface) {
     super()
-    this._id = job._id
+    this._id = toObjectId(String(job._id))
     this.createdAt = job.createdAt
     this.type = job.type
     this.data = job.data
@@ -40,7 +40,7 @@ export default class Job extends Model implements JobInterface {
     this.runCount = job.runCount
   }
 
-  static async createJob (data: Partial<Job>, type: string = this.JOB_TYPE): Promise<ObjectId | null> {
+  static async createJob (data: Partial<JobInterface>, type: string = this.JOB_TYPE): Promise<ObjectId | null> {
     const { db } = await connectToDatabase()
     const job: JobInterface = {
       _id: new ObjectId(),
@@ -52,7 +52,7 @@ export default class Job extends Model implements JobInterface {
       ...data
     }
     const res = await db.collection(this.TABLE_NAME).insertOne(job)
-    return res.result.ok === 1 ? job._id : null
+    return res.result.ok === 1 ? job._id as ObjectId : null
   }
 
   static async executeJob (job: Job): Promise<void> {

@@ -102,7 +102,7 @@ export const inviteUser = async (projectId: string | ObjectId, email: string, cr
   return await db.collection(TABLE_NAME).findOne({ token })
 }
 
-export const emailVerificationTokenHandler = async (token: string, createdBy: string): Promise<void> => {
+export const emailVerificationTokenHandler = async (token: string, createdBy: string | ObjectId): Promise<void> => {
   token = sanitize(token)
   createdBy = toObjectId(createdBy)
   const { db } = await connectToDatabase()
@@ -118,7 +118,7 @@ export const emailVerificationTokenHandler = async (token: string, createdBy: st
   await setStatus(dbToken, TokenStatus.REDEEMED)
 }
 
-export const createEmailVerificationToken = async (email: string, createdBy: string): Promise<Token> => {
+export const createEmailVerificationToken = async (email: string, createdBy: string | ObjectId): Promise<Token> => {
   const token = randomIntFromInterval(100000, 999999)
   const { db } = await connectToDatabase()
   createdBy = toObjectId(createdBy)

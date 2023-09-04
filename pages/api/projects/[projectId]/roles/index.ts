@@ -3,13 +3,14 @@ import { addRoleAndCreateActivity } from '@/src/models/role'
 import { isConnected, hasProjectAccess, getUserFromRequest } from '@/util/custom-middleware'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { projectId } = req.query
+  let { projectId } = req.query
   const user = getUserFromRequest(req)
+  projectId = String(projectId)
 
   switch (req.method) {
     case 'POST': {
       const { name, desc } = req.body
-      const role = await addRoleAndCreateActivity(projectId, { name, desc }, user?._id)
+      const role = await addRoleAndCreateActivity(projectId, { name, desc }, String(user?._id))
       return res.status(200).json(role)
     }
     default:

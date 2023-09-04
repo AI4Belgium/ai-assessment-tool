@@ -1,18 +1,19 @@
+import { ObjectId } from 'mongodb'
 import { User } from '@/src/types/user'
 
 export interface Comment {
-  _id: string
+  _id: string | ObjectId
   text: string
-  projectId: string
-  userId: string
+  projectId: string | ObjectId
+  userId: string | ObjectId
   user: User
   questionId: string
-  cardId: string
-  userIds?: string[]
+  cardId: string | ObjectId
+  userIds?: Array<string | ObjectId>
   createdAt: Date
   updatedAt?: Date
   deletedAt?: Date
-  deletedBy?: string
-  parentId?: string
+  deletedBy?: string | ObjectId
+  parentId?: string | ObjectId
   parent?: Comment
 }

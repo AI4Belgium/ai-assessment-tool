@@ -1,11 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { toObjectId, sanitize } from '@/src/models/mongodb'
+import { sanitize } from '@/src/models/mongodb'
 import { TokenStatus, getProjectInvites, deleteToken } from '@/src/models/token'
 import { isConnected, hasProjectAccess } from '@/util/custom-middleware'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
   let { projectId, catchAll } = req.query
-  projectId = toObjectId(projectId)
+
+  if (projectId instanceof Array) projectId = projectId[0]
+  if (projectId == null) return res.status(400).send({ code: 9000 })
+
   let restOfQuery = catchAll != null && typeof catchAll === 'string' ? [catchAll] : []
 
   if (Array.isArray(catchAll)) {

@@ -132,7 +132,7 @@ const ProjectColumns: FC<IProps> = ({ project }): JSX.Element => {
       cardToPatch.columnId = destinationColumnId
       patchCard.columnId = destinationColumnId
     }
-    const promises: Array<Promise<any>> = [updateCard(patchCard, project?._id)]
+    const promises: Array<Promise<any>> = [updateCard(patchCard, String(project?._id))]
     for (const card of sortedCardsFromColumn) {
       sequence += 1
       card.sequence = sequence
@@ -141,7 +141,7 @@ const ProjectColumns: FC<IProps> = ({ project }): JSX.Element => {
         _id: card._id,
         sequence
       }
-      promises.push(updateCard(patchCard, project?._id))
+      promises.push(updateCard(patchCard, String(project?._id)))
     }
     setCards([...cards])
     await Promise.all(promises)
@@ -175,7 +175,7 @@ const ProjectColumns: FC<IProps> = ({ project }): JSX.Element => {
                   mr={index === columns.length - 1 ? '10px' : '5px'}
                   cards={filterCards(column._id)}
                   showCardDetail={setCardQuery}
-                  projectId={project?._id}
+                  projectId={String(project?._id)}
                   minW={['calc(100vw - 20px)', 'calc(100vw - 20px)', 'unset']}
                   width={['calc(100vw - 20px)', 'calc(100vw - 20px)', `${colWidth}px`]}
                   scrollSnapAlign={['center', 'center', 'none']}

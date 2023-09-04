@@ -4,8 +4,11 @@ import { addUserToCardAndCreateActivity, removeUserFromCardAndCreateActivity } f
 import { getProjectUsers } from '@/src/models/project'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { projectId, cardId, userId } = req.query
+  let { projectId, cardId, userId } = req.query
   const creator = getUserFromRequest(req)
+  projectId = String(projectId)
+  cardId = String(cardId)
+  userId = String(userId)
 
   switch (req.method) {
     case 'POST': {
@@ -14,12 +17,12 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
       if (user == null) return res.status(400).send({ message: 'invalid user', code: 9006 })
       // const res =
       if (creator == null) return res.status(401).send({ message: 'unauthorized', code: 9010 })
-      await addUserToCardAndCreateActivity(cardId, creator._id as string, userId as string)
+      await addUserToCardAndCreateActivity(cardId, creator._id as string, userId)
       return res.send(201)
     }
     case 'DELETE': {
       if (creator == null) return res.status(401).send({ message: 'unauthorized', code: 9010 })
-      await removeUserFromCardAndCreateActivity(cardId, creator._id as string, userId as string)
+      await removeUserFromCardAndCreateActivity(cardId, creator._id as string, userId)
       return res.send(201)
     }
     default:

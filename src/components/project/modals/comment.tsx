@@ -212,7 +212,7 @@ const ParentComment = ({ comment, ...rest }: CommentProps): JSX.Element => {
     query.comment = ''
     void router
       .push({ query }, undefined, { shallow: true })
-      .then(async () => await router.push({ query: { ...query, comment: comment._id } }, undefined, { shallow: true }))
+      .then(async () => await router.push({ query: { ...query, comment: String(comment._id) } }, undefined, { shallow: true }))
   }
 
   return (

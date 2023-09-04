@@ -58,7 +58,7 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
     if (description !== project.description) data.description = description
     if (industry?._id !== project.industryId) data.industryId = industry?._id
     if (!isEmpty(data)) {
-      const url = `/api/projects/${project._id}`
+      const url = `/api/projects/${String(project._id)}`
       const response = await fetch(url, {
         ...defaultFetchOptions,
         method: HTTP_METHODS.PATCH,

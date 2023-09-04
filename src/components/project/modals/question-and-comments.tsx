@@ -93,7 +93,7 @@ const QuestionAndComments: FC<Props> = ({ cardId, projectId, question, questionS
 
   const deleteComment = async (comment: Comment, question: DisplayQuestion): Promise<void> => {
     setIsLoading(true)
-    const url = `/api/projects/${projectId}/cards/${cardId}/questions/${question.id}/comments/${comment._id}`
+    const url = `/api/projects/${projectId}/cards/${cardId}/questions/${question.id}/comments/${String(comment._id)}`
     const response = await fetch(url, {
       ...defaultFetchOptions,
       method: HTTP_METHODS.DELETE,
@@ -126,7 +126,7 @@ const QuestionAndComments: FC<Props> = ({ cardId, projectId, question, questionS
       <QuestionComp question={question} onChange={saveQuestion} />
       <CommentComponent comment={newComment} onSave={async (data: Partial<Comment>) => await saveComment(newComment, data, question)} ml='3' />
       {question.comments?.map(c => (
-        <CommentComponent key={c._id} comment={c} setNewCommentParent={setNewCommentParent} onSave={async (data: Partial<Comment>) => await saveComment(c, data, question)} onDelete={async () => await deleteComment(c, question)} ml='3' />
+        <CommentComponent key={String(c._id)} comment={c} setNewCommentParent={setNewCommentParent} onSave={async (data: Partial<Comment>) => await saveComment(c, data, question)} onDelete={async () => await deleteComment(c, question)} ml='3' />
       ))}
     </Box>
   )

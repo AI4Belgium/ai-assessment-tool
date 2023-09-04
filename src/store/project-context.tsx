@@ -23,7 +23,7 @@ export function ProjectContextProvider (props: any): JSX.Element {
   const router = useRouter()
   const [project, setProject] = useState<Project>(props.project)
   const [categories] = useState<Category[]>(props.categories)
-  const { data: users, mutate } = useSWR(`/api/projects/${project._id}/users`, fetcher)
+  const { data: users, mutate } = useSWR(`/api/projects/${String(project._id)}/users`, fetcher)
 
   function categoryClickHandler (cat: Category): void {
     const {

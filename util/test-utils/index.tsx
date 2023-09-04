@@ -147,6 +147,7 @@ export const givenAUser = async (data = {}): Promise<User> => {
 
 export const givenAUserAcceptingNotifications = async (userData: Partial<User> = {}, notificationData: Partial<Notification> = { projectActivity: true, mentions: true }): Promise<User> => {
   const user = await givenAUser(userData)
+  if (user?._id == null) throw new Error('User not created')
   await upsertNotification({ mentions: true, projectActivity: true, ...notificationData, _id: user._id })
   return user
 }
@@ -161,6 +162,7 @@ export const givenMultipleUsers = async (count: number, data = {}): Promise<User
 
 export const givenAProject = async (data = {}, user: User | undefined, withCardsAndRoles: boolean = false): Promise<Project> => {
   if (user == null) user = await givenAUser()
+  if (user?._id == null) throw new Error('User not created')
   const project = givenProjectData(data) as Project
   let projectId = null
   if (withCardsAndRoles) {

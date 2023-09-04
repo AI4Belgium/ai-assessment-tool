@@ -1,8 +1,18 @@
 import {
   AlertStatus
 } from '@chakra-ui/react'
+import { NextApiRequest } from 'next'
 
 export const fetcher = async (url: string, options?: any): Promise<any> => await fetch(url).then(async r => await r.json())
+
+export function getQueryParamStringValue (paramName: string, req: NextApiRequest): string | null {
+  const { query } = req
+  if (query == null) return null
+  const value = query[paramName]
+  if (value == null) return null
+  if (value instanceof Array) return value[0]
+  return value
+}
 
 export enum HTTP_METHODS {
   GET = 'GET',

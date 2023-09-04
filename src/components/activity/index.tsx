@@ -44,7 +44,7 @@ export const ActivityTimeline = ({ activities = [], total, loadMoreFn }: { activ
   return (
     <Box className={style.timeline}>
       {activities.map((activity: DisplayActivity, idx: number) =>
-        <TimelineItem key={`${activity._id}-${(new Date(activity.updatedAt ?? 0).toISOString())}`} activity={activity} placement={idx % 2 === 0 ? 'left' : 'right'} />
+        <TimelineItem key={`${String(activity._id)}-${(new Date(activity.updatedAt ?? 0).toISOString())}`} activity={activity} placement={idx % 2 === 0 ? 'left' : 'right'} />
       )}
       {loadMoreFn != null && total !== activities?.length &&
         <Flex justifyContent='center' position='relative' zIndex='1'>
@@ -67,7 +67,7 @@ export const TimelineItem = ({ activity, placement }: { activity: DisplayActivit
 
   useEffect(() => {
     if (isVisible && !isSeen && !isCreator && promise == null && !setSeenBy) {
-      const url = `/api/activities/${activity._id}/seen`
+      const url = `/api/activities/${String(activity._id)}/seen`
       const p = fetch(url, {
         ...defaultFetchOptions,
         method: HTTP_METHODS.POST,
@@ -123,7 +123,7 @@ const ProjectLinkComp = (props: Props): JSX.Element => {
     if (questionId != null) query.question = questionId
     if (commentId != null) query.comment = commentId
     const linkProps = {
-      pathname: `/projects/${activity.projectId}`,
+      pathname: `/projects/${String(activity.projectId)}`,
       query
     }
     return (

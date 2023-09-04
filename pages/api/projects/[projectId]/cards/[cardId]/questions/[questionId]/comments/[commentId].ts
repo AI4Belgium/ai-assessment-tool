@@ -5,6 +5,7 @@ import { deleteCommentAndCreateActivity, getComment, updateCommentAndCreateActiv
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
   let { projectId, commentId } = req.query
   projectId = String(projectId)
+  commentId = String(commentId)
   const reqAsAny = req as any
   const user = reqAsAny.locals.user
 

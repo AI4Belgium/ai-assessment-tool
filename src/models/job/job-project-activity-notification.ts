@@ -73,6 +73,7 @@ export class JobProjectActivityNotification extends Job {
   }
 
   static async getLatestActivityPerProject (user: User, activityMaxAgeDate: Date): Promise<PartialActivityTypeDef[]> {
+    if (user?._id == null) return []
     const userProjectIds = await getUserProjectIds(user._id)
     if (isEmpty(userProjectIds)) return []
     const where = {

@@ -3,7 +3,8 @@ import { updatePassword } from '@/src/models/user'
 import { isConnected, isCurrentUser } from '@/util/custom-middleware'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { userId } = req.query
+  let { userId } = req.query
+  userId = String(userId)
 
   switch (req.method) {
     case 'PATCH': {

@@ -80,7 +80,7 @@ export const updateCardAndCreateActivities = async (cardId: string | ObjectId, u
   return res
 }
 
-export const cardDataSanitizer = async (cardId: string, data: any): Promise<any> => {
+export const cardDataSanitizer = async (cardId: string | ObjectId, data: any): Promise<any> => {
   const updatableFields: any = {}
   UPDATABLE_FIELDS.forEach(field => {
     if (Object.keys(data).includes(field)) updatableFields[field] = sanitize(data[field])
@@ -97,7 +97,6 @@ export const cardDataSanitizer = async (cardId: string, data: any): Promise<any>
     else if ((typeof updatableFields.dueDate === 'string' || typeof updatableFields.dueDate === 'number') && UNIX_TIMESTAMP_MS_REGEX.test(`${String(updatableFields.dueDate)}`)) updatableFields.dueDate = new Date(+updatableFields.dueDate)
     else throw new Error('Invalid dueDate')
   }
-  console.log('updatableFields', updatableFields)
   return updatableFields
 }
 
@@ -162,7 +161,7 @@ export const updateQuestionAndCreateActivity = async (cardId: string | ObjectId,
   return res
 }
 
-export const sanitizeQuestionData = async (data: any, cardId: string, questionId: string, card?: Card): Promise<{ responses?: string[], conculusion?: string }> => {
+export const sanitizeQuestionData = async (data: any, cardId: string | ObjectId, questionId: string | ObjectId, card?: Card): Promise<{ responses?: string[], conculusion?: string }> => {
   if (card == null) {
     card = await getCard(cardId)
   }
@@ -203,7 +202,7 @@ export const dataToCards = async (data: any[], projectId?: string | ObjectId, co
         ...card,
         category: cat.id,
         originalId: card.id,
-        _id: ObjectId(),
+        _id: new ObjectId(),
         ...(projectId != null ? { projectId: toObjectId(projectId) } : {}),
         ...(columnId != null ? { columnId: toObjectId(columnId) } : {}),
         sequence: idx,
