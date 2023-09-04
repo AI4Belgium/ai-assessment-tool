@@ -1,7 +1,7 @@
 
 import { ObjectId } from 'mongodb'
 import { connectToDatabase, toObjectId, sanitize } from '@/src/models/mongodb'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { deleteCards } from '@/src/models/card'
 
 export const TABLE_NAME = 'columns'

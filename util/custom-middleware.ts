@@ -73,8 +73,8 @@ export function hasProjectAccess (handler: Function): Function {
     if (projectId == null) {
       projectId = req.body?.projectId
     }
-    if (projectId != null && projectId !== 'undefined' && user != null) {
-      const users = await getProjectUsers(projectId, [user._id])
+    if (projectId != null && projectId !== 'undefined' && user?._id != null) {
+      const users = await getProjectUsers(String(projectId), [user._id])
       hasAccess = users.some(u => String(u._id) === String(user._id))
     }
     if (!hasAccess) {
@@ -87,7 +87,7 @@ export function hasProjectAccess (handler: Function): Function {
 export function cardBelongsToProject (handler: Function): Function {
   return async (req: NextApiRequest, res: NextApiResponse): Promise<any> => {
     const { projectId, cardId } = req.query
-    const card = await getCard(cardId)
+    const card = await getCard(String(cardId))
     if (card == null) {
       return res.status(404).send({ message: 'Notfound', status: 404, code: 9006 })
     }

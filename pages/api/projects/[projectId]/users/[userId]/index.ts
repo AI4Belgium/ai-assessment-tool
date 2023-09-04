@@ -6,10 +6,14 @@ import { sendMail } from '@/util/mail'
 import { getUser } from '@/src/models/user'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { projectId, userId } = req.query
+  let { projectId, userId } = req.query
   const { projectName } = req.body
+  projectId = String(projectId)
+  userId = String(userId)
   const user = getUserFromRequest(req)
   const removedUser = await getUser({ _id: userId })
+
+  if (user?._id == null) return res.status(403).send({ code: 9003 })
 
   switch (req.method) {
     case 'DELETE': {

@@ -10,13 +10,12 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { defaultFetchOptions, fetcher } from '@/util/api'
-import UserContext from '../../store/user-context'
+import UserContext from '@/src/store/user-context'
 import useSWR from 'swr'
 
 const NotificationSettings = (): JSX.Element => {
   const { t } = useTranslation()
   const { user } = useContext(UserContext)
-
   const toast = useToast()
   const [isLoading, setIsLoading] = useState(false)
 

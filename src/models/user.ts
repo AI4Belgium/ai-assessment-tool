@@ -1,6 +1,6 @@
 import { cleanEmail, cleanText, connectToDatabase, toObjectId } from '@/src/models/mongodb'
 import { ObjectId } from 'mongodb'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { hashPassword, verifyPassword } from '@/util/auth'
 import { isEmailValid, isPasswordValid } from '@/util/validator'
 import { User, UserCreate } from '@/src/types/user'

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { toObjectId, connectToDatabase } from '@/src/models/mongodb'
 import { Activity as ActivityTypeDef, ActivityData, ActivityType, ActivityVisibility } from '@/src/types/activity'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { CardStage } from '@/src/types/card'
 import { Comment as CommentType } from '@/src/types/comment'
 import { Project, Role } from '@/src/types/project'
@@ -17,7 +17,7 @@ import industries from '@/src/data/industries.json'
 export default class Activity extends Model {
   static TABLE_NAME = 'activities'
 
-  static async createProjectCreateActivity (projectId: string, createdBy: string, project: Partial<Project>): Promise<string | null> {
+  static async createProjectCreateActivity (projectId: string | ObjectId, createdBy: string | ObjectId, project: Partial<Project>): Promise<string | null> {
     const industry = industries.find(i => i._id === String(project.industryId))
     const data = {
       name: project.name,
@@ -26,7 +26,7 @@ export default class Activity extends Model {
     return await this.createActivity(projectId, createdBy, ActivityType.PROJECT_CREATE, data)
   }
 
-  static async createProjectUpdateActivities (projectId: string, createdBy: string, newData: Partial<Project>): Promise<string[]> {
+  static async createProjectUpdateActivities (projectId: string | ObjectId, createdBy: string | ObjectId, newData: Partial<Project>): Promise<string[]> {
     const newActivityIds: Array<string | null> = []
     if (newData.name != null) newActivityIds.push(await this.createActivity(projectId, createdBy, ActivityType.PROJECT_UPDATE_NAME, { name: newData.name }))
     if (newData.description != null) newActivityIds.push(await this.createActivity(projectId, createdBy, ActivityType.PROJECT_UPDATE_DESCRIPTION))
@@ -37,7 +37,7 @@ export default class Activity extends Model {
     return newActivityIds.filter(id => id != null) as string[]
   }
 
-  static async createRoleActivity (projectId: string, createdBy: string, roleId: string, newData: Partial<Role>, activityType: ActivityType = ActivityType.ROLE_UPDATE): Promise<string | null> {
+  static async createRoleActivity (projectId: string | ObjectId, createdBy: string | ObjectId, roleId: string | ObjectId, newData: Partial<Role>, activityType: ActivityType = ActivityType.ROLE_UPDATE): Promise<string | null> {
     const data: ActivityData = {}
     if (newData.name != null) data.name = newData.name
     if (newData.desc != null) data.description = true
@@ -45,7 +45,7 @@ export default class Activity extends Model {
     return await this.createActivity(projectId, createdBy, activityType, data, { roleId })
   }
 
-  static async createCardUserChangeActivity (cardId: string, createdBy: string, userId: string, type: ActivityType): Promise<string | null> {
+  static async createCardUserChangeActivity (cardId: string | ObjectId, createdBy: string | ObjectId, userId: string | ObjectId, type: ActivityType): Promise<string | null> {
     const card = await getCard(cardId)
     if (card == null) {
       // TODO: log error
@@ -55,7 +55,7 @@ export default class Activity extends Model {
     return await this.createActivity(card.projectId, createdBy, type, data, { cardId, userIds: [userId] })
   }
 
-  static async getUserName (userId: string): Promise<any> {
+  static async getUserName (userId: string | ObjectId): Promise<any> {
     const user = await getUser({ _id: toObjectId(userId) })
     let data: any = null
     if (user != null) {
@@ -64,24 +64,24 @@ export default class Activity extends Model {
     }
   }
 
-  static async createCardUserAddActivity (cardId: string, createdBy: string, userId: string): Promise<string | null> {
+  static async createCardUserAddActivity (cardId: string | ObjectId, createdBy: string | ObjectId, userId: string | ObjectId): Promise<string | null> {
     return await this.createCardUserChangeActivity(cardId, createdBy, userId, ActivityType.CARD_USER_ADD)
   }
 
-  static async createCardUserRemoveActivity (cardId: string, createdBy: string, userId: string): Promise<string | null> {
+  static async createCardUserRemoveActivity (cardId: string | ObjectId, createdBy: string | ObjectId, userId: string | ObjectId): Promise<string | null> {
     return await this.createCardUserChangeActivity(cardId, createdBy, userId, ActivityType.CARD_USER_REMOVE)
   }
 
-  static async removeUserProjectActivity (projectId: string, createdBy: string, userId: string): Promise<string | null> {
+  static async removeUserProjectActivity (projectId: string | ObjectId, createdBy: string | ObjectId, userId: string | ObjectId): Promise<string | null> {
     const data = await Activity.getUserName(userId)
     return await this.createActivity(projectId, createdBy, ActivityType.PROJECT_USER_REMOVE, data, { userIds: [userId] })
   }
 
-  static async createCardDueDateAddActivity (projectId: string, createdBy: string, cardId: string, dueDate: Date): Promise<string | null> {
+  static async createCardDueDateAddActivity (projectId: string | ObjectId, createdBy: string | ObjectId, cardId: string | ObjectId, dueDate: Date): Promise<string | null> {
     return await this.createActivity(projectId, createdBy, ActivityType.CARD_DUE_DATE_ADD, { dueDate }, { cardId })
   }
 
-  static async createCardDueDateUpdateActivity (cardId: string, createdBy: string, dueDate: Date): Promise<string | null> {
+  static async createCardDueDateUpdateActivity (cardId: string | ObjectId, createdBy: string | ObjectId, dueDate: Date): Promise<string | null> {
     const card = await getCard(cardId)
     if (card == null) {
       // TODO: log error
@@ -93,11 +93,16 @@ export default class Activity extends Model {
     return await this.createActivity(card.projectId, createdBy, ActivityType.CARD_DUE_DATE_UPDATE, { dueDate }, { cardId })
   }
 
-  static async createCardDueDateDeleteActivity (projectId: string, createdBy: string, cardId: string): Promise<string | null> {
+  static async createCardDueDateDeleteActivity (projectId: string | ObjectId, createdBy: string | ObjectId, cardId: string | ObjectId): Promise<string | null> {
     return await this.createActivity(projectId, createdBy, ActivityType.CARD_DUE_DATE_DELETE, null, { cardId })
   }
 
-  static async createActivity (projectId: string, createdBy: string, type: ActivityType, data?: any, subjectEntity?: { userIds?: string[], questionId?: string, commentId?: string, roleId?: string, cardId?: string }): Promise<string | null> {
+  static async createActivity (
+    projectId: string | ObjectId,
+    createdBy: string | ObjectId,
+    type: ActivityType, data?: any,
+    subjectEntity?: { userIds?: Array<string | ObjectId>, questionId?: string, commentId?: string | ObjectId, roleId?: string | ObjectId, cardId?: string | ObjectId }
+  ): Promise<string | null> {
     const activity: ActivityTypeDef = {
       _id: new ObjectId(),
       projectId: toObjectId(projectId),
@@ -123,7 +128,7 @@ export default class Activity extends Model {
     return res.modifiedCount === 1
   }
 
-  static async createCardStageUpdateActivity (cardId: string, userId: string, stage: CardStage): Promise<string | null> {
+  static async createCardStageUpdateActivity (cardId: string | ObjectId, userId: string | ObjectId, stage: CardStage): Promise<string | null> {
     const card = await getCard(cardId)
     if (card == null) {
       // TODO: log error
@@ -132,7 +137,7 @@ export default class Activity extends Model {
     return await this.createActivity(card.projectId, userId, ActivityType.CARD_STAGE_UPDATE, { stage }, { cardId })
   }
 
-  static async createCardColumnUpdateActivity (cardId: string, userId: string, columnId: string): Promise<string | null> {
+  static async createCardColumnUpdateActivity (cardId: string | ObjectId, userId: string | ObjectId, columnId: string | ObjectId): Promise<string | null> {
     const card = await getCard(cardId)
     if (card == null) {
       // TODO: log error
@@ -150,7 +155,7 @@ export default class Activity extends Model {
     return await this.createActivity(projectId, userId, ActivityType.COMMENT_CREATE, null, { commentId, cardId, questionId })
   }
 
-  static async createCommentDeleteActivity (commentId: string, userId: string | ObjectId): Promise<string | null> {
+  static async createCommentDeleteActivity (commentId: string | ObjectId, userId: string | ObjectId): Promise<string | null> {
     userId = toObjectId(userId)
     const result = await this.find({
       commentId: toObjectId(commentId),
@@ -168,7 +173,7 @@ export default class Activity extends Model {
     return await this.createActivity(projectId, userId, ActivityType.COMMENT_DELETE, null, { commentId })
   }
 
-  static async createCommentUpdateActivity (commentId: string): Promise<string | null> {
+  static async createCommentUpdateActivity (commentId: string | ObjectId): Promise<string | null> {
     const comment = await Comment.get(commentId)
     if (comment == null) return null
     const { projectId, userId, userIds, questionId, cardId } = comment
@@ -178,7 +183,7 @@ export default class Activity extends Model {
     return await this.createActivity(projectId, userId, ActivityType.COMMENT_UPDATE, null, { commentId, cardId, questionId })
   }
 
-  static async createCardQuestionUpdateActivity (cardId: string, questionId: string, userId: string, data: { conclusion?: string, responses?: string[] }): Promise<Array<string | null>> {
+  static async createCardQuestionUpdateActivity (cardId: string | ObjectId, questionId: string, userId: string | ObjectId, data: { conclusion?: string, responses?: string[] }): Promise<Array<string | null>> {
     const card = await getCard(cardId)
     if (card == null) {
       // TODO: log error

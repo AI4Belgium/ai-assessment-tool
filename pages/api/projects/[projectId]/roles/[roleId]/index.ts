@@ -3,8 +3,10 @@ import { getRole, removeRoleAndCreateActivity, updateRoleAndCreateActivity } fro
 import { isConnected, hasProjectAccess, getUserFromRequest } from '@/util/custom-middleware'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { projectId, roleId } = req.query
+  let { projectId, roleId } = req.query
   const user = getUserFromRequest(req)
+  projectId = String(projectId)
+  roleId = String(roleId)
 
   switch (req.method) {
     case 'PATCH': {
@@ -14,7 +16,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
       return res.status(200).json(role)
     }
     case 'DELETE': {
-      const success = await removeRoleAndCreateActivity(projectId, roleId, user?._id)
+      const success = await removeRoleAndCreateActivity(projectId, roleId, String(user?._id))
       return success ? res.send(201) : res.send(400)
     }
     default:

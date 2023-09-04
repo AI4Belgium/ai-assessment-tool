@@ -2,7 +2,7 @@ import {
   // Logger,
   Db, MongoClient, ObjectId
 } from 'mongodb'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 const { MONGODB_URI, MONGODB_DB } = process.env
 
@@ -90,7 +90,7 @@ export function sanitize (v: any): any {
   return v
 }
 
-export const toObjectId = (_id: string | ObjectId): ObjectId => typeof _id === 'string' ? ObjectId(sanitize(_id)) : _id
+export const toObjectId = (_id: string | ObjectId): ObjectId => typeof _id === 'string' ? new ObjectId(sanitize(_id)) : _id
 
 export const cleanEmail = (email: string): string => sanitize(email.trim().toLowerCase())
 export const cleanText = (txt: string): string => sanitize(txt.trim())

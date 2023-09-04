@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 
 export enum JobType {
 }
@@ -18,7 +19,7 @@ export enum JobStatus {
 }
 
 export interface Job {
-  _id?: string
+  _id?: string | ObjectId
   createdAt: Date
   type: string
   data?: any

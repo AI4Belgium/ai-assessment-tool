@@ -1,6 +1,6 @@
 
 import nodemailer, { SentMessageInfo } from 'nodemailer'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 const SMTP_FROM: string | undefined = process.env.SMTP_FROM
 const SMTP_HOST: string | undefined = process.env.SMTP_HOST

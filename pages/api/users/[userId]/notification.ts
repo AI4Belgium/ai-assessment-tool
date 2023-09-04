@@ -18,7 +18,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
     }
     case 'PATCH': {
       const data: Notification = {
-        _id: ObjectId(user._id),
+        _id: new ObjectId(user._id).toString(),
         mentions: req.body.mentions,
         projectActivity: req.body.projectActivity
       }

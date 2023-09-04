@@ -2,7 +2,8 @@ import { ObjectId } from 'mongodb'
 import { connectToDatabase, toObjectId, sanitize } from '@/src/models/mongodb'
 import { getColumnsByProjectId } from '@/src/models/column'
 import { Card, STAGE_VALUES, Question, Answer } from '@/src/types/card'
-import { isEmpty, isEqual } from '@/util/index'
+import { isEqual } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import Activity from '@/src/models/activity'
 
 export const TABLE_NAME = 'cards'
@@ -79,7 +80,7 @@ export const updateCardAndCreateActivities = async (cardId: string | ObjectId, u
   return res
 }
 
-export const cardDataSanitizer = async (cardId: string, data: any): Promise<any> => {
+export const cardDataSanitizer = async (cardId: string | ObjectId, data: any): Promise<any> => {
   const updatableFields: any = {}
   UPDATABLE_FIELDS.forEach(field => {
     if (Object.keys(data).includes(field)) updatableFields[field] = sanitize(data[field])
@@ -160,7 +161,7 @@ export const updateQuestionAndCreateActivity = async (cardId: string | ObjectId,
   return res
 }
 
-export const sanitizeQuestionData = async (data: any, cardId: string, questionId: string, card?: Card): Promise<{ responses?: string[], conculusion?: string }> => {
+export const sanitizeQuestionData = async (data: any, cardId: string | ObjectId, questionId: string | ObjectId, card?: Card): Promise<{ responses?: string[], conculusion?: string }> => {
   if (card == null) {
     card = await getCard(cardId)
   }
@@ -201,7 +202,7 @@ export const dataToCards = async (data: any[], projectId?: string | ObjectId, co
         ...card,
         category: cat.id,
         originalId: card.id,
-        _id: ObjectId(),
+        _id: new ObjectId(),
         ...(projectId != null ? { projectId: toObjectId(projectId) } : {}),
         ...(columnId != null ? { columnId: toObjectId(columnId) } : {}),
         sequence: idx,

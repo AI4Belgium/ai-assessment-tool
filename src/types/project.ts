@@ -1,15 +1,16 @@
+import { ObjectId } from 'mongodb'
 import { Card } from './card'
 
 export interface Project {
-  _id: string
+  _id: string | ObjectId
   name: string
-  createdBy: string
+  createdBy: string | ObjectId
   columns?: Columns[]
   createdAt?: Date
   backgroundImage?: string
   userIds?: string[]
   roles?: Role[]
-  industryId?: string
+  industryId?: string | ObjectId
   description?: string
 }
 

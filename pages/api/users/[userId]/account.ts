@@ -17,14 +17,15 @@ interface SendEmailUserRemoved {
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const session = await getServerSession(req, res, authOptions)
   const user: any = await getUser({ _id: String(session?.user?.name) })
-  const { userId } = req.query
+  let { userId } = req.query
+  userId = String(userId)
 
   /**
    * Function used to retrieve all projects and users emails of theses projects which the deleted user used to be part of.
    * @returns SendEmailUserRemoved[]
    */
   async function buildProjectAndUsersEmails (): Promise<SendEmailUserRemoved[]> {
-    const projects: Project[] = await getUserProjects(userId) // retrieves all project that user to be deleted is part of.
+    const projects: Project[] = await getUserProjects(String(userId)) // retrieves all project that user to be deleted is part of.
     const response = await Promise.all(
       projects.map(async p => {
         const users = await getUsers(p.userIds) // retrieves all members of projects which to be deleted user is part of.
@@ -65,7 +66,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
       if (String(user._id) !== userId) return res.status(403).json({ message: 'You are not authorized to update this user' })
       // update user to inactive in all projects which user is part of.
       const allProjectIdsUser = await getUserProjects(userId)
-      allProjectIdsUser.map(async project => await removeUser(project._id, userId)) // remove user from user project lists and put user into project inactive user lists.
+      allProjectIdsUser.map(async project => await removeUser(project._id, String(userId))) // remove user from user project lists and put user into project inactive user lists.
       await updateToDeletedUser(userId) // marks user as deleted
       if (user == null) {
         return res.status(422).json({ code: 10007 })

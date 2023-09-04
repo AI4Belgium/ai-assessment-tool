@@ -25,7 +25,6 @@ const baseExpect = async (context: any): Promise<void> => {
   for (const jobId of jobIds) {
     const job = await JobModel.get(jobId)
     const strUserId = String(job?.data?.userId)
-    // console.log('job', JSON.stringify(job, null, 2))
     expect(job).toBeDefined()
     expect(job?.status).toEqual(JobStatus.PENDING)
     expect(job?.type).toEqual(JobProjectActivityNotification.JOB_TYPE)

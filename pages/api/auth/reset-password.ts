@@ -25,15 +25,15 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<any>
     if (!isPasswordValid(password)) return res.status(400).json({ code: 10004 })
 
     const hashedPassword = await hashPassword(password)
-    const result = await resetPassword(tokenEnt.createdBy, hashedPassword)
-    if (result) {
+    const result = tokenEnt.createdBy != null ? await resetPassword(tokenEnt.createdBy, hashedPassword) : null
+    if (result != null) {
       void setStatus(tokenEnt.token, TokenStatus.REDEEMED)
       return res.status(201).send({ code: 10005 })
     }
     return res.status(400).json({ code: 9004 })
   } else if (email != null) {
     const user = await getUser({ email })
-    if (user == null) {
+    if (user?._id == null) {
       return res.status(422).json({ code: 10007 })
     } else {
       const tokenEnt = await getToken({ createdBy: user._id, type: TokenType.RESET_PASSWORD })

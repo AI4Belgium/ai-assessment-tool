@@ -100,7 +100,7 @@ export function getProjectActivityHtml (projects: Project[], baseUrl: string = B
       <span>
         There is new activity on your project${projects.length > 1 ? 's' : ''}:
       </span>
-      ${projects.map(project => `<a href='${trimAndRemoveLastSlash(baseUrl)}/projects/${project._id}'>${project.name}</a>`).join('')}
+      ${projects.map(project => `<a href='${trimAndRemoveLastSlash(baseUrl)}/projects/${String(project._id)}'>${project.name}</a>`).join('')}
     </div>
   `
 }

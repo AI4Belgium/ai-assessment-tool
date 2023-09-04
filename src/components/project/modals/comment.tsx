@@ -18,13 +18,14 @@ import {
   GridProps,
   Tooltip
 } from '@chakra-ui/react'
+import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
 import { format } from 'date-fns'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { GiCancel } from 'react-icons/gi'
 import { Mention, MentionsInput } from 'react-mentions'
 import { BsReply } from 'react-icons/bs'
-import { isEmpty, timeAgo } from '@/util/index'
+import { timeAgo } from '@/util/index'
 import { getUserDisplayName } from '@/util/users'
 import UserContext from '@/src/store/user-context'
 import ProjectContext from '@/src/store/project-context'
@@ -211,7 +212,7 @@ const ParentComment = ({ comment, ...rest }: CommentProps): JSX.Element => {
     query.comment = ''
     void router
       .push({ query }, undefined, { shallow: true })
-      .then(async () => await router.push({ query: { ...query, comment: comment._id } }, undefined, { shallow: true }))
+      .then(async () => await router.push({ query: { ...query, comment: String(comment._id) } }, undefined, { shallow: true }))
   }
 
   return (

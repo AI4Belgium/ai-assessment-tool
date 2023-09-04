@@ -17,7 +17,7 @@ import {
 import { FiFilter } from 'react-icons/fi'
 import { useRouter } from 'next/router'
 import ProjectContext from '@/src/store/project-context'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { getUserDisplayName } from '@/util/users'
 import { CloseIcon } from '@chakra-ui/icons'
 import { useTranslation } from 'next-i18next'

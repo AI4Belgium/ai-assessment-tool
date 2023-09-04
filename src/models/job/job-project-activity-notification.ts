@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { Job as JobInterface } from '@/src/types/job'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import Activity from '@/src/models/activity'
 import { Activity as ActivityTypeDef } from '@/src/types/activity'
 import Job from '@/src/models/job'
@@ -73,6 +73,7 @@ export class JobProjectActivityNotification extends Job {
   }
 
   static async getLatestActivityPerProject (user: User, activityMaxAgeDate: Date): Promise<PartialActivityTypeDef[]> {
+    if (user?._id == null) return []
     const userProjectIds = await getUserProjectIds(user._id)
     if (isEmpty(userProjectIds)) return []
     const where = {

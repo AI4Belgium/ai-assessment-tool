@@ -1,11 +1,11 @@
 import { sanitize } from '@/src/models/mongodb'
 import { ObjectId } from 'mongodb'
+import isEmpty from 'lodash.isempty'
 import { TABLE_NAME } from './project'
 import { toObjectId, connectToDatabase } from './mongodb'
 import Activity from './activity'
 import { ActivityType } from '@/src/types/activity'
 import { Role } from '@/src/types/project'
-import { isEmpty } from '@/util/index'
 
 export const getRole = async (projectId: ObjectId | string, roleId: ObjectId | string): Promise<Role> => {
   const { db } = await connectToDatabase()
@@ -47,7 +47,7 @@ export const addRole = async (projectId: ObjectId | string, role: { _id?: Object
 
 export const addRoleAndCreateActivity = async (projectId: ObjectId | string, role: { _id?: ObjectId | string, name: string, desc: string }, userId: ObjectId | string): Promise<Role> => {
   const roleInserted = await addRole(projectId, role)
-  if (roleInserted != null) void Activity.createRoleActivity(projectId, userId, role._id, role, ActivityType.ROLE_CREATE)
+  if (roleInserted != null) void Activity.createRoleActivity(projectId, userId, roleInserted._id as unknown as ObjectId, roleInserted, ActivityType.ROLE_CREATE)
   return roleInserted
 }
 
@@ -74,6 +74,7 @@ export const updateRoleAndCreateActivity = async (projectId: ObjectId | string, 
 }
 
 export const updateRole = async (projectId: ObjectId | string, role: Partial<Role>): Promise<boolean> => {
+  if (role._id == null) throw new Error('Role: missing _id for update')
   const { db } = await connectToDatabase()
   const set: any = {}
   if (role.name != null) set['roles.$.name'] = sanitize(role.name)
@@ -82,9 +83,7 @@ export const updateRole = async (projectId: ObjectId | string, role: Partial<Rol
   set['roles.$.updateAt'] = new Date()
   const res = await db.collection(TABLE_NAME).updateOne(
     { _id: toObjectId(projectId), 'roles._id': toObjectId(role._id) },
-    {
-      $set: set
-    }
+    { $set: set }
   )
   return res.result.ok === 1
 }

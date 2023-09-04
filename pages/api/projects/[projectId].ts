@@ -3,8 +3,11 @@ import { deleteProjectAndCreateActivity, getProject, updateProjectAndCreateActiv
 import { getUserFromRequest, hasProjectAccess, isConnected } from '@/util/custom-middleware'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { projectId } = req.query
+  let { projectId } = req.query
   const user = getUserFromRequest(req)
+
+  if (projectId instanceof Array) projectId = projectId[0]
+  if (projectId == null || user?._id == null) return res.status(400).send({ message: 'Invalid request', code: 9002 })
 
   switch (req.method) {
     case 'GET': {

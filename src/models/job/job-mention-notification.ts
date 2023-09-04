@@ -1,9 +1,9 @@
 import { ObjectId } from 'mongodb'
+import isEmpty from 'lodash.isempty'
 import { toObjectId } from '@/src/models/mongodb'
 import { Job as JobInterface, JobStatus } from '@/src/types/job'
 import { Comment as CommentInterface } from '@/src/types/comment'
 import { Comment as CommentModel } from '@/src/models/comment'
-import { isEmpty } from '@/util/index'
 import { getUser } from '@/src/models/user'
 import { sendMailToBcc } from '@/util/mail'
 import { commentMentionHtml } from '@/util/mail/templates'
@@ -25,8 +25,8 @@ export class JobMentionNotification extends Job {
     if (comment instanceof ObjectId) {
       comment = await CommentModel.get(comment)
     }
-    const { _id, userIds, updatedAt } = comment
-    if (userIds == null || isEmpty(userIds) == null || _id == null) return null
+    const { _id, userIds, updatedAt } = comment as CommentInterface
+    if (isEmpty(userIds) || _id == null) return null
     const job: Partial<JobInterface> = {
       data: {
         userIds,
@@ -57,7 +57,7 @@ export class JobMentionNotification extends Job {
     const emails: string[] = []
     for (const uid of userIds) {
       const user = await getUser({ _id: toObjectId(uid) })
-      if (user == null || user.emailVerified !== true) continue
+      if (user?._id == null || user.emailVerified !== true) continue
       const notification = await getNotifications(user._id)
       if (notification == null || !notification.mentions) continue
       emails.push(user.email)

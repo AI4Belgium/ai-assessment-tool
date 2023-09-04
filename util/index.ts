@@ -14,14 +14,6 @@ export function timeAgo (value: string | Date): string {
   return rtf.format(-Math.floor(interval), 'second')
 }
 
-export const isEmpty = (value: any): boolean => {
-  return (
-    value == null || // From standard.js: Always use === - but obj == null is allowed to check null || undefined
-    (typeof value === 'object' && Object.keys(value).length === 0) ||
-    (typeof value === 'string' && value.trim().length === 0)
-  )
-}
-
 export const isEqual = (first: any, second: any): boolean => {
   if (first === second) {
     return true

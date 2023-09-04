@@ -30,7 +30,7 @@ import Roles from './roles'
 import Team from './team'
 import { defaultFetchOptions, HTTP_METHODS } from '@/util/api'
 import ConfirmDialog from '../../confirm-dialog'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import ToastContext from '@/src/store/toast-context'
 import { Project } from '@/src/types/project'
 import industries from '@/src/data/industries.json'
@@ -58,7 +58,7 @@ const ProjectBaseProperties = ({ project }: { project: Project }): JSX.Element =
     if (description !== project.description) data.description = description
     if (industry?._id !== project.industryId) data.industryId = industry?._id
     if (!isEmpty(data)) {
-      const url = `/api/projects/${project._id}`
+      const url = `/api/projects/${String(project._id)}`
       const response = await fetch(url, {
         ...defaultFetchOptions,
         method: HTTP_METHODS.PATCH,

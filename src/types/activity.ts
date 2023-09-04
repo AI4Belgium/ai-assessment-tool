@@ -2,6 +2,7 @@ import { User } from './user'
 import { Project, Role } from './project'
 import { Card, Question } from './card'
 import { Comment } from './comment'
+import { ObjectId } from 'mongodb'
 
 export enum ActivityType {
   PROJECT_CREATE = 'project_create',
@@ -46,20 +47,20 @@ export interface ActivityData {
 }
 
 export interface Activity {
-  _id: string
+  _id: string | ObjectId
   createdAt: Date
   type: ActivityType
-  createdBy: string
-  projectId: string
+  createdBy: string | ObjectId
+  projectId: string | ObjectId
   visibility: number
   updatedAt?: Date
   data?: ActivityData
-  userIds?: string[]
-  roleId?: string
-  cardId?: string
-  commentId?: string
-  questionId?: string
-  seenBy?: string[]
+  userIds?: Array<string | ObjectId>
+  roleId?: string | ObjectId
+  cardId?: string | ObjectId
+  commentId?: string | ObjectId
+  questionId?: string | ObjectId
+  seenBy?: Array<string | ObjectId>
 }
 
 export type DisplayActivity = Activity & {

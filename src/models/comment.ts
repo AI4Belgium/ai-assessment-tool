@@ -5,7 +5,6 @@ import { Comment as CommentTypeDef } from '@/src/types/comment'
 import Activity from '@/src/models/activity'
 import Model, { generatePaginationQuery } from '@/src/models/model'
 import { JobMentionNotification } from '@/src/models/job/job-mention-notification'
-// import { isEmpty } from '@/util/index'
 
 export const TABLE_NAME = 'comments'
 

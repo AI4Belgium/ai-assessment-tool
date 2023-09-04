@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { isConnected, getUserFromRequest } from '@/util/custom-middleware'
 import { getUserProjects } from '@/src/models/project'
 import Activity from '@/src/models/activity'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 const notAllowedMsg = 'You are not allowed to update this activity'
 

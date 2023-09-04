@@ -3,8 +3,13 @@ import { addUserToRoleAndCreateActivity, removeUserFromRoleAndCreateActivity } f
 import { isConnected, hasProjectAccess, getUserFromRequest } from '@/util/custom-middleware'
 
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { projectId, roleId, userId } = req.query
+  let { projectId, roleId, userId } = req.query
   const user = getUserFromRequest(req)
+  projectId = String(projectId)
+  roleId = String(roleId)
+  userId = String(userId)
+
+  if (user?._id == null) return res.status(403).send({ code: 9003 })
 
   switch (req.method) {
     case 'POST': {

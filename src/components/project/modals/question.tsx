@@ -25,7 +25,7 @@ import { GiCancel } from 'react-icons/gi'
 import { StringOrNumber } from '@chakra-ui/utils'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { useTranslation } from 'next-i18next'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { Question, DisplayQuestion, QuestionType, Answer } from '@/src/types/card'
 import { GlossaryLink } from '@/src/store/glossary-context'
 

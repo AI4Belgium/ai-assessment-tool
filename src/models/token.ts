@@ -1,8 +1,9 @@
 import { ObjectId } from 'mongodb'
 import uniqid from 'uniqid'
+import isEmpty from 'lodash.isempty'
 import { connectToDatabase, toObjectId, cleanEmail, sanitize } from '@/src/models/mongodb'
 import { getUser, updateUser } from '@/src/models/user'
-import { isEmpty, randomIntFromInterval } from '@/util/index'
+import { randomIntFromInterval } from '@/util/index'
 import { addUser, getUserProjects, removeUserInactive } from '@/src/models/project'
 
 const TABLE_NAME = 'tokens'
@@ -53,9 +54,11 @@ export const invitedUserHandler = async (token: string, email: string): Promise<
     const { projectId, status } = dbToken
     if (status === TokenStatus.PENDING && projectId != null) {
       const user = await getUser({ email })
-      await addUser(projectId, user?._id)
-      await removeUserInactive(projectId, user?._id)
-      await setStatus(token, TokenStatus.REDEEMED)
+      if (user?._id != null) {
+        await addUser(projectId, user?._id)
+        await removeUserInactive(projectId, user?._id)
+        await setStatus(token, TokenStatus.REDEEMED)
+      }
     }
   }
 }
@@ -85,7 +88,7 @@ export const inviteUser = async (projectId: string | ObjectId, email: string, cr
   projectId = toObjectId(projectId)
   createdBy = toObjectId(createdBy)
   const user = await getUser({ email })
-  if (user != null) {
+  if (user?._id != null) {
     const projects = await getUserProjects(user?._id, projectId)
     if (projects?.length > 0) throw new Error('Duplicate invite. Email already used for invitation.')
   }
@@ -99,7 +102,7 @@ export const inviteUser = async (projectId: string | ObjectId, email: string, cr
   return await db.collection(TABLE_NAME).findOne({ token })
 }
 
-export const emailVerificationTokenHandler = async (token: string, createdBy: string): Promise<void> => {
+export const emailVerificationTokenHandler = async (token: string, createdBy: string | ObjectId): Promise<void> => {
   token = sanitize(token)
   createdBy = toObjectId(createdBy)
   const { db } = await connectToDatabase()
@@ -115,7 +118,7 @@ export const emailVerificationTokenHandler = async (token: string, createdBy: st
   await setStatus(dbToken, TokenStatus.REDEEMED)
 }
 
-export const createEmailVerificationToken = async (email: string, createdBy: string): Promise<Token> => {
+export const createEmailVerificationToken = async (email: string, createdBy: string | ObjectId): Promise<Token> => {
   const token = randomIntFromInterval(100000, 999999)
   const { db } = await connectToDatabase()
   createdBy = toObjectId(createdBy)

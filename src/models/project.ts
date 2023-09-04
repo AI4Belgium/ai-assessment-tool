@@ -2,7 +2,7 @@
 import { ObjectId } from 'mongodb'
 import { cleanText, connectToDatabase, toObjectId, sanitize } from '@/src/models/mongodb'
 import { getUsers } from '@/src/models/user'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 import { deleteProjectCards, createCards } from '@/src/models/card'
 import { deleteProjectColumns, createProjectDefaultColumns, getTodoColumn } from '@/src/models/column'
 import Activity from '@/src/models/activity'
@@ -19,7 +19,7 @@ export const createProject = async ({ name, createdBy, description, industryId }
   createdBy = toObjectId(createdBy)
   const createdAt = new Date()
   const data: Partial<Project> = {
-    _id: ObjectId(),
+    _id: new ObjectId(),
     name,
     createdAt,
     createdBy,
@@ -31,7 +31,7 @@ export const createProject = async ({ name, createdBy, description, industryId }
     if (validatedIndustyId != null) data.industryId = validatedIndustyId
   }
   const result = await db.collection(TABLE_NAME).insertOne(data)
-  if (addDefaultColumns) await createProjectDefaultColumns(data._id, createdBy)
+  if (addDefaultColumns) await createProjectDefaultColumns(data._id as ObjectId, createdBy)
   return result.insertedId
 }
 

@@ -5,7 +5,7 @@ import { verifyPassword } from '@/util/auth'
 import { invitedUserHandler } from '@/src/models/token'
 import { sanitize } from '@/src/models/mongodb'
 import { getUser } from '@/src/models/user'
-import { isEmpty } from '@/util/index'
+import isEmpty from 'lodash.isempty'
 
 const authorize: any = async (credentials: any, req: NextApiRequest): Promise<User | null> => {
   // Check any field is empty

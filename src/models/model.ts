@@ -2,7 +2,6 @@ import { ObjectId } from 'mongodb'
 import { connectToDatabase, toObjectId } from './mongodb'
 import { sanitize } from '@/src/models/mongodb'
 import clonedeep from 'lodash.clonedeep'
-// import { isEmpty } from '@/util/index'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default abstract class Model {
