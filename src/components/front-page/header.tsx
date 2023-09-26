@@ -1,5 +1,5 @@
 import checkEnvironment from '@/util/check-environment'
-import { AI4BelgiumIcon } from '@/src/components/navbar'
+import AppLogo from '@/src/components/app-logo'
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, Flex } from '@chakra-ui/react'
 import LocaleSwitcher from '@/src/components/locale-switcher'
 
@@ -10,7 +10,7 @@ export const AI4BelgiumHeader = (): JSX.Element => {
   return (
     <Box width='100%'>
       <Flex width='100%' alignItems='center' gap='2' p='2'>
-        <AI4BelgiumIcon />
+        <AppLogo />
         <Spacer />
         <Flex alignItems='center'>
           <LocaleSwitcher />

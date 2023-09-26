@@ -11,13 +11,13 @@ import {
 } from '@chakra-ui/react'
 import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
-import { AI4BelgiumIcon } from './navbar'
+import { signOut, useSession } from 'next-auth/react'
+import { useTranslation } from 'next-i18next'
+import AppLogo from '@/src/components/app-logo'
 import { defaultFetchOptions } from '@/util/api'
 import { debounce } from '@/util/index'
 import { isPasswordValid, isEmailValid } from '@/util/validator'
-import { signOut, useSession } from 'next-auth/react'
-import ToastContext from '../store/toast-context'
-import { useTranslation } from 'next-i18next'
+import ToastContext from '@/src/store/toast-context'
 
 const ResetPassword = (props: any): JSX.Element => {
   const { t } = useTranslation()
@@ -228,7 +228,7 @@ const ResetPassword = (props: any): JSX.Element => {
   return (
     <>
       <Box display='flex' alignItems='center' justifyContent='center'>
-        <Link href='/'><AI4BelgiumIcon /></Link>
+        <Link href='/'><AppLogo /></Link>
       </Box>
       <Flex
         alignItems='center'

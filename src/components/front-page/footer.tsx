@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Box, Flex, Image, Button, useColorModeValue, VisuallyHidden } from '@chakra-ui/react'
 import { FaGithub } from 'react-icons/fa'
-import { AI4BelgiumIcon } from '@/src/components/navbar'
+import AppLogo from '@/src/components/app-logo'
 import { TextBody } from './content'
 import { useTranslation, Trans } from 'next-i18next'
 import { GITHUB_URL } from './header'
@@ -13,7 +13,7 @@ const Logo = (): JSX.Element => {
         <Image src='/frontpage/bosa-logo.svg' alt='BOSA logo' height='30px' mr='2vh' />
       </a>
       <a href='https://ai4belgium.be' title='AI 4 Belgium home page' style={{ textDecoration: 'none' }}>
-        <AI4BelgiumIcon />
+        <AppLogo />
       </a>
     </Flex>
   )
