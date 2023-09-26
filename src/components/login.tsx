@@ -13,7 +13,7 @@ import {
   IconButton
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { AI4BelgiumIcon } from './navbar'
+import AppLogo from '@/src/components/app-logo'
 import { isEmailValid } from '@/util/validator'
 import isEmpty from 'lodash.isempty'
 import ToastContext from '@/src/store/toast-context'
@@ -108,7 +108,7 @@ const Login = ({ onSubmit }: { onSubmit?: Function }): JSX.Element => {
   return (
     <>
       <Box display='flex' justifyContent='center' alignItems='center' my='40px'>
-        <Link href='/'><AI4BelgiumIcon /></Link>
+        <Link href='/'><AppLogo /></Link>
       </Box>
 
       <Flex

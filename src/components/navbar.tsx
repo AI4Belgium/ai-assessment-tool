@@ -32,20 +32,14 @@ import { ActivityTimeline } from '@/src/components/activity'
 import NotificationIcon from '@/src/components/notification-icon'
 import { DisplayActivity } from '@/src/types/activity'
 import EmailVerificationCheck from '@/src/components/email-verification-check'
-import LocaleSwitcher from './locale-switcher'
+import LocaleSwitcher from '@/src/components/locale-switcher'
+import AppLogo from '@/src/components/app-logo'
+
 interface Props {
   bg?: string
   onShowSidebar?: Function
   showSidebarButton?: boolean
 }
-
-export const AI4BelgiumIcon = (): JSX.Element => (
-  <div className='px-3 py-3 flex flex-col justify-center icon-grey-color font-semibold text-lg cursor-pointer'>
-    <span>
-      AI<sub className='icon-blue-color text-lg'>4</sub>Belgium
-    </span>
-  </div>
-)
 
 function removeDuplicatesById (arr: any[]): any[] {
   const seenIds = new Set()
@@ -220,7 +214,7 @@ const NavaBarInner = ({ bg, showSidebarButton = true, onShowSidebar }: Props): J
           </Box>
         )}
         <Box onClick={() => { void router.push('/home') }} margin='auto 0'>
-          <AI4BelgiumIcon />
+          <AppLogo />
         </Box>
         <Spacer />
         <Flex flexDirection='column' justifyContent='center'>

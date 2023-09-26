@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
-import { AI4BelgiumIcon } from '@/src/components/navbar'
+import AppLogo from '@/src/components/app-logo'
 import { defaultFetchOptions, getResponseHandler } from '@/util/api'
 import { debounce } from '@/util/index'
 import { isEmailValid, isPasswordValid } from '@/util/validator'
@@ -159,7 +159,7 @@ const SignUp = (): JSX.Element => {
   return (
     <>
       <Box display='flex' alignItems='center' justifyContent='center'>
-        <Link href='/'><AI4BelgiumIcon /></Link>
+        <Link href='/'><AppLogo /></Link>
       </Box>
       <Flex
         alignItems='center'
