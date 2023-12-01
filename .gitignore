@@ -69,6 +69,10 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+# IDEs and editors
+.idea
+.vscode
+
 # dotenv environment variables file
 .env
 # .env.test
