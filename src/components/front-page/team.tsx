@@ -31,6 +31,11 @@ const teamMemberData = [
     social: 'https://www.linkedin.com/in/rob-heyman-7182976/'
   },
   {
+    src: '/frontpage/avatars/yves_poullet.jpg',
+    name: 'Yves Poullet',
+    social: 'https://www.linkedin.com/in/yves-poullet-463bb685/'
+  },
+  {
     src: '/frontpage/avatars/nathanael-ackerman.jpeg',
     name: 'Nathanaël Ackerman',
     social: 'https://www.linkedin.com/in/nathanael-ackerman-4715881/'
