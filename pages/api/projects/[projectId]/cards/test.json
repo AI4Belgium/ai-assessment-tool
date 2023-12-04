@@ -13,7 +13,7 @@
           "html": "<h3>Avoidance of unfair bias</h3>"
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.1-B",
           "title": "Did you establish a strategy or a set of procedures to avoid creating or reinforcing =gb=unfair=ge= =gb=bias=ge= in the =gb=AI system=ge=, both regarding the use of input data as well as for the algorithm design?=hb=The way in which AI systems are developed (e.g. algorithms' programming, data) may suffer from unfair bias. This could be counteracted by putting in place oversight processes to analyse and address the system's purpose, constraints, requirements and decisions in a clear and transparent manner. Moreover, hiring from diverse backgrounds, cultures and disciplines can ensure diversity of opinions and should be encouraged.=br= EGTAI p. 18=he=",
           "isRequired": true,
@@ -23,7 +23,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.2-B",
           "visibleIf": "{DNF-Q1.1-B} notempty",
           "title": "Did you consider diversity and representativeness of =gb=end-users=ge= and/or =gb=subjects=ge= in the data?=hb=Data sets used by AI systems (both for training and operation) may suffer from the inclusion of inadvertent historic bias, incompleteness and bad governance models. The continuation of such biases could lead to unintended (in)direct prejudice and discrimination against certain groups or people, potentially exacerbating prejudice and marginalisation<br/>EGTAI p 18=he=",
@@ -34,7 +34,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.3-B",
           "visibleIf": "{DNF-Q1.2-B} notempty",
           "title": "Did you test for specific target groups or problematic =gb=use case=ge=? =hb=AI systems should be user-centric and designed in a way that allows all people to use AI products or services, regardless of their age, gender, abilities or characteristics. User involvement from the initial phases of the design and development of an AI system is one of the most important facts for involving all parts of society.<br/>EGTAI p. 18=he=",
@@ -46,7 +46,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.4-B",
           "visibleIf": "{DNF-Q1.3-B} notempty",
           "title": "Did you research and use publicly available technical tools, that are state-of-the-art, to improve your understanding of the data, model and performance?=hb=The tools available to support any phase of the development of an AI system change and improve very rapidly, allowing over time for a better handling of such phases and their properties. It is therefore important to use the latest available tools, that can solve problems that were previously not considered, not understood, or solved in a less satisfactory way.=he=",
@@ -57,7 +57,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.5-B",
           "visibleIf": "{DNF-Q1.4-B} notempty",
           "title": "Did you assess and put in place processes to test and monitor for potential biases during the entire =gb=lifecycle=ge= of the =gb=AI system=ge= (e.g. biases due to possible limitations stemming from the composition of the used data sets (lack of diversity, non-representativeness))?=hb=The way in which AI systems are developed (e.g. algorithms' programming) may also suffer from unfair bias. This could be counteracted by putting in place oversight processes to analyse and address the system's purpose, constraints, requirements and decisions in a clear and transparent manner. Moreover, hiring from diverse backgrounds, cultures and disciplines can ensure diversity of opinions and should be encouraged.<br/>EGTAI p 18=he=",
@@ -69,7 +69,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.6-B",
           "visibleIf": "{DNF-Q1.5-B} notempty",
           "title": "Where relevant, did you consider diversity and representativeness of =gb=end-users=ge= and or =gb=subjects=ge= in the data?=hb=Particularly in business-to-consumer domains, systems should be user-centric and designed in a way that allows all people to use AI products or services, regardless of their age, gender, abilities or characteristics.<br/>EGTAI p 18=he=",
@@ -80,7 +80,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.7-B",
           "visibleIf": "{DNF-Q1.6-B} notempty",
           "title": "Did you put in place educational and awareness initiatives to help =gb=AI designers=ge= and =gb=AI developers=ge= be more aware of the possible =gb=bias=ge= they can inject in designing and developing the =gb=AI system=ge=?=hb=AI designers and developers should be educated about the many different forms of bias human being can unintentionally inject in an AI system, and the several ways this can happen. In this respect, the selection of the training data is crucial, but also many other design choices can embed bias (such as the choice of entities to be extracted from text, or the choice of the classes for an AI classifier).=he=",
@@ -92,7 +92,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.8-B",
           "visibleIf": "{DNF-Q1.7-B} notempty",
           "title": "Depending on the =gb=use case=ge=, did you ensure a mechanism that allows for the flagging of issues related to =gb=bias=ge=, discrimination or poor performance of the =gb=AI system=ge=?=hb=It is important to have an internal process by which any stakeholder of the AI system can raise issues that developers have possibly overlooked or that revealed themselves only after deployment. =he=",
@@ -103,7 +103,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.9-B",
           "visibleIf": "{DNF-Q1.8-B} notempty",
           "title": "Did you establish clear steps and ways of communicating on how and to whom such issues can be raised?=hb=The internal process by which people can raise issues should be documented and the issues should be clearly communicated to the official persons/institutions in the organisation who can make decisions about the possible product revision=he=",
@@ -114,7 +114,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.10-B",
           "visibleIf": "{DNF-Q1.9-B} notempty",
           "title": "Did you identify the =gb=subjects=ge= that could potentially be (in)directly affected by the =gb=AI system=ge=, in addition to the =gb=end-users=ge=? =hb=Ubiquitous exposure to social AI systems  in all areas of our lives (be it in education, work, care or entertainment) may alter our conception of social agency, or impact our social relationships and attachment. While AI systems can be used to enhance social skills,  they can equally contribute to their deterioration. This could also affect people's physical and mental wellbeing. The effects of these systems must therefore be carefully monitored and considered.<br/>EGTAI p. 19=he=",
@@ -125,7 +125,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.11-B",
           "visibleIf": "{DNF-Q1.10-B} notempty",
           "title": "Is your definition of =gb=fairness=ge= commonly used and implemented in any phase of the process of setting up the =gb=AI system=ge= ?=hb=The requirement of accountability complements the above requirements, and is closely linked to the principle of fairness. It necessitates that mechanisms be put in place to ensure responsibility and accountability for AI systems and their outcomes, both before and after their development, deployment and use. See also next point about definition of fairness.<br/>EGTAI p. 19=he=",
@@ -142,7 +142,7 @@
           "title": "Please explain your definition of =gb=fairness=ge=:"
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q1.12-B",
           "visibleIf": "{DNF-Q1.11-B} notempty",
           "title": "Did you consider other definitions of =gb=fairness=ge= before choosing this one?=hb=There are at least 20 mathematical definitions of fairness, and when we choose one, we violate some aspect of the others. In other words, it is impossible for every decision to be fair to all parties. It is therefore important to identify the correct notion of bias for the specific deployment scenario.=he=",
@@ -153,7 +153,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "visibleIf": "{DNF-Q1.12-B} notempty",
           "name": "DNF-Q1.13-B",
           "title": "Did you consult with the impacted communities about the correct definition of =gb=fairness=ge=, i.e., representatives of elderly persons or persons with disabilities?=hb=This is again about the involvement of the end-users or subjects in the context of a user-centric approach: In order to develop AI systems that are trustworthy, it is advisable to consult stakeholders who may directly or indirectly be affected by the system throughout its life cycle.=br=EGTAI p. 18.=he=",
@@ -164,7 +164,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "visibleIf": "{DNF-Q1.13-B} notempty",
           "name": "DNF-Q1.14-B",
           "title": "Did you ensure a quantitative analysis or metrics to measure and test the applied definition of =gb=fairness=ge=?=hb=Fairness is a social construct. And in fact, when people judge an algorithm to be “biased,” they are often conflating bias and fairness: They are using a specific definition of fairness to pass judgment on the algorithm.<br/>The development, deployment and use of AI systems must be fair. While we acknowledge that there are many different interpretations of fairness, we believe that fairness has both a substantive and a procedural dimension. The substantive dimension implies a commitment to: ensuring equal and just distribution of both benefits and costs, and ensuring that individuals and groups are free from unfair bias, discrimination and stigmatisation.<br/>EGTAI p 12.=he=",
@@ -175,7 +175,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "visibleIf": "{DNF-Q1.14-B} notempty",
           "name": "DNF-Q1.15-B",
           "title": "Did you establish mechanisms to ensure =gb=fairness=ge= in your =gb=AI system=ge=?",
@@ -186,7 +186,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-S1-R",
           "visibleIf": "{DNF-Q1.15-B} notempty",
           "title": "Based on your answers to the previous questions, how would you rate the measures you have adopted to detect and avoid =gb=bias=ge=, and ensure =gb=fairness=ge=?=hb=The development, deployment and use of AI systems must be fair. While we acknowledge that there are many different interpretations of fairness, we believe that fairness has both a substantive and a procedural dimension. The substantive dimension implies a commitment to: ensuring equal and just distribution of both benefits and costs, and ensuring that individuals and groups are free from unfair bias, discrimination and stigmatisation.=br= If unfair biases can be avoided, AI systems could even increase societal fairness. Equal opportunity in terms of access to education, goods, services and technology should also be fostered. Moreover, the use of AI systems should never lead to people being deceived or unjustifiably impaired in their freedom of choice. Additionally, fairness implies that AI practitioners should respect the principle of proportionality between means and ends, and consider carefully how to balance competing interests and objectives.  The procedural dimension of fairness entails the ability to contest and seek effective redress against decisions made by AI systems and by the humans operating them.  In order to do so, the entity accountable for the decision must be identifiable, and the decision-making processes should be explicable.<br/>ETAI p 12=he=",
@@ -211,7 +211,7 @@
           "html": "Particularly in business-to-consumer domains, AI systems should be user-centric and designed in a way that allows all people to use AI products or services, regardless of their age, gender, abilities or characteristics. Accessibility to this technology for persons with disabilities, which are present in all societal groups, is of particular importance. AI systems should not have a one-size-fits-all approach and should consider Universal Design principles addressing the widest possible range of users, following relevant accessibility standards.  This will enable equitable access and active participation of all people in existing and emerging computer-mediated human activities and with regard to assistive technologies."
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.1-B",
           "title": "Did you ensure that the =gb=AI system=ge= corresponds to the variety of preferences and abilities in society?=hb=Beyond assessing the impact of an AI system's development, deployment and use on individuals, this impact should also be assessed from a societal perspective, taking into account its effect on institutions, democracy and society at large.<br/>It is also inline with the CRPD <br/>EGTAI p 19=he=",
           "isRequired": true,
@@ -221,7 +221,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.2-B",
           "visibleIf": "{DNF-Q2.1-B} notempty",
           "title": "Did you assess whether the =gb=AI system=ge='s user interface is usable by those with special needs or disabilities or those at risk of exclusion?=hb=Goes together with the principle of UD to involve all the possible target groups from the scratch. Assistive Technologies are products like Screenreaders, Magnifiers, Text2Speed Software.<br/>EGTAI p 18",
@@ -232,7 +232,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.2.1-B",
           "visibleIf": "{DNF-Q2.2-B} = 'Yes'",
           "title": "Did you ensure that information about, and the user interface of, the =gb=AI system=ge= is accessible and usable also to =gb=users=ge= of =gb=assistive technologies=ge= (such as screenreaders)? =hb=Goes together with the principle of UD to involve all the possible target groups from the scratch. Assistive Technologies are products like Screenreaders, Magnifiers, Text2Speed Software.<br/>Use technical tools like assistive technologies.<br/>EGTAI p 18=he=",
@@ -243,7 +243,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.2.2-B",
           "visibleIf": "{DNF-Q2.2-B} = 'Yes'",
           "title": "Did you involve or consult with =gb=end-users=ge= or =gb=subjects=ge= in need for =gb=assistive technology=ge= during the planning and development phase of the AI system?=hb=Goes together with the principle of UD to involve all the possible target groups from the scratch. Assistive Technologies are products like Screenreaders, Magnifiers, Text2Speed Software.<br/>Use technical tools like assistive technologies.<br/>EGTAI p 18=he=",
@@ -254,7 +254,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.3-B",
           "visibleIf": "{DNF-Q2.2-B} notempty",
           "title": "Did you ensure that =gb=Universal Design=ge= principles are taken into account during every step of the planning and development process, if applicable?=hb=The process approach is aligned with, compatible with, and complementary to established management system standards, including quality management systems. The Design for All approach as specified in this document is written to be easily integrated into existing organisational processes and practices. As with management systems, outcomes are realized most effectively and efficiently when they are understood and managed as deliberate, interrelated processes.=he=",
@@ -265,7 +265,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.4-B",
           "visibleIf": "{DNF-Q2.3-B} notempty",
           "title": "Did you take the impact of the =gb=AI system=ge= on the potential =gb=end-users=ge= and/or =gb=subjects=ge= into account?=hb=AI systems should not have a one-size-fits-all approach and should consider Universal Design principles addressing the widest possible range of users, following relevant accessibility standards.  This will enable equitable access and active participation of all people in existing and emerging computer-mediated human activities and with regard to assistive technologies.<br/>EGTAI p.18=he=",
@@ -276,7 +276,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "visibleIf": "{DNF-Q2.4-B} notempty",
           "name": "DNF-Q2.5-B",
           "title": "Did you assess whether the team involved in building the =gb=AI system=ge= engaged with the possible target =gb=end-users=ge= and/or =gb=subjects=ge=?=hb=AI systems should not have a one-size-fits-all approach and should consider Universal Design principles addressing the widest possible range of users, following relevant accessibility standards.  This will enable equitable access and active participation of all people in existing and emerging computer-mediated human activities and with regard to assistive technologies.<br/>EGTAI p.18=he=",
@@ -287,7 +287,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q2.6-B",
           "visibleIf": "{DNF-Q2.5-B} notempty",
           "title": "Did you assess whether there could be groups who might be disproportionately affected by the outcomes of the system?=hb=AI systems should not have a one-size-fits-all approach and should consider Universal Design principles addressing the widest possible range of users, following relevant accessibility standards.<br/>EGTAI p 18=he=",
@@ -304,7 +304,7 @@
           "title": "Please explain::"
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "visibleIf": "{DNF-Q2.6-B} notempty",
           "name": "DNF-Q2.7-B",
           "title": "Did you assess the risk of the possible =gb=unfairness=ge= of the system onto the =gb=end-users=ge=' or =gb=subjects=ge=' communities?=hb=Data sets used by AI systems (both for training and operation) may suffer from the inclusion of inadvertent historic bias, incompleteness and bad governance models. The continuation of such biases could lead to unintended (in)direct prejudice and discrimination  against certain groups or people, potentially exacerbating prejudice and marginalisation. Harm can also result from the intentional exploitation of (consumer) biases or by engaging in unfair competition, such as the homogenisation of prices by means of collusion or a non-transparent market.<br/>EGTAI p. 18=he=",
@@ -321,7 +321,7 @@
           "title": "Please explain:"
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-S2-R",
           "visibleIf": "{DNF-Q2.7-B} notempty",
           "title": "Based on your answers to the previous questions, how would you rate the measures you implemented to ensure =gb=accessibility=ge= and =gb=Universal Design=ge=?=hb=A Design for All approach takes account of human diversity to extend the range of users. This approach inspires innovation in organisations so that management value an inclusive and non-stigmatizing mindset and supports a culture, which prioritises people. The Design for All approach and innovation ensure optimal practices and activities, so that operations have the best tools and resources in place to enable them to achieve accessible products, goods and services, i.e. what this document refers to as 'accessibility outcomes'. Accessibility seeks to prevent and remove barriers, ensuring that persons with disabilities have access to products, goods and services on an equal basis with others. Accessibility as an outcome from integrating a Design for All approach throughout the whole organization can maximize the range of potential users of products, goods and services. Extending the range of users can increase markets. It can also increase the proportion of the population, including persons with disabilities, able to participate fully and independently in society. The accessibility of products, goods and services realized by Design for All can benefit all users. Every organization can benefit from this approach.=he=",
@@ -346,7 +346,7 @@
           "html": "In order to develop Trustworthy AI, it is advisable to consult stakeholders who may directly or indirectly be affected by the AI system throughout its life cycle. It is beneficial to solicit regular feedback even after deployment and set up longer term mechanisms for stakeholder participation, for example by ensuring workers information, consultation and participation throughout the whole process of implementing AI systems at organisations."
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "name": "DNF-Q3.1-B",
           "title": "Did you consider a mechanism to include the participation of the widest range of possible stakeholders in the =gb=AI system=ge='s design and development?=hb=Particularly in business-to-consumer domains, systems should be user-centric and designed in a way that allows all people to use AI products or services, regardless of their age, gender, abilities or characteristics.<br/>ETAI p.18.=he=",
           "isRequired": true,
@@ -356,7 +356,7 @@
           ]
         },
         {
-          "type": "radiogroup",
+          "type": "radio",
           "visibleIf": "{DNF-Q3.1-B} notempty",
           "name": "DNF-S3-R",
           "title": "Based on your answers to the previous questions, how would you rate the measures you put in place to ensure the involvement of the relevant stakeholders?",

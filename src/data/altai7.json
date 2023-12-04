@@ -24,7 +24,7 @@
                 {
                     "id": "AC-Q1-B",
                     "title": "Did you establish mechanisms that facilitate the =gb=AI system=ge=’s auditability (e.g. traceability of the development process, the sourcing of training data and the logging of the AI system’s processes, outcomes, positive and negative impact)? =hb=Auditability entails the enablement of the assessment of algorithms, data and design processes. This does not necessarily imply that information about business models and intellectual property related to the AI system must always be openly available. =br=EGTAI p. 19-20.=he=",
-                    "type": "radiogroup",
+                    "type": "radio",
                     "isScored": 0,
                     "answers": [
                         { "answer":"Yes","score":0 },
@@ -32,7 +32,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q2-B",
                     "visibleIf": "",
                     "title": "Did you ensure that the =gb=AI system=ge= can be audited by independent third parties? =hb=Evaluation by internal and external auditors, and the availability of such evaluation reports, can contribute to the trustworthiness of the technology. In applications affecting fundamental rights, including safety-critical applications, AI systems should be able to be independently audited. <br/>EGTAI p. 20=he=",
@@ -43,7 +43,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-S1-R",
                     "visibleIf": "",
                     "title": "Based on the answer you gave above, do you believe the measures in place to ensure the auditability of the =gb=AI system=ge= are:=hb=Auditability entails the enablement of the assessment of algorithms, data and design processes.<br/> EGTAI p. 19=he=",
@@ -65,7 +65,7 @@
             "section": "1670175641",
             "questions": [
                 {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q3-B",
                     "title": "Did you foresee any kind of external guidance or third-party auditing processes to oversee ethical concerns and accountability measures?  =hb=Evaluation by internal and external auditors, and the availability of such evaluation reports, can contribute to the trustworthiness of the technology. In applications affecting fundamental rights, or cause adverse impacts to individuals, society and the environment. AI systems should be able to be independently audited. <br/>EGTAI p. 20=he=",
                     "isScored": 0,
@@ -76,7 +76,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q31-B",
                     "visibleIf": "",
                     "title": "Does the involvement of these third parties go beyond the development phase?  =hb=In order to achieve Trustworthy AI, we must enable inclusion and diversity throughout the entire AI system’s life cycle. Besides the consideration and involvement of all affected stakeholders throughout the process, this also entails ensuring equal access through inclusive design processes as well as equal treatment. <br/>EGTAI p. 18=he=",
@@ -88,7 +88,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q4-B",
                     "visibleIf": "",
                     "title": "Did you organise risk training and, if so, does this also inform about the potential legal framework applicable to the =gb=AI system=ge=? =hb= It must be ensured that the system will do what it is supposed to do without harming individuals, society and the environment. This includes the minimisation of unintended consequences and errors. In addition, processes to clarify and assess potential risks associated with the use of AI systems, across various application areas, should be established. <br/>EGTAI p. 17=he=",
@@ -100,7 +100,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q5-B",
                     "visibleIf": "",
                     "title": "Did you consider establishing an ‘AI ethics review board’ or a similar mechanism to discuss the overall =gb=accountability=ge= and ethics practices, including potential unclear grey areas? =hb=In order to develop AI systems that are trustworthy, it is advisable to consult stakeholders who may directly or indirectly be affected by the system throughout its life cycle. It is beneficial to solicit regular feedback even after deployment and set up longer term mechanisms for stakeholder participation, for example by ensuring workers information, consultation and participation throughout the whole process of implementing AI systems at organisations. <br/>EGTAI p. 19=he=",
@@ -112,7 +112,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q6-B",
                     "visibleIf": "",
                     "title": "Did you establish a mechanism to identify conflicts of values that could be implemented in your =gb=AI system=ge= and your own interests? ",
@@ -124,7 +124,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q6.1-B",
                     "visibleIf": "",
                     "title": "Does this process include identification and documentation of trade-offs between different ethical principles? =hb=Tensions may arise between ethical principles, for which there is no fixed solution. In line with the EU fundamental commitment to democratic engagement, due process and open political participation, methods of accountable deliberation to deal with such tensions should be established. <br/>EGTAI p.14=he=",
@@ -136,7 +136,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q6.2-B",
                     "visibleIf": "",
                     "title": "How did you decide on such trade-offs? Did you ensure that the trade-off decision was documented?=hb= AI systems’ overall benefits should substantially exceed the foreseeable individual risks. AI practitioners can hence not be expected to find the right solution based on the principles above, yet they should approach ethical dilemmas and trade-offs via reasoned, evidence-based reflection rather than intuition or random discretion. =he=",
@@ -148,7 +148,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q7-B",
                     "visibleIf": "",
                     "title": "Did you establish a processes for third parties (e.g. suppliers, =gb=end-users=ge=, =gb=subjects=ge=, distributors/vendors or workers) or workers to report potential vulnerabilities, risks or biases in the =gb=AI system=ge=?=hb=In order to develop AI systems that are trustworthy, it is advisable to consult stakeholders who may directly or indirectly be affected by the system throughout its lifecycle. It is beneficial to solicit regular feedback even after deployment and set up longer term mechanisms for stakeholder participation, for example by ensuring workers information, consultation and participation throughout the whole process of implementing AI systems at organisations. <br/> EGTAI p. 19=he=",
@@ -160,7 +160,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q8-B",
                     "visibleIf": "",
                     "title": "Does this process foster revision of the risk management process?=hb=It is beneficial to solicit regular feedback even after deployment and set up longer term mechanisms for stakeholder participation, for example by ensuring workers information, consultation and participation throughout the whole process of implementing AI systems at organisations. <br/> EGTAI p. 19=he=",
@@ -172,7 +172,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-Q9-B",
                     "visibleIf": "",
                     "title": " For applications that can significantly adversely affect individuals, have =gb=redress by design=ge= mechanisms been put in place?=hb=When unjust adverse impact occurs, accessible mechanisms should be foreseen that ensure adequate, accessible and effective redress. <br/>EGTAI p. 20 <br/>=he=",
@@ -184,7 +184,7 @@
                         { "answer":"Don't know","score":0 }
                     ]
                 }, {
-                    "type": "radiogroup",
+                    "type": "radio",
                     "id": "AC-S2-R",
                     "visibleIf": "",
                     "title": "Based on the answer you gave above, do you believe the risk management system you have in place is:",
