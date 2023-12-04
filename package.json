@@ -34,7 +34,7 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.isempty": "^4.4.0",
     "mongodb": "^3.6.10",
-    "next": "13.2.4",
+    "next": "13.5.0",
     "next-auth": "^4.22.1",
     "next-csrf": "^0.2.1",
     "next-i18next": "^13.1.6",
