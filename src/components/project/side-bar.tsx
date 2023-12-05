@@ -52,7 +52,10 @@ const SideBar = (props: Props): JSX.Element => {
         onClick={(e) => clickHandler(e, cat)}
       >
         <Box display='flex' justifyContent='space-between' width='100%' height='100%' alignItems='center'>
-          <Box width='4px' height='100%' bgColor={cat._id === selectedCategoryId ? 'var(--main-blue)' : 'white'} borderRightRadius='5px' />
+          <Box height='100%' display='flex' alignItems='center'>
+            <Box width='4px' height='100%' bgColor={cat._id === selectedCategoryId ? 'var(--main-blue)' : 'white'} borderRightRadius='5px' />
+            <Box ml='1rem'>{index + 1}.</Box>
+          </Box>
           <Box px='1rem'>{cat.name}</Box>
           <Box width='4px' height='100%' bgColor='transparent' />
         </Box>
