@@ -3,7 +3,8 @@ import {
   Box,
   Heading,
   Input,
-  BoxProps
+  BoxProps,
+  Spinner
 } from '@chakra-ui/react'
 import { Droppable } from 'react-beautiful-dnd'
 import { debounce } from '@/util/index'
@@ -63,11 +64,11 @@ interface Props extends BoxProps {
   index: number
   cards: CardType[]
   projectId: string
+  isLoading?: boolean
 }
 
-const Column = ({ showCardDetail, column, index, cards, projectId, ...boxProps }: Props): JSX.Element => {
+const Column = ({ showCardDetail, column, index, cards, projectId, isLoading, ...boxProps }: Props): JSX.Element => {
   const { t } = useTranslation()
-  // const { data } = useSession()
   const router = useRouter()
   const {
     sort = Sort.NUMBER,
@@ -77,7 +78,6 @@ const Column = ({ showCardDetail, column, index, cards, projectId, ...boxProps }
   const [, setIsLoading] = useState<boolean>(false)
   const [cardsInSortedSequence, setCardsInSortedSequence] = useState<any[]>(sortCards(cards, sort as Sort, ord as Order))
   const [columnName, setColumnName] = useState<string>(column.name)
-  // const user: any = data?.user
 
   useEffect(() => {
     setCardsInSortedSequence(sortCards(cards ?? [], sort as Sort, ord as Order))
@@ -153,6 +153,7 @@ const Column = ({ showCardDetail, column, index, cards, projectId, ...boxProps }
         {(provided: any) => (
           // 2px height is needed to make the drop work when there is no card.
           <Box ref={provided.innerRef} {...provided.droppableProps} flexGrow={1}>
+            {isLoading === true ? <Box className='flex justify-center mt-5'><Spinner /> </Box> : null}
             {cardsInSortedSequence?.map((card, index) => (
               <Card key={index} card={card} cardIndex={index} showCardDetail={showCardDetail} />
             ))}
