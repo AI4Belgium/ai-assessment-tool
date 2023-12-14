@@ -12,7 +12,7 @@ const smVariant = { navigation: 'drawer', navigationButton: true }
 const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 export default function Page ({ session }: { session: any }): JSX.Element {
-  const { data, mutate } = useSWR('/api/projects', fetcher)
+  const { data, mutate, isLoading } = useSWR('/api/projects', fetcher)
   // const { data: industries, error: errorIndustries } = useSWR('/api/industries', fetcher)
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant })
@@ -28,7 +28,7 @@ export default function Page ({ session }: { session: any }): JSX.Element {
       showSidebarButton={variants?.navigationButton}
       onShowSidebar={toggleSidebar}
     >
-      <Projects projects={data ?? []} session={session} fetchProjects={mutate} />
+      <Projects projects={data ?? []} session={session} fetchProjects={mutate} isLoading={isLoading} />
     </SideBar>
   )
 }
