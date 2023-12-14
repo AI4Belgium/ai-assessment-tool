@@ -19,6 +19,7 @@ interface Props {
   session: any
   categories: Category[]
   sections: Section[]
+  isLoading: boolean
 }
 
 const ProjectComponent: FC<Props> = (props): JSX.Element => {
@@ -36,7 +37,7 @@ const ProjectComponent: FC<Props> = (props): JSX.Element => {
           isOpen={isSidebarOpen}
           showSidebarButton={variants?.navigationButton}
         />
-        <ProjectColumns project={props.project} />
+        <ProjectColumns project={props.project} isLoading={props.isLoading ?? false} />
       </Box>
     </Box>
   )

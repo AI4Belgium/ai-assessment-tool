@@ -22,6 +22,7 @@ const Droppable2 = Droppable as any
 
 interface IProps {
   project: Project
+  isLoading?: boolean
 }
 
 // defined to avoid style issues while columns are loading
@@ -29,7 +30,7 @@ const dummyData = { projectId: '', createdAt: new Date(), createdBy: '' }
 
 const colWidth = '272'
 
-const ProjectColumns: FC<IProps> = ({ project }): JSX.Element => {
+const ProjectColumns: FC<IProps> = ({ project, isLoading: isLoadingProject = false }): JSX.Element => {
   const { t } = useTranslation()
   const defaultColumns: Column[] = [
     { _id: '1', name: `${t('column-dashboard:todo')}`, ...dummyData },
@@ -45,14 +46,19 @@ const ProjectColumns: FC<IProps> = ({ project }): JSX.Element => {
     [QueryFilterKeys.DUE_DATE]: dueDate,
     [QueryFilterKeys.ASSIGNMENT]: assignment
   } = router.query
-  const { data } = useSWR(`/api/projects/${projectId}/columns`, fetcher)
-  const { data: dataCards } = useSWR(`/api/projects/${projectId}/cards`, fetcher)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { data, isLoading: isLoadingColumns } = useSWR(`/api/projects/${projectId}/columns`, fetcher)
+  const { data: dataCards, isLoading: isLoadingCards } = useSWR(`/api/projects/${projectId}/cards`, fetcher)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [columns, setColumns] = useState<Column[]>(defaultColumns)
   const [cards, setCards] = useState<Card[]>([])
   const { card, setCardQuery, unSetCardQuery } = useQueryCardId(cards, () => onOpen(), () => onClose())
 
   // useRenderingTrace('ProjectColumns', { projectId, session, columns, cards, isLoading, cardDetail }, 'log')
+
+  useEffect(() => {
+    setIsLoading(isLoadingColumns || isLoadingCards || isLoadingProject)
+  }, [isLoadingColumns, isLoadingCards, isLoadingProject])
 
   useEffect(() => {
     if (Array.isArray(data)) {
@@ -180,7 +186,7 @@ const ProjectColumns: FC<IProps> = ({ project }): JSX.Element => {
                   width={['calc(100vw - 20px)', 'calc(100vw - 20px)', `${colWidth}px`]}
                   scrollSnapAlign={['center', 'center', 'none']}
                   scrollSnapStop={['always', 'always', 'unset']}
-
+                  isLoading={isLoading}
                 />
               ))}
               {provided.placeholder}
