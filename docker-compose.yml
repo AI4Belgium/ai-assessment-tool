@@ -2,6 +2,7 @@ version: '3.3'
 
 services:
   altai:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,7 +12,6 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/.next
-      - /usr/src/app/.husky
     environment:
       - API_KEY=${API_KEY-very_weak_api_key}
       - BASE_URL=http://altai:3000
@@ -33,7 +33,7 @@ services:
       - ai-app
 
   mongodb:
-    image: mongo:4.4-bionic
+    image: mongo:7.0.4
     volumes:
       - assessment-db:/data/db
     ports:
