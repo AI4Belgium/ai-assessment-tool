@@ -227,14 +227,9 @@ export default class Activity extends Model {
             as: 'project'
           }
         },
-        // {
-        //   $lookup: {
-        //     from: 'projects',
-        //     localField: 'roleId',
-        //     foreignField: 'roles._id',
-        //     as: 'role'
-        //   }
-        // },
+        {
+          $unwind: { path: '$project', preserveNullAndEmptyArrays: true }
+        },
         {
           $lookup: {
             from: 'cards',
@@ -244,32 +239,45 @@ export default class Activity extends Model {
           }
         },
         {
-          $lookup: {
-            from: 'cards',
-            // localField: 'questionId',
-            // foreignField: 'questions.id', // doesn't work, we end up with the cards and not the questions
-            let: { question_id: '$questionId' },
-            pipeline: [
-              { $unwind: '$questions' },
-              { $match: { $expr: { $eq: ['$questions.id', '$$question_id'] } } },
-              { $replaceRoot: { newRoot: '$questions' } }
-            ],
-            as: 'questions'
+          $unwind: { path: '$card', preserveNullAndEmptyArrays: true }
+        },
+        {
+          $addFields: {
+            question: {
+              $filter: {
+                input: '$card.questions',
+                as: 'qs',
+                cond: {
+                  $eq: [
+                    '$$qs.id',
+                    '$questionId'
+                  ]
+                }
+              }
+            }
           }
         },
         {
-          $lookup: {
-            from: 'projects',
-            // localField: 'questionId',
-            // foreignField: 'questions.id', // doesn't work, we end up with the cards and not the questions
-            let: { role_id: '$roleId' },
-            pipeline: [
-              { $unwind: '$roles' },
-              { $match: { $expr: { $eq: ['$roles._id', '$$role_id'] } } },
-              { $replaceRoot: { newRoot: '$roles' } }
-            ],
-            as: 'roles'
+          $unwind: { path: '$question', preserveNullAndEmptyArrays: true }
+        },
+        {
+          $addFields: {
+            role: {
+              $filter: {
+                input: '$project.roles',
+                as: 'rs',
+                cond: {
+                  $eq: [
+                    '$$rs._id',
+                    '$roleId'
+                  ]
+                }
+              }
+            }
           }
+        },
+        {
+          $unwind: { path: '$role', preserveNullAndEmptyArrays: true }
         },
         {
           $lookup: {
@@ -279,6 +287,7 @@ export default class Activity extends Model {
             as: 'comment'
           }
         },
+        { $unwind: { path: '$comment', preserveNullAndEmptyArrays: true } },
         {
           $lookup: {
             from: 'users',
@@ -287,6 +296,7 @@ export default class Activity extends Model {
             as: 'creator'
           }
         },
+        { $unwind: { path: '$creator', preserveNullAndEmptyArrays: true } },
         {
           $lookup: {
             from: 'users',
@@ -295,14 +305,6 @@ export default class Activity extends Model {
             as: 'users'
           }
         },
-        { $addFields: { question: { $first: '$questions' } } },
-        { $addFields: { role: { $first: '$roles' } } },
-        { $unwind: { path: '$project', preserveNullAndEmptyArrays: true } },
-        { $unwind: { path: '$role', preserveNullAndEmptyArrays: true } },
-        { $unwind: { path: '$card', preserveNullAndEmptyArrays: true } },
-        // { $unwind: { path: '$question', preserveNullAndEmptyArrays: true } },
-        { $unwind: { path: '$comment', preserveNullAndEmptyArrays: true } },
-        { $unwind: { path: '$creator', preserveNullAndEmptyArrays: true } },
         {
           $project: {
             'project.roles': 0,
@@ -313,8 +315,8 @@ export default class Activity extends Model {
             'project.createdBy': 0,
             'card.questions': 0,
             'card.id': 0,
-            questions: 0,
-            roles: 0,
+            // questions: 0,
+            // roles: 0,
             // 'card.questions.title': 0,
             // 'card.questions.type': 0,
             // 'card.questions.isVisibleIf': 0,
