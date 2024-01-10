@@ -12,10 +12,10 @@ import { Session } from 'next-auth'
 function Page ({ session }: { session: Session }): JSX.Element {
   const router = useRouter()
   const [projectId] = Array.isArray(router.query.projectId) ? router.query.projectId : [router.query.projectId, null]
-  const { data, error } = useSWR(`/api/projects/${String(projectId)}`, fetcher)
+  const { data, error, isLoading } = useSWR(`/api/projects/${String(projectId)}`, fetcher)
   if (error != null) void router.push('/error')
   return (
-    <Project project={data} session={session} categories={categories} sections={sections} />
+    <Project project={data} session={session} categories={categories} sections={sections} isLoading={isLoading} />
   )
 }
 

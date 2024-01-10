@@ -14,7 +14,8 @@ import {
   ModalFooter,
   Input,
   Text,
-  Textarea
+  Textarea,
+  Spinner
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { AiOutlinePlus } from 'react-icons/ai'
@@ -105,8 +106,14 @@ const CreateProjectModal = ({ fetchProjects }: { fetchProjects: Function }): JSX
   )
 }
 
-export default function Projects (props: any): JSX.Element {
-  const { projects = [], fetchProjects }: { projects: any[], fetchProjects: Function } = props
+interface Props {
+  projects: any[]
+  fetchProjects: Function
+  isLoading?: boolean
+}
+
+export default function Projects (props: Props): JSX.Element {
+  const { projects = [], fetchProjects, isLoading } = props
 
   const loadExistingProjects = (): JSX.Element => {
     return (
@@ -158,8 +165,9 @@ export default function Projects (props: any): JSX.Element {
   }
 
   return (
-    <Box flexGrow={3} mx='2%' boxShadow='base' rounded='lg' bg='white' p='1rem'>
+    <Box mx='2%' boxShadow='base' rounded='lg' bg='white' p='1rem' height='100%'>
       <CreateProjectModal fetchProjects={fetchProjects} />
+      {isLoading === true ? <Box className='flex justify-center items-center'><Spinner /></Box> : null}
       {loadExistingProjects()}
     </Box>
   )
