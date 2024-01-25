@@ -35,6 +35,11 @@ const trackingCode = process.env.NEXT_PUBLIC_ALTAI_TOOL_TRACKING_CODE
 const App = ({ Component, pageProps }: any): JSX.Element => {
   return (
     <>
+      {!isEmpty(trackingCode) &&
+        <Script id='altai-tool-tracking-code'>
+          {trackingCode}
+        </Script>}
+
       <Head>
         <title>AI Assessment Tool</title>
         <link rel='icon' href='/favicon.ico' />
@@ -43,10 +48,6 @@ const App = ({ Component, pageProps }: any): JSX.Element => {
         <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        {!isEmpty(trackingCode) &&
-          <Script id='altai-tool-tracking-code'>
-            {trackingCode}
-          </Script>}
       </Head>
       <NextNprogress color='#0079bf' startPosition={0.3} stopDelayMs={200} height={4} />
       <ChakraProvider theme={theme}>
