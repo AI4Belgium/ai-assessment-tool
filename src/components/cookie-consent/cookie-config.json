@@ -1,0 +1,26 @@
+{
+  "cookieBanner": {
+    "message": "This website uses cookies. Essential and functional cookies are necessary for the proper functioning of the website and cannot be refused. Other cookies are used for statistical purposes (analytical cookies) and these cookies are only placed if you choose to do so.",
+    "privacyPolicyUrl": "/privacy-policy",
+    "showPrivacyLink": true,
+    "privacyLinkText": "Read more in our cookie policy.",
+    "showManagePreferencesButton": true,
+    "showRejectAllButton": true,
+    "showAcceptAllButton": true,
+    "showAcceptOptionalCookies": true,
+    "showRejectOptionalCookies": true,
+    "managePreferencesButtonLabel": "Conifgure cookies",
+    "managePreferencesButtonAriaLabel": "Manage the use of cookies on this website",
+    "acceptAllButtonLabel": "Accept all cookies",
+    "acceptAllButtonAriaLabel": "Accept the use of all cookies on this website",
+    "rejectAllButtonLabel": "Reject all cookies",
+    "rejectAllButtonAriaLabel": "Reject the use of all cookies on this website",
+    "acceptOptionalCookiesButtonLabel": "Accept optional cookies",
+    "acceptOptionalCookiesButtonAriaLabel": "Accept the use of optional cookies on this website",
+    "rejectOptionalCookiesButtonLabel": "Reject optional cookies",
+    "rejectOptionalCookiesButtonAriaLabel": "Reject the use of optional cookies on this website"
+  },
+  "cookieManager": {
+
+  }
+}

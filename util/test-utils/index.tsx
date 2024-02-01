@@ -33,6 +33,7 @@ const { JWT_SECRET_KEY } = process.env
 const namespaces = [
   'api-messages',
   'buttons',
+  'cookies',
   'column-dashboard',
   'common',
   'dialogs',

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useMemo, RefObject } from 'react'
 import { useRouter } from 'next/router'
+import { useCookies } from 'react-cookie'
 import { Card } from '../types/card'
 
 export const useOnScreen = (ref: RefObject<HTMLElement>, rootMargin: string = '0px'): boolean => {
@@ -103,4 +104,106 @@ export const useRenderingTrace = (componentName: string, propsAndStates: any, le
 
     prev.current = propsAndStates
   })
+}
+
+export const COOKIE_NAME = 'fedconsent'
+
+export interface CookieConfig {
+  id: string
+  isDisabled: boolean
+  isDefaultChecked: boolean
+  isOptional?: boolean
+}
+
+export const COOKIE_CONFIG: CookieConfig[] = [
+  {
+    id: 'essential',
+    isDisabled: true,
+    isDefaultChecked: true
+  },
+  {
+    id: 'functional',
+    isDisabled: true,
+    isDefaultChecked: true
+  },
+  {
+    id: 'analytical',
+    isDisabled: false,
+    isDefaultChecked: false,
+    isOptional: true
+  }
+]
+
+export const useFedconsentCookie = (): any => {
+  const defaultCookieValue: any = COOKIE_CONFIG.reduce((acc: any, curr) => {
+    acc[curr.id] = curr.isDefaultChecked
+    return acc
+  }, {})
+
+  const [cookies, setCookie, removeCookie] = useCookies([COOKIE_NAME])
+  let { fedconsent }: { fedconsent?: any } = cookies
+  const [cookieMemoryValue, setCookieMemoryValue] = useState(defaultCookieValue)
+
+  function setOptionalCookies (allow = false): void {
+    const newCookieValue: any = {
+      ...cookieMemoryValue
+    }
+
+    for (const cookieConf of COOKIE_CONFIG) {
+      if (cookieConf.isOptional === true) {
+        newCookieValue[cookieConf.id] = allow
+      }
+    }
+    setCookieMemoryValue(newCookieValue)
+  }
+
+  function allowOptionalCookies (): void {
+    setOptionalCookies(true)
+  }
+
+  function denyOptionalCookies (): void {
+    setOptionalCookies(false)
+  }
+
+  function setConsentValue (id: string, value: boolean): void {
+    const newCookieValue: any = {
+      ...cookieMemoryValue,
+      [id]: value
+    }
+    setCookieMemoryValue(newCookieValue)
+  }
+
+  useEffect(() => {
+    if (typeof fedconsent === 'string') {
+      try {
+        fedconsent = JSON.parse(fedconsent)
+        for (const cookieConf of COOKIE_CONFIG) {
+          if (fedconsent[cookieConf.id] == null) {
+            throw new Error('Cookie value is not valid')
+          }
+        }
+        setCookieMemoryValue(fedconsent)
+      } catch (e) {
+        removeCookie(COOKIE_NAME)
+      }
+    }
+  }, [fedconsent])
+
+  function saveFedconsentCookie (): void {
+    setCookie(COOKIE_NAME, cookieMemoryValue, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 90 // 90 days
+    })
+  }
+
+  return {
+    saveFedconsentCookie,
+    setOptionalCookies,
+    allowOptionalCookies,
+    denyOptionalCookies,
+    setConsentValue,
+    COOKIE_CONFIG,
+    cookieMemoryValue,
+    fedconsentCookieBrowserValue: fedconsent
+  }
 }

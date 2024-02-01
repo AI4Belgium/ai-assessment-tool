@@ -1,0 +1,35 @@
+{
+  "cookieManager": {
+    "header": "Our site uses cookies",
+    "message": "What is a cookie? What cookies do we use and why? Read more in our cookie policy.",
+    "cookies": {
+      "essential": {
+        "label": "Essential",
+        "labelSuffix": "(always required)",
+        "description": "These cookies are necessary for purely technical reasons for a normal visit to the website. Given the technical necessity, only an information obligation applies, and these cookies are placed as soon as you access the website.",
+        "purpose": "Purpose: basic service"
+      },
+      "functional": {
+        "label": "Functional",
+        "labelSuffix": "(always required)",
+        "description": "You cannot refuse these cookies if you wish to browse this website, but they are only placed after a choice has been made regarding the placement of cookies.",
+        "purpose": "Purpose: basic service"
+      },
+      "analytical": {
+        "label": "Analytical",
+        "labelSuffix": "(Matomo)",
+        "description": "These are cookies that allow us to know how many times a specific page has been visited. We only use this information to improve the content of our website. These cookies are only placed if you accept their placement.",
+        "purpose": "Purpose: Statistics"
+      }
+    }
+  },
+  "cookieBanner": {
+    "message": "This website uses cookies. Essential and functional cookies are necessary for the proper functioning of the website and cannot be refused. Other cookies are used for statistical purposes (analytical cookies) and these cookies are only placed if you choose to do so. Read more in our cookie policy."
+  },
+  "cookieActions": {
+    "acceptOptional": "Accept optional cookies",
+    "declineOptional": "Refuse optional cookies",
+    "confirm": "Confirm my choices",
+    "configureCookies": "Configure cookies"
+  }
+}
