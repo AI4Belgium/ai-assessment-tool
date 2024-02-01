@@ -34,7 +34,7 @@ export async function getServerSideProps (ctx: any): Promise<any> {
   return {
     props: {
       session: JSON.parse(JSON.stringify(session)),
-      ...await serverSideTranslations(ctx.locale as string, ['buttons', 'navbar', 'projects', 'placeholders', 'project-settings', 'exceptions', 'dialogs', 'api-messages', 'titles', 'filter-sort', 'sidebar', 'settings', 'column-dashboard'])
+      ...await serverSideTranslations(ctx.locale as string, ['buttons', 'cookies', 'navbar', 'projects', 'placeholders', 'project-settings', 'exceptions', 'dialogs', 'api-messages', 'titles', 'filter-sort', 'sidebar', 'settings', 'column-dashboard'])
     }
   }
 }

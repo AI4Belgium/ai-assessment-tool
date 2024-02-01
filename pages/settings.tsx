@@ -48,7 +48,7 @@ export async function getServerSideProps (ctx: any): Promise<any> {
   return {
     props: {
       session: JSON.parse(JSON.stringify(session)),
-      ...await serverSideTranslations(ctx.locale as string, ['buttons', 'navbar', 'validations', 'settings', 'placeholders', 'img-input', 'api-messages'])
+      ...await serverSideTranslations(ctx.locale as string, ['buttons', 'cookies', 'navbar', 'validations', 'settings', 'placeholders', 'img-input', 'api-messages'])
     }
   }
 }

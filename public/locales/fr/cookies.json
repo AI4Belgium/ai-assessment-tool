@@ -1,0 +1,35 @@
+{
+  "cookieManager": {
+    "header": "Notre site utilise des cookies",
+    "message": "Qu'est-ce qu'un cookie? Quels cookies utilisons nous et pourquoi ? Lisez notre politique en matière de cookies pour en savoir plus.",
+    "cookies": {
+      "essential": {
+        "label": "Essentiel",
+        "labelSuffix": "(toujours requis)",
+        "description": "Nous utilisons des cookies qui, pour des raisons techniques, sont nécessaires à la bonne visite du site. Ces cookies sont placés automatiquement dès votre arrivée sur le site et ne peuvent pas être refusés. Nous sommes en revanche tenus de les lister pour vous.",
+        "purpose": "Utilisation: service de base"
+      },
+      "functional": {
+        "label": "Fonctionnel",
+        "labelSuffix": "(toujours requis)",
+        "description": "Si vous souhaitez utiliser notre site web, vous ne pouvez pas refuser ces cookies. Nous les plaçons toutefois seulement lorsque vous avez confirmé votre choix.",
+        "purpose": "Utilisation: service de base"
+      },
+      "analytical": {
+        "label": "Analytique",
+        "labelSuffix": "(Matomo)",
+        "description": "Ces cookies permettent de suivre votre visite et l'origine de votre visite. Nous les utilisons pour établir des statistiques sur lesquelles nous nous basons pour améliorer le site et rendre son utilisation plus agréable. Les données sont analysées de manière anonyme.",
+        "purpose": "Utilisation: statistiques"
+      }
+    }
+  },
+  "cookieBanner": {
+    "message": "Le présent site web utilise des cookies. Les cookies essentiels et fonctionnels sont nécessaires au bon fonctionnement du site web et ne peuvent pas être refusés. D'autres cookies sont utilisés à des fins statistiques (\"cookies analytiques\") et ne seront placés que si vous en acceptez le placement. Lisez notre politique en matière de cookies pour en savoir plus."
+  },
+  "cookieActions": {
+    "acceptOptional": "Accepter les cookies optionnels",
+    "declineOptional": "Refuser les cookies optionnels",
+    "confirm": "Confirmer mon choix",
+    "configureCookies": "Configurer les cookies"
+  }
+}

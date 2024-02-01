@@ -1,0 +1,35 @@
+{
+  "cookieManager": {
+    "header": "Onze site maakt gebruik van cookies",
+    "message": "Wat is een cookie? Welke cookies gebruiken we en waarom? Lees er meer over in ons cookiebeleid.",
+    "cookies": {
+      "essential": {
+        "label": "Essentieel",
+        "labelSuffix": "(altijd verplicht)",
+        "description": "Wij gebruiken cookies die technisch noodzakelijk zijn voor een vlot bezoek aan de website. Deze cookies plaatsen wij automatisch zodra je op de website komt en kunnen niet geweigerd worden. We zijn wel verplicht om ze voor je op te lijsten.",
+        "purpose": "Doeleinde: basisdienst"
+      },
+      "functional": {
+        "label": "Functioneel",
+        "labelSuffix": "(altijd verplicht)",
+        "description": "Als je onze website wil gebruiken, mag je deze cookies niet weigeren. Toch plaatsen we ze pas wanneer je jouw keuze bevestigd hebt.",
+        "purpose": "Doeleinde: basisdienst"
+      },
+      "analytical": {
+        "label": "Analytical",
+        "labelSuffix": "(Matomo)",
+        "description": "Deze cookies volgen jouw bezoek en de herkomst van jouw bezoek. We gebruiken ze om statistieken op te stellen waarop we ons baseren om de site te verbeteren en gebruiksvriendelijker te maken. De gegevens worden op anonieme wijze geanalyseerd.",
+        "purpose": "Doeleinde: statistieken"
+      }
+    }
+  },
+  "cookieBanner": {
+    "message": "Deze website maakt gebruik van cookies. De essentiële en functionele cookies kan je niet weigeren. Die zijn nodig om de website goed te laten werken. Andere cookies gebruiken we voor statistische doeleinden (analytische cookies). Die worden enkel geplaatst nadat je een keuze hebt gemaakt. Lees er meer over in ons cookiebeleid."
+  },
+  "cookieActions": {
+    "acceptOptional": "Optionele cookies aanvaarden",
+    "declineOptional": "Optionele cookies weigeren",
+    "confirm": "Bevestig mijn keuze",
+    "configureCookies": "Cookies configureren"
+  }
+}

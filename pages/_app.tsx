@@ -10,6 +10,8 @@ import { SessionProvider } from 'next-auth/react'
 import { ToastContextProvider } from '@/src/store/toast-context'
 import { UserContextProvider } from '@/src/store/user-context'
 import AppLogo from '@/src/components/app-logo'
+import CookieBanner from '@/src/components/cookie-consent/cookie-banner'
+import { CookiesProvider } from 'react-cookie'
 
 import 'nprogress/nprogress.css'
 import isEmpty from 'lodash.isempty'
@@ -53,18 +55,21 @@ const App = ({ Component, pageProps }: any): JSX.Element => {
       <ChakraProvider theme={theme}>
         <ToastContextProvider>
           <SessionProvider session={pageProps.session}>
-            <UserContextProvider>
-              {/* Table for @media print mode so we have the header on every page. With this we could also add a footer on every page */}
-              <table width='100%'>
-                <thead>
-                  <tr className='hidden print:block'><th><AppLogo /></th></tr>
-                </thead>
-                <tbody>
-                  <tr className='hidden print:block'><td><Text decoration='underline' fontSize='4xl'>AI Assessmentool</Text></td></tr>
-                  <tr><td><Component {...pageProps} /></td></tr>
-                </tbody>
-              </table>
-            </UserContextProvider>
+            <CookiesProvider defaultSetOptions={{ path: '/' }}>
+              <UserContextProvider>
+                {/* Table for @media print mode so we have the header on every page. With this we could also add a footer on every page */}
+                <table width='100%'>
+                  <thead>
+                    <tr className='hidden print:block'><th><AppLogo /></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr className='hidden print:block'><td><Text decoration='underline' fontSize='4xl'>AI Assessmentool</Text></td></tr>
+                    <tr><td><Component {...pageProps} /></td></tr>
+                  </tbody>
+                </table>
+                <CookieBanner />
+              </UserContextProvider>
+            </CookiesProvider>
           </SessionProvider>
         </ToastContextProvider>
       </ChakraProvider>

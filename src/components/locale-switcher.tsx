@@ -1,22 +1,30 @@
 import { Select } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { useCookies } from 'react-cookie'
+
+const lngs = [
+  { key: 'en', name: 'English' },
+  { key: 'fr', name: 'Français' },
+  { key: 'nl', name: 'Nederlands' }
+]
+
+const COOKIE_NAME = 'NEXT_LOCALE'
 
 export default function LocaleSwitcher (): JSX.Element {
   const router = useRouter()
-  const lngs = [
-    { key: 'en', name: 'English' },
-    { key: 'fr', name: 'Français' },
-    { key: 'nl', name: 'Nederlands' }
-  ]
+  const [,setCookie] = useCookies([COOKIE_NAME])
 
   const handleOnChange = (locale: string): void => {
     // push new locale into a cookie so it can be overwritten and used on middleware
-    setCookie(locale)
+    setCookieWrapper(locale)
     void router.push(router.asPath, router.asPath, { locale })
   }
 
-  const setCookie = (lang: string): void => {
-    document.cookie = `NEXT_LOCALE=${lang}; path=/;`
+  const setCookieWrapper = (lang: string): void => {
+    setCookie(COOKIE_NAME, lang, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365 * 10 // 10 years
+    })
   }
 
   return (
