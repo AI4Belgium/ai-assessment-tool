@@ -144,7 +144,7 @@ export const useFedconsentCookie = (): any => {
   let { fedconsent }: { fedconsent?: any } = cookies
   const [cookieMemoryValue, setCookieMemoryValue] = useState(defaultCookieValue)
 
-  function setOptionalCookies (allow = false): void {
+  function setOptionalCookies (allow = false, save = false): void {
     const newCookieValue: any = {
       ...cookieMemoryValue
     }
@@ -155,6 +155,7 @@ export const useFedconsentCookie = (): any => {
       }
     }
     setCookieMemoryValue(newCookieValue)
+    if (save) saveFedconsentCookie(newCookieValue)
   }
 
   function allowOptionalCookies (): void {
@@ -189,8 +190,8 @@ export const useFedconsentCookie = (): any => {
     }
   }, [fedconsent])
 
-  function saveFedconsentCookie (): void {
-    setCookie(COOKIE_NAME, cookieMemoryValue, {
+  function saveFedconsentCookie (newCookieValue: any = null): void {
+    setCookie(COOKIE_NAME, newCookieValue ?? cookieMemoryValue, {
       path: '/',
       maxAge: 60 * 60 * 24 * 90 // 90 days
     })

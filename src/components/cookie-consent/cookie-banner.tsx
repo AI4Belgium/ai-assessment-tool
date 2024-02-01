@@ -2,9 +2,6 @@ import React, { useEffect } from 'react'
 import {
   Drawer,
   DrawerBody,
-  // DrawerFooter,
-  // DrawerHeader,
-  // DrawerCloseButton,
   DrawerOverlay,
   DrawerContent,
   useDisclosure,
@@ -21,13 +18,11 @@ function CookieBanner (): JSX.Element {
   const [modalOpen, setModalOpen] = React.useState(false)
   const {
     setOptionalCookies,
-    saveFedconsentCookie,
     fedconsentCookieBrowserValue
   } = useFedconsentCookie()
 
   function cookieHandler (accpetAll: boolean): void {
-    setOptionalCookies(accpetAll)
-    saveFedconsentCookie()
+    setOptionalCookies(accpetAll, true)
     onClose()
   }
 
@@ -60,10 +55,10 @@ function CookieBanner (): JSX.Element {
               <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={configureCookiesHandler}>
                 {t('cookies:cookieActions.configureCookies')}
               </Button>
-              <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={() => cookieHandler(false)}>
+              <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={() => cookieHandler(true)}>
                 {t('cookies:cookieActions.acceptOptional')}
               </Button>
-              <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={() => cookieHandler(true)}>
+              <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={() => cookieHandler(false)}>
                 {t('cookies:cookieActions.declineOptional')}
               </Button>
             </Flex>

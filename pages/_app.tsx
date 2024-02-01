@@ -11,7 +11,6 @@ import { ToastContextProvider } from '@/src/store/toast-context'
 import { UserContextProvider } from '@/src/store/user-context'
 import AppLogo from '@/src/components/app-logo'
 import CookieBanner from '@/src/components/cookie-consent/cookie-banner'
-import { getServerSideProps as getServerSidePropsImported } from '@/pages/projects/index'
 import { CookiesProvider } from 'react-cookie'
 
 import 'nprogress/nprogress.css'
@@ -76,10 +75,6 @@ const App = ({ Component, pageProps }: any): JSX.Element => {
       </ChakraProvider>
     </>
   )
-}
-
-export async function getServerSideProps (context: any): Promise<any> {
-  return await getServerSidePropsImported(context)
 }
 
 App.propTypes = {
