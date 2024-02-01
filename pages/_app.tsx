@@ -4,6 +4,7 @@ import { appWithTranslation } from 'next-i18next'
 import '@/src/styles/default.scss'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
+import Script from 'next/script'
 import NextNprogress from 'nextjs-progressbar'
 import { SessionProvider } from 'next-auth/react'
 import { ToastContextProvider } from '@/src/store/toast-context'
@@ -11,6 +12,7 @@ import { UserContextProvider } from '@/src/store/user-context'
 import AppLogo from '@/src/components/app-logo'
 
 import 'nprogress/nprogress.css'
+import isEmpty from 'lodash.isempty'
 
 export const theme = extendTheme({
   colors: {
@@ -28,9 +30,16 @@ export const theme = extendTheme({
   }
 })
 
+const trackingCode = process.env.NEXT_PUBLIC_ALTAI_TOOL_TRACKING_CODE
+
 const App = ({ Component, pageProps }: any): JSX.Element => {
   return (
     <>
+      {!isEmpty(trackingCode) &&
+        <Script id='altai-tool-tracking-code'>
+          {trackingCode}
+        </Script>}
+
       <Head>
         <title>AI Assessment Tool</title>
         <link rel='icon' href='/favicon.ico' />
