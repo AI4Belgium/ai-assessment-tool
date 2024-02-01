@@ -62,7 +62,7 @@ function CookieManagerModal (props: Props): JSX.Element {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior='inside' size={['full', 'full', 'md']}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{t('cookies:cookieManager.header')}</ModalHeader>

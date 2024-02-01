@@ -44,7 +44,7 @@ function CookieBanner (): JSX.Element {
 
   return (
     <>
-      <Drawer placement={'bottom' as any} onClose={onClose} isOpen={isOpen} closeOnOverlayClick={false}>
+      <Drawer placement={'bottom' as any} onClose={onClose} isOpen={isOpen} closeOnOverlayClick={false} blockScrollOnMount={!modalOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerBody>
