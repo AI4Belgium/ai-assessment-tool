@@ -21,6 +21,10 @@ jobs:
       - name: Build app
         run: |
             cp .env.test .env
+            if [[ -z "${NEXT_PUBLIC_ALTAI_TOOL_TRACKING_CODE}" ]]; then
+              echo "NEXT_PUBLIC_ALTAI_TOOL_TRACKING_CODE='${NEXT_PUBLIC_ALTAI_TOOL_TRACKING_CODE}'" >> .env
+            fi
+            cat .env
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
