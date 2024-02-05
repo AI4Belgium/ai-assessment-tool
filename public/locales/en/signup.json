@@ -1,5 +1,6 @@
 {
   "account-created-title": "Account created.",
   "account-created-description": "We've created your account. Redirecting you to login page in 3 seconds",
-  "registering": "Registering"
+  "registering": "Registering",
+  "accept-terms-and-conditions": "I accept the terms and conditions and privacy policy"
 }

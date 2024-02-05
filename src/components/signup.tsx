@@ -10,7 +10,23 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  IconButton
+  IconButton,
+  Switch,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Divider,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel
+
 } from '@chakra-ui/react'
 import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
@@ -21,11 +37,13 @@ import { isEmailValid, isPasswordValid } from '@/util/validator'
 import ToastContext from '@/src/store/toast-context'
 import { useTranslation } from 'next-i18next'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import Lorem from 'react-lorem-component'
 
 const SignUp = (): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
   const { showToast } = useContext(ToastContext)
+  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: false })
   let email: string | null = router.query.email as string
   email = isEmpty(email) ? null : decodeURIComponent(email)
   const token = router.query.token as string
@@ -34,7 +52,8 @@ const SignUp = (): JSX.Element => {
     password: '',
     firstName: '',
     lastName: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    acceptedTerms: false
   })
 
   const [showPasswords, setShowPasswords] = useState({
@@ -54,7 +73,7 @@ const SignUp = (): JSX.Element => {
   const [passwordLengthErr, setPasswordLengthErr] = useState(false)
   const [passwordCharErr, setPasswordCharErr] = useState(false)
   const [confirmPasswordErr, setConfirmPasswordErr] = useState(false)
-  const [isButtonDisabled, setButtonState] = useState(true)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const responseHandler = getResponseHandler(showToast, t)
   useEffect(() => {
@@ -81,9 +100,9 @@ const SignUp = (): JSX.Element => {
   useEffect(() => {
     const hasErrors = emailErr || passwordLengthErr || passwordCharErr || confirmPasswordErr ||
       isEmpty(values.email) || isEmpty(values.password) || isEmpty(values.confirmPassword) ||
-      isEmpty(values.firstName) || isEmpty(values.lastName)
-    setButtonState(hasErrors)
-  }, [values.password, values.confirmPassword, values.firstName, values.lastName, values.email, emailErr, passwordLengthErr, passwordCharErr, confirmPasswordErr])
+      isEmpty(values.firstName) || isEmpty(values.lastName) || !values.acceptedTerms
+    setIsButtonDisabled(hasErrors)
+  }, [values, emailErr, passwordLengthErr, passwordCharErr, confirmPasswordErr])
 
   const _showToast = (): void => {
     showToast({
@@ -147,10 +166,10 @@ const SignUp = (): JSX.Element => {
   const setPropTouchedDebounced = useMemo(() => debounce(setPropTouched, 1000), [touched])
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    const { name, value } = e.target
+    const { name, value, checked, type } = e.target
     setValues({
       ...values,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     })
     setPropTouchedDebounced(name)
   }
@@ -279,11 +298,19 @@ const SignUp = (): JSX.Element => {
               </InputGroup>
               {confirmPasswordErr && <Text size='xs' color='red'>{t('validations:passwords-unmatch')}</Text>}
             </FormControl>
+
+            <FormControl display='flex' alignItems='center'>
+              <Switch id='acceptedTerms' p='0' mt='1.5' isChecked={values.acceptedTerms} onChange={(e) => { void handleChange(e) }} name='acceptedTerms' className='m-0 p-0' />
+              <Text className='m-0 ml-2 text-sm' onClick={onOpen} cursor='pointer'>
+                {t('signup:accept-terms-and-conditions')}
+              </Text>
+            </FormControl>
+
             <Button
               fontWeight='semibold'
               width='full'
               mt={4}
-              disabled={isButtonDisabled}
+              isDisabled={isButtonDisabled}
               bg='success'
               color='white'
               onClick={(e) => { void registerUser(e) }}
@@ -300,6 +327,37 @@ const SignUp = (): JSX.Element => {
           </Box>
         </Box>
       </Flex>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior='inside' size={['full', 'full', 'lg', 'xl']}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Terms & Conditions and Privacy Policy</ModalHeader>
+          <ModalCloseButton onClick={onClose} />
+          <ModalBody>
+            <Tabs isFitted variant='enclosed'>
+              <TabList mb='1em'>
+                <Tab>Terms & Conditions</Tab>
+                <Tab>Privacy Policy</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <Lorem count='10' />
+                </TabPanel>
+                <TabPanel>
+                  <Lorem count='10' />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+            <Divider />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' mr={3} onClick={onClose}>
+              {t('cookies:cookieActions.confirm')}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

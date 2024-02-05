@@ -86,7 +86,7 @@ function CookieManagerModal (props: Props): JSX.Element {
             <Grid templateColumns='min-content auto' rowGap='3' columnGap='4' className='mb-3'>
               {COOKIE_CONFIG.map((cookieConf: CookieConfig) => (
                 <Fragment key={cookieConf.id}>
-                  <Switch mt='1.5' disabled={cookieConf.isDisabled} isChecked={cookieMemoryValue?.[cookieConf.id]} onChange={(e) => handleCookieChange(e, cookieConf.id)} name={cookieConf.id} />
+                  <Switch mt='1.5' disabled={cookieConf.isDisabled} isChecked={cookieMemoryValue?.[cookieConf.id]} onChange={(e) => handleCookieChange(e, cookieConf.id)} name={cookieConf.id} className='p-0' />
                   <div>
                     <div>
                       <span className='font-bold'>{t(`cookies:cookieManager.cookies.${cookieConf.id}.label`)}</span> <span className='text-xs'>{t(`cookies:cookieManager.cookies.${cookieConf.id}.labelSuffix`)}</span>
