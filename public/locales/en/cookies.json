@@ -1,7 +1,7 @@
 {
   "cookieManager": {
     "header": "Our site uses cookies",
-    "message": "What is a cookie? What cookies do we use and why? Read more in our cookie policy.",
+    "message": "What is a cookie? What cookies do we use and why? Read more in our <button>privacy policy</button>.",
     "cookies": {
       "essential": {
         "label": "Essential",
@@ -24,7 +24,7 @@
     }
   },
   "cookieBanner": {
-    "message": "This website uses cookies. Essential and functional cookies are necessary for the proper functioning of the website and cannot be refused. Other cookies are used for statistical purposes (analytical cookies) and these cookies are only placed if you choose to do so. Read more in our cookie policy."
+    "message": "This website uses cookies. Essential and functional cookies are necessary for the proper functioning of the website and cannot be refused. Other cookies are used for statistical purposes (analytical cookies) and these cookies are only placed if you choose to do so. <button>Read more in our privacy policy.</button>"
   },
   "cookieActions": {
     "acceptOptional": "Accept optional cookies",

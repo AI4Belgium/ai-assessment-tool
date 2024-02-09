@@ -14,8 +14,9 @@ import {
   Divider,
   Grid
 } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import { CookieConfig, useFedconsentCookie } from '@/src/hooks'
+import TranslationButton from '@/src/components/cookie-consent/legal-cookie-button'
 
 interface Props {
   onCloseCb?: () => void
@@ -69,7 +70,14 @@ function CookieManagerModal (props: Props): JSX.Element {
           <ModalCloseButton onClick={close} />
           <ModalBody>
             <div className='mb-3'>
-              {t('cookies:cookieManager.message')}
+              <Trans
+                t={t}
+                components={{
+                  button: <TranslationButton />
+                }}
+              >
+                {t('cookies:cookieManager.message')}
+              </Trans>
             </div>
             <Divider />
 

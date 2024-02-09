@@ -1,7 +1,7 @@
 {
   "cookieManager": {
     "header": "Onze site maakt gebruik van cookies",
-    "message": "Wat is een cookie? Welke cookies gebruiken we en waarom? Lees er meer over in ons cookiebeleid.",
+    "message": "Wat is een cookie? Welke cookies gebruiken we en waarom? Lees er meer over in ons <button>privacybeleid</button>.",
     "cookies": {
       "essential": {
         "label": "Essentieel",
@@ -24,7 +24,7 @@
     }
   },
   "cookieBanner": {
-    "message": "Deze website maakt gebruik van cookies. De essentiële en functionele cookies kan je niet weigeren. Die zijn nodig om de website goed te laten werken. Andere cookies gebruiken we voor statistische doeleinden (analytische cookies). Die worden enkel geplaatst nadat je een keuze hebt gemaakt. Lees er meer over in ons cookiebeleid."
+    "message": "Deze website maakt gebruik van cookies. De essentiële en functionele cookies kan je niet weigeren. Die zijn nodig om de website goed te laten werken. Andere cookies gebruiken we voor statistische doeleinden (analytische cookies). Die worden enkel geplaatst nadat je een keuze hebt gemaakt. Lees er meer over in ons <button>privacybeleid</button>."
   },
   "cookieActions": {
     "acceptOptional": "Optionele cookies aanvaarden",

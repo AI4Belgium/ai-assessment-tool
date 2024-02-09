@@ -8,9 +8,10 @@ import {
   Flex,
   Button
 } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import { useFedconsentCookie } from '@/src/hooks'
-import CookieManagerModal from './cookie-manager-modal'
+import CookieManagerModal from '@/src/components/cookie-consent/cookie-manager-modal'
+import TranslationButton from '@/src/components/cookie-consent/legal-cookie-button'
 
 function CookieBanner (): JSX.Element {
   const { t } = useTranslation()
@@ -49,7 +50,14 @@ function CookieBanner (): JSX.Element {
         <DrawerContent>
           <DrawerBody>
             <div className='mr-5'>
-              {t('cookies:cookieBanner.message')}
+              <Trans
+                t={t}
+                components={{
+                  button: <TranslationButton />
+                }}
+              >
+                {t('cookies:cookieBanner.message')}
+              </Trans>
             </div>
             <Flex flexWrap='wrap' mt='1'>
               <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={configureCookiesHandler}>

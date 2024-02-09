@@ -12,21 +12,7 @@ import {
   InputRightElement,
   IconButton,
   Switch,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Divider,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel
-
+  useDisclosure
 } from '@chakra-ui/react'
 import isEmpty from 'lodash.isempty'
 import { useRouter } from 'next/router'
@@ -37,7 +23,7 @@ import { isEmailValid, isPasswordValid } from '@/util/validator'
 import ToastContext from '@/src/store/toast-context'
 import { useTranslation } from 'next-i18next'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import Lorem from 'react-lorem-component'
+import LegalModal from '@/src/components/legal-modal'
 
 const SignUp = (): JSX.Element => {
   const { t } = useTranslation()
@@ -328,36 +314,8 @@ const SignUp = (): JSX.Element => {
         </Box>
       </Flex>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior='inside' size={['full', 'full', 'lg', 'xl']}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Terms & Conditions and Privacy Policy</ModalHeader>
-          <ModalCloseButton onClick={onClose} />
-          <ModalBody>
-            <Tabs isFitted variant='enclosed'>
-              <TabList mb='1em'>
-                <Tab>Terms & Conditions</Tab>
-                <Tab>Privacy Policy</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <Lorem count='10' />
-                </TabPanel>
-                <TabPanel>
-                  <Lorem count='10' />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-            <Divider />
-          </ModalBody>
+      <LegalModal isOpen={isOpen} onClose={onClose} />
 
-          <ModalFooter>
-            <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' mr={3} onClick={onClose}>
-              {t('cookies:cookieActions.confirm')}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   )
 }
