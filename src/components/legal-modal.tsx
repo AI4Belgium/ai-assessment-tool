@@ -1,14 +1,21 @@
+import React, { useState } from 'react'
 import { Divider, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { useTranslation, Trans } from 'next-i18next'
 
 interface Props {
   isOpen: boolean
   onClose: () => void
-  tabIndex?: number
+  defaultIndex?: number
 }
 
-export const LegalModal = ({ isOpen, onClose, tabIndex = 0 }: Props): JSX.Element => {
+export const LegalModal = ({ isOpen, onClose, defaultIndex = 0 }: Props): JSX.Element => {
   const { t } = useTranslation(['terms-and-conditions', 'privacy-policy'])
+  const [tabIndex, setTabIndex] = useState(defaultIndex)
+
+  const handleTabsChange = (index: number): void => {
+    setTabIndex(index)
+  }
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior='inside' size={['full', 'full', '2xl', '4xl']}>
@@ -17,7 +24,7 @@ export const LegalModal = ({ isOpen, onClose, tabIndex = 0 }: Props): JSX.Elemen
           <ModalHeader>Terms & Conditions and Privacy Policy</ModalHeader>
           <ModalCloseButton onClick={onClose} />
           <ModalBody>
-            <Tabs isFitted variant='enclosed' index={tabIndex}>
+            <Tabs isFitted variant='enclosed' index={tabIndex} onChange={handleTabsChange}>
               <TabList mb='1em'>
                 <Tab>Terms & Conditions</Tab>
                 <Tab>Privacy Policy</Tab>
