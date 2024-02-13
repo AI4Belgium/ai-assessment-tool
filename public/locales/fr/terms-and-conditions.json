@@ -86,5 +86,11 @@
     "Si vous souhaitez obtenir des informations supplémentaires ou si vous souhaitez soumettre des commentaires, vous pouvez contacter le SPF BOSA à l 'adresse suivante: Boulevard Simon Bolivar, 30 bte 1 1000 Bruxelles ou par e-mail à l 'adresse info@bosa.fgov.be.",
     "<br>",
     "Si vous souhaitez introduire une plainte, vous pouvez la soumettre a l'adresse e-mail ai4belgium@bosa.fgov.be."
+  ],
+  "disclaimer": [
+    "<strong>AVERTISSEMENT:</strong>",
+    "Cette version est une version de <strong>démonstration</strong>.",
+    "L'objectif de cette version est de démontrer le fonctionnement de l'AI Assessment Tool avant de vous permettre de le télécharger localement sur vos serveurs et d'y inclure en toute sécurité les données relatives à votre projet. En utilisant l'Outil, vous acceptez de respecter les présentes Conditions Générales telles que mentionnées ci-dessous.",
+    "Un projet, une fois créé, est temporairement stocké sur nos serveurs qui sont régulièrement nettoyés."
   ]
 }

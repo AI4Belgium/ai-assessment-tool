@@ -21,12 +21,12 @@ import { defaultFetchOptions, getResponseHandler } from '@/util/api'
 import { debounce } from '@/util/index'
 import { isEmailValid, isPasswordValid } from '@/util/validator'
 import ToastContext from '@/src/store/toast-context'
-import { useTranslation } from 'next-i18next'
+import { Trans, useTranslation } from 'next-i18next'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import LegalModal from '@/src/components/legal-modal'
 
 const SignUp = (): JSX.Element => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const router = useRouter()
   const { showToast } = useContext(ToastContext)
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: false })
@@ -62,6 +62,15 @@ const SignUp = (): JSX.Element => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const responseHandler = getResponseHandler(showToast, t)
+
+  const disclaimer = t('terms-and-conditions:disclaimer', { returnObjects: true })
+  const disclaimerTranslationConfig: any = {
+    returnObjects: true
+  }
+  if (Array.isArray(disclaimer)) {
+    disclaimerTranslationConfig.joinArrays = '\n'
+  }
+
   useEffect(() => {
     if (!touched.email) return
     setEmailErr(!isEmailValid(values.email))
@@ -205,6 +214,12 @@ const SignUp = (): JSX.Element => {
             lineHeight='normal'
           >
             <h1>{t('buttons:sign-up')}</h1>
+            {i18n.exists('terms-and-conditions:disclaimer') &&
+              <div className='border-2 border-gray-500 border-solid p-3 mt-3 text-justify whitespace-pre-line'>
+                <Trans t={t}>
+                  <Text>{t('terms-and-conditions:disclaimer', disclaimerTranslationConfig)}</Text>
+                </Trans>
+              </div>}
           </Box>
           <Box my={4} textAlign='left'>
             <FormControl isRequired isInvalid={emailErr}>

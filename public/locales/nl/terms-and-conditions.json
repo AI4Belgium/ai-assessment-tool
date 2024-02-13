@@ -87,5 +87,12 @@
     "Als u aanvullende informatie wenst te ontvangen of als u opmerkingen wilt indienen, kunt u contact opnemen met de FOD BOSA op het volgende adres: WTC III, Bd Simon Bolivar 30/bte 1, 1000 Brussel of per e-mail op het adres info@bosa.fgov.be",
     "<br>",
     "Als u een klacht wilt indienen, kunt u deze indienen op het e-mailadres ai4belgium@bosa.fgov.be"
+  ],
+  "disclaimer": [
+    "<strong>Waarschuwing:</strong>",
+    "Dit is een <strong>DEMONSTRATIE</strong> versie.",
+    "Het doel van deze versie is om de werking van de AI Assessment Tool te demonstreren voordat u deze lokaal op uw servers downloadt en veilig uw projectgegevens toevoegt. Als u de Tool gebruikt, gaat u akkoord met deze Algemene voorwaarden zoals hieronder vermeld.",
+    "Deze versie mag niet worden aangevuld met actuele en nauwkeurige gegevens.",
+    "Een project, eenmaal gemaakt, wordt tijdelijk op onze servers opgeslagen die regelmatig worden schoongemaakt."
   ]
 }
