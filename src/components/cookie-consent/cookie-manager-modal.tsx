@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation, Trans } from 'next-i18next'
 import { CookieConfig, useFedconsentCookie } from '@/src/hooks'
-import TranslationButton from '@/src/components/cookie-consent/legal-cookie-button'
+import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
 
 interface Props {
   onCloseCb?: () => void
@@ -73,7 +73,7 @@ function CookieManagerModal (props: Props): JSX.Element {
               <Trans
                 t={t}
                 components={{
-                  button: <TranslationButton />
+                  button: <LegalCookieButton />
                 }}
               >
                 {t('cookies:cookieManager.message')}

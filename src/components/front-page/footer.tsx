@@ -5,6 +5,7 @@ import AppLogo from '@/src/components/app-logo'
 import { TextBody } from './content'
 import { useTranslation, Trans } from 'next-i18next'
 import { GITHUB_URL } from './header'
+import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
 
 const Logo = (): JSX.Element => {
   return (
@@ -42,7 +43,7 @@ const SocialButton = ({ children, label, href }: { children: ReactNode, label: s
 }
 
 export const Footer = (): JSX.Element => {
-  const { t } = useTranslation('front-page')
+  const { t } = useTranslation(['front-page', 'terms-and-conditions', 'privacy-policy'])
   return (
     <Flex flexDirection='column' bgColor='transparent' pb='30%' mt='3em' alignItems='center'>
       <Logo />
@@ -59,6 +60,10 @@ export const Footer = (): JSX.Element => {
       <SocialButton label='GitHub' href={GITHUB_URL}>
         <FaGithub />
       </SocialButton>
+      <Flex className='underline mt-3'>
+        <LegalCookieButton index={0}><Box className='mr-2 mb-2 cursor-pointer'>{t('terms-and-conditions:title')}</Box></LegalCookieButton>
+        <LegalCookieButton><Box className='mr-2 mb-2 cursor-pointer'>{t('privacy-policy:title')}</Box></LegalCookieButton>
+      </Flex>
     </Flex>
   )
 }

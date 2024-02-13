@@ -21,13 +21,13 @@ export const LegalModal = ({ isOpen, onClose, defaultIndex = 0 }: Props): JSX.El
       <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior='inside' size={['full', 'full', '2xl', '4xl']}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Terms & Conditions and Privacy Policy</ModalHeader>
+          <ModalHeader>{`${t('terms-and-conditions:title')} & ${t('privacy-policy:title')}`}</ModalHeader>
           <ModalCloseButton onClick={onClose} />
           <ModalBody>
             <Tabs isFitted variant='enclosed' index={tabIndex} onChange={handleTabsChange}>
               <TabList mb='1em'>
-                <Tab>Terms & Conditions</Tab>
-                <Tab>Privacy Policy</Tab>
+                <Tab>{t('terms-and-conditions:title')}</Tab>
+                <Tab>{t('privacy-policy:title')}</Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
@@ -53,8 +53,8 @@ export const LegalModal = ({ isOpen, onClose, defaultIndex = 0 }: Props): JSX.El
                     components={{
                       0: <strong key='0' className='underline' />,
                       1: <div key='1' className='text-center' />,
-                      title: <div className='text-xl font-bold mb-3 mt-3' />,
-                      titleSub: <div className='text-lg' />,
+                      title: <div className='text-xl font-bold mt-3' />,
+                      titleSub: <div className='text-lg mt-3 mb-0 font-medium' />,
                       table: <table className='table-auto w-full' />,
                       tr: <tr className='border' />,
                       th: <th className='border p-2' />,

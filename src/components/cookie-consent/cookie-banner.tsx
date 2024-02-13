@@ -11,7 +11,7 @@ import {
 import { useTranslation, Trans } from 'next-i18next'
 import { useFedconsentCookie } from '@/src/hooks'
 import CookieManagerModal from '@/src/components/cookie-consent/cookie-manager-modal'
-import TranslationButton from '@/src/components/cookie-consent/legal-cookie-button'
+import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
 
 function CookieBanner (): JSX.Element {
   const { t } = useTranslation()
@@ -53,7 +53,7 @@ function CookieBanner (): JSX.Element {
               <Trans
                 t={t}
                 components={{
-                  button: <TranslationButton />
+                  button: <LegalCookieButton />
                 }}
               >
                 {t('cookies:cookieBanner.message')}

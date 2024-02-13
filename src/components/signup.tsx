@@ -287,7 +287,7 @@ const SignUp = (): JSX.Element => {
 
             <FormControl display='flex' alignItems='center'>
               <Switch id='acceptedTerms' p='0' mt='1.5' isChecked={values.acceptedTerms} onChange={(e) => { void handleChange(e) }} name='acceptedTerms' className='m-0 p-0' />
-              <Text className='m-0 ml-2 text-sm' onClick={onOpen} cursor='pointer'>
+              <Text className='m-0 ml-2 text-sm cursor-pointer underline' onClick={onOpen}>
                 {t('signup:accept-terms-and-conditions')}
               </Text>
             </FormControl>
