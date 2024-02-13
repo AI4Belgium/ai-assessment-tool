@@ -8,9 +8,9 @@ import {
   GridItem,
   useDisclosure
 } from '@chakra-ui/react'
+import isEmpty from 'lodash.isempty'
 import { Card, DisplayQuestion, Question } from '@/src/types/card'
 import { Category, Project } from '@/src/types/project'
-import isEmpty from 'lodash.isempty'
 import { useQueryCardId } from '@/src/hooks/index'
 import CardDetailsModal from '@/src/components/project/modals/card-details-modal/index'
 

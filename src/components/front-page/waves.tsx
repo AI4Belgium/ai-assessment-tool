@@ -1,4 +1,4 @@
-import style from './waves.module.scss'
+import style from '@/src/components/front-page/waves.module.scss'
 
 export const Waves = (): JSX.Element => {
   return (

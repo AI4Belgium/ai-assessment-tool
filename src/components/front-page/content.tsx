@@ -2,11 +2,12 @@ import React from 'react'
 import { Box, Flex, Text, Center, Image, Wrap, Heading, Spacer, HeadingProps, TextProps } from '@chakra-ui/react'
 import Typed from 'typed.js'
 import { useTranslation, Trans } from 'next-i18next'
-import { TeamMembersContainer } from './team'
-import { AltaiSections } from './altai-sections'
-import { LinkButton } from './link-button'
-import style from './content.module.scss'
-import { GITHUB_URL } from './header'
+
+import { TeamMembersContainer } from '@/src/components/front-page/team'
+import { AltaiSections } from '@/src/components/front-page/altai-sections'
+import { LinkButton } from '@/src/components/front-page/link-button'
+import style from '@/src/components/front-page/content.module.scss'
+import { GITHUB_URL } from '@/src/components/front-page/header'
 
 export const TEXT_COLOR = '#09181B'
 

@@ -9,9 +9,9 @@ import {
   DrawerContent
 } from '@chakra-ui/react'
 import { AiOutlineHome, AiOutlineSetting } from 'react-icons/ai'
-import Link from 'next/link'
-import NavBar from './navbar'
 import { useTranslation } from 'next-i18next'
+import Link from 'next/link'
+import NavBar from '@/src/components/navbar'
 
 interface Props {
   page: string

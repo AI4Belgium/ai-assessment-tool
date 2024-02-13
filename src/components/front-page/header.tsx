@@ -1,7 +1,7 @@
-import checkEnvironment from '@/util/check-environment'
-import AppLogo from '@/src/components/app-logo'
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, Flex } from '@chakra-ui/react'
+import checkEnvironment from '@/util/check-environment'
 import LocaleSwitcher from '@/src/components/locale-switcher'
+import AppLogo from '@/src/components/app-logo'
 
 export const GITHUB_URL = 'https://github.com/AI4Belgium/ai-assessment-tool'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Box, Center, Flex, BoxProps } from '@chakra-ui/react'
-import style from './team.module.scss'
-import { Heading1, TEXT_COLOR } from './content'
 import { useTranslation, Trans } from 'next-i18next'
+import style from '@/src/components/front-page/team.module.scss'
+import { Heading1, TEXT_COLOR } from '@/src/components/front-page/content'
 
 const teamMemberData = [
   {

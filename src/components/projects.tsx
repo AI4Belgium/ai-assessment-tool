@@ -19,8 +19,8 @@ import {
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { defaultFetchOptions, HTTP_METHODS } from '@/util/api'
 import { useTranslation } from 'next-i18next'
+import { defaultFetchOptions, HTTP_METHODS } from '@/util/api'
 import { Industry } from '@/src/types/industry'
 import IndustrySelect from '@/src/components/industry-select'
 

@@ -13,11 +13,12 @@ import {
   IconButton
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
+import isEmpty from 'lodash.isempty'
+
 import AppLogo from '@/src/components/app-logo'
 import { isEmailValid } from '@/util/validator'
-import isEmpty from 'lodash.isempty'
 import ToastContext from '@/src/store/toast-context'
-import { useTranslation } from 'next-i18next'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 const Login = ({ onSubmit }: { onSubmit?: Function }): JSX.Element => {

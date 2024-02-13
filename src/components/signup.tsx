@@ -15,14 +15,15 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import isEmpty from 'lodash.isempty'
+import { Trans, useTranslation } from 'next-i18next'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
+
 import AppLogo from '@/src/components/app-logo'
 import { defaultFetchOptions, getResponseHandler } from '@/util/api'
 import { debounce } from '@/util/index'
 import { isEmailValid, isPasswordValid } from '@/util/validator'
 import ToastContext from '@/src/store/toast-context'
-import { Trans, useTranslation } from 'next-i18next'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import LegalModal from '@/src/components/legal-modal'
 
 const SignUp = (): JSX.Element => {
