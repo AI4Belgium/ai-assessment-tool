@@ -6,6 +6,7 @@ import { TextBody } from './content'
 import { useTranslation, Trans } from 'next-i18next'
 import { GITHUB_URL } from './header'
 import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
+import ManageCookieButton from '../cookie-consent/manage-cookie-button'
 
 const Logo = (): JSX.Element => {
   return (
@@ -43,7 +44,7 @@ const SocialButton = ({ children, label, href }: { children: ReactNode, label: s
 }
 
 export const Footer = (): JSX.Element => {
-  const { t } = useTranslation(['front-page', 'terms-and-conditions', 'privacy-policy'])
+  const { t } = useTranslation(['front-page', 'terms-and-conditions', 'privacy-policy', 'cookies'])
   return (
     <Flex flexDirection='column' bgColor='transparent' pb='30%' mt='3em' alignItems='center'>
       <Logo />
@@ -60,10 +61,11 @@ export const Footer = (): JSX.Element => {
       <SocialButton label='GitHub' href={GITHUB_URL}>
         <FaGithub />
       </SocialButton>
-      <Flex className='underline mt-3'>
+      <div className='flex flex-wrap underline mt-3 justify-center'>
         <LegalCookieButton index={0}><Box className='mr-2 mb-2 cursor-pointer'>{t('terms-and-conditions:title')}</Box></LegalCookieButton>
         <LegalCookieButton><Box className='mr-2 mb-2 cursor-pointer'>{t('privacy-policy:title')}</Box></LegalCookieButton>
-      </Flex>
+        <ManageCookieButton><Box className='mr-2 mb-2 cursor-pointer'>{t('cookies:cookieActions.configureCookies')}</Box></ManageCookieButton>
+      </div>
     </Flex>
   )
 }
