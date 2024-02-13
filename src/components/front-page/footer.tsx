@@ -1,12 +1,13 @@
 import React, { ReactNode } from 'react'
 import { Box, Flex, Image, Button, useColorModeValue, VisuallyHidden } from '@chakra-ui/react'
 import { FaGithub } from 'react-icons/fa'
-import AppLogo from '@/src/components/app-logo'
-import { TextBody } from './content'
 import { useTranslation, Trans } from 'next-i18next'
-import { GITHUB_URL } from './header'
+
+import AppLogo from '@/src/components/app-logo'
+import { TextBody } from '@/src/components/front-page/content'
+import { GITHUB_URL } from '@/src/components/front-page/header'
 import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
-import ManageCookieButton from '../cookie-consent/manage-cookie-button'
+import ManageCookieButton from '@/src/components/cookie-consent/manage-cookie-button'
 
 const Logo = (): JSX.Element => {
   return (

@@ -9,6 +9,7 @@ import {
   Button
 } from '@chakra-ui/react'
 import { useTranslation, Trans } from 'next-i18next'
+
 import { useFedconsentCookie } from '@/src/hooks'
 import CookieManagerModal from '@/src/components/cookie-consent/cookie-manager-modal'
 import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
