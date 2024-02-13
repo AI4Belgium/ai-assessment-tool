@@ -199,7 +199,7 @@ const Login = ({ onSubmit }: { onSubmit?: Function }): JSX.Element => {
                 loadingText={`${t('login:logging')}`}
                 disabled={disabled}
               >
-                {t('buttons:sign-in')}
+                {t('buttons:log-in')}
               </Button>
               <Box m='5' textAlign='center'>
                 <Link href='/signup' color='brand' p='2' display='block'>
