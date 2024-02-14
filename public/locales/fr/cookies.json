@@ -1,7 +1,7 @@
 {
   "cookieManager": {
     "header": "Notre site utilise des cookies",
-    "message": "Qu'est-ce qu'un cookie? Quels cookies utilisons nous et pourquoi ? Lisez notre politique en matière de cookies pour en savoir plus.",
+    "message": "Qu'est-ce qu'un cookie? Quels cookies utilisons nous et pourquoi ? <button>Lisez notre politique en matière de cookies</button> pour en savoir plus.",
     "cookies": {
       "essential": {
         "label": "Essentiel",
@@ -24,7 +24,7 @@
     }
   },
   "cookieBanner": {
-    "message": "Le présent site web utilise des cookies. Les cookies essentiels et fonctionnels sont nécessaires au bon fonctionnement du site web et ne peuvent pas être refusés. D'autres cookies sont utilisés à des fins statistiques (\"cookies analytiques\") et ne seront placés que si vous en acceptez le placement. Lisez notre politique en matière de cookies pour en savoir plus."
+    "message": "Le présent site web utilise des cookies. Les cookies essentiels et fonctionnels sont nécessaires au bon fonctionnement du site web et ne peuvent pas être refusés. D'autres cookies sont utilisés à des fins statistiques (\"cookies analytiques\") et ne seront placés que si vous en acceptez le placement. Lisez notre <button>déclaration de confidentialité</button> pour en savoir plus."
   },
   "cookieActions": {
     "acceptOptional": "Accepter les cookies optionnels",

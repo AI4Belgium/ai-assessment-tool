@@ -22,9 +22,11 @@ export async function middleware (req: NextRequest): Promise<undefined | NextRes
     return
   }
 
-  if (req.nextUrl.locale === 'default') {
-    const locale = String(req.cookies.get('NEXT_LOCALE')?.value ?? i18n.defaultLocale)
+  const usersLocale = req.cookies.get('NEXT_LOCALE')?.value
+  const defaultLocale = i18n.defaultLocale
 
+  if (req.nextUrl.locale === 'default' || (usersLocale != null && usersLocale !== req.nextUrl.locale)) {
+    const locale = usersLocale ?? defaultLocale
     return NextResponse.redirect(
       new URL(`/${locale}${req.nextUrl.pathname}${req.nextUrl.search}`, req.url)
     )

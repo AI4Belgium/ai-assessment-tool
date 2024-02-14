@@ -20,7 +20,7 @@
   },
   "part3": {
     "title1": "ESSAYEZ L'INSTANCE DE DÉMO",
-    "txt1": "L'instance de démonstration est une instance publiquement accessible pour essayer l'outil d'évaluation de l'éthique de l'IA et peut être trouvée à l'adresse suivante : <0>altai.ai4belgium.be</0>.<br/><br/>Bien que les projets et les comptes sur l'instance de démonstration ne soient pas supprimés périodiquement, vous ne devriez <strong>pas compter</strong> sur l'instance de démonstration pour une utilisation en production. Nous ne pouvons pas garantir que vos projets ne seront pas perdus. Cela est principalement dû au fait que cette instance fonctionne sur une petite machine virtuelle avec des ressources limitées. Nous vous recommandons généralement d'héberger votre propre instance.",
+    "txt1": "L'instance de démonstration est une instance publiquement accessible pour essayer l'outil d'évaluation de l'éthique de l'IA.<br/><br/>Les projets et les comptes sur l'instance de démonstration sont supprimés périodiquement, vous ne devriez <strong>pas compter</strong> sur l'instance de démonstration pour une utilisation en production. Nous vous recommandons d'héberger votre propre instance.",
     "action1": "Essayez-le ici"
   },
   "team": {

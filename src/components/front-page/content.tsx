@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box, Flex, Text, Center, Image, Wrap, Heading, Spacer, HeadingProps, TextProps } from '@chakra-ui/react'
 import Typed from 'typed.js'
 import { useTranslation, Trans } from 'next-i18next'
-import { TeamMembersContainer } from './team'
-import { AltaiSections } from './altai-sections'
-import { LinkButton } from './link-button'
-import style from './content.module.scss'
-import { GITHUB_URL } from './header'
+
+import { TeamMembersContainer } from '@/src/components/front-page/team'
+import { AltaiSections } from '@/src/components/front-page/altai-sections'
+import { LinkButton } from '@/src/components/front-page/link-button'
+import style from '@/src/components/front-page/content.module.scss'
+import { GITHUB_URL } from '@/src/components/front-page/header'
 
 export const TEXT_COLOR = '#09181B'
 
@@ -16,9 +17,6 @@ export const Heading3 = (props: HeadingProps): JSX.Element => <Heading fontSize=
 export const TextBody = (props: TextProps): JSX.Element => <Text textAlign='justify' fontSize={['1.125rem', '1.25rem']} mt={['1.125rem', '1.25rem']} {...props}>{props.children}</Text>
 
 export const Content = (): JSX.Element => {
-  useEffect(() => {
-
-  }, [])
   return (
     <Flex flexDirection='column' justifyContent='center' alignItems='center' px={['2em', '3em']} className={style.content}>
       <Part1 />
@@ -93,7 +91,7 @@ const Part3 = (): JSX.Element => {
           <Wrap>
             <Box>
               <TextBody>
-                <Trans t={t} components={[<a key='0' href='//altai.ai4belgium.be' />]}>
+                <Trans t={t}>
                   {t('part3.txt1')}
                 </Trans>
               </TextBody>
@@ -103,7 +101,7 @@ const Part3 = (): JSX.Element => {
         </Flex>
       </Flex>
       <Center mt='2rem'>
-        <LinkButton link='//altai.ai4belgium.be/login' label={t('part3.action1')} />
+        <LinkButton link='/login' label={t('part3.action1')} />
       </Center>
     </Box>
   )

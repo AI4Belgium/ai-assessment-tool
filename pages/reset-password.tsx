@@ -27,7 +27,7 @@ export const getServerSideProps = setup(async (ctx: any): Promise<any> => {
   return {
     props: {
       ...props,
-      ...(await serverSideTranslations(ctx.locale as string, ['reset-password', 'cookies', 'buttons', 'validations', 'exceptions', 'placeholders', 'api-messages']))
+      ...(await serverSideTranslations(ctx.locale as string, ['reset-password', 'cookies', 'buttons', 'validations', 'exceptions', 'placeholders', 'api-messages', 'terms-and-conditions', 'privacy-policy']))
     }
   }
 })

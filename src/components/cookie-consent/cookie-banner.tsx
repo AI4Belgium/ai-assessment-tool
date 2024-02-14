@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Drawer,
   DrawerBody,
@@ -8,14 +8,16 @@ import {
   Flex,
   Button
 } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
+
 import { useFedconsentCookie } from '@/src/hooks'
-import CookieManagerModal from './cookie-manager-modal'
+import CookieManagerModal from '@/src/components/cookie-consent/cookie-manager-modal'
+import LegalCookieButton from '@/src/components/cookie-consent/legal-cookie-button'
 
 function CookieBanner (): JSX.Element {
   const { t } = useTranslation()
   const { isOpen, onClose, onOpen } = useDisclosure()
-  const [modalOpen, setModalOpen] = React.useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const {
     setOptionalCookies,
     fedconsentCookieBrowserValue
@@ -24,14 +26,6 @@ function CookieBanner (): JSX.Element {
   function cookieHandler (accpetAll: boolean): void {
     setOptionalCookies(accpetAll, true)
     onClose()
-  }
-
-  function configureCookiesHandler (): void {
-    setModalOpen(true)
-  }
-
-  function modalCloseCallback (): void {
-    setModalOpen(false)
   }
 
   useEffect(() => {
@@ -49,10 +43,17 @@ function CookieBanner (): JSX.Element {
         <DrawerContent>
           <DrawerBody>
             <div className='mr-5'>
-              {t('cookies:cookieBanner.message')}
+              <Trans
+                t={t}
+                components={{
+                  button: <LegalCookieButton />
+                }}
+              >
+                {t('cookies:cookieBanner.message')}
+              </Trans>
             </div>
             <Flex flexWrap='wrap' mt='1'>
-              <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={configureCookiesHandler}>
+              <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={() => setModalOpen(true)}>
                 {t('cookies:cookieActions.configureCookies')}
               </Button>
               <Button colorScheme='teal' variant='outline' className='text-xs md:text-md mb-1 mr-1' onClick={() => cookieHandler(true)}>
@@ -65,7 +66,7 @@ function CookieBanner (): JSX.Element {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-      {modalOpen && <CookieManagerModal onCloseCb={modalCloseCallback} />}
+      {modalOpen && <CookieManagerModal onCloseCb={() => setModalOpen(false)} />}
     </>
   )
 }

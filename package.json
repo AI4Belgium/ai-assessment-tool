@@ -14,7 +14,7 @@
     "node": ">=16.0.0 <19.0.0"
   },
   "keywords": [],
-  "license": "MIT",
+  "license": "EUPL-1.2",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.12",
     "@chakra-ui/react": "^2.6.0",

@@ -10,22 +10,27 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  IconButton
+  IconButton,
+  Switch,
+  useDisclosure
 } from '@chakra-ui/react'
 import isEmpty from 'lodash.isempty'
+import { Trans, useTranslation } from 'next-i18next'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
+
 import AppLogo from '@/src/components/app-logo'
 import { defaultFetchOptions, getResponseHandler } from '@/util/api'
 import { debounce } from '@/util/index'
 import { isEmailValid, isPasswordValid } from '@/util/validator'
 import ToastContext from '@/src/store/toast-context'
-import { useTranslation } from 'next-i18next'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import LegalModal from '@/src/components/legal-modal'
 
 const SignUp = (): JSX.Element => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const router = useRouter()
   const { showToast } = useContext(ToastContext)
+  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: false })
   let email: string | null = router.query.email as string
   email = isEmpty(email) ? null : decodeURIComponent(email)
   const token = router.query.token as string
@@ -34,7 +39,8 @@ const SignUp = (): JSX.Element => {
     password: '',
     firstName: '',
     lastName: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    acceptedTerms: false
   })
 
   const [showPasswords, setShowPasswords] = useState({
@@ -54,9 +60,18 @@ const SignUp = (): JSX.Element => {
   const [passwordLengthErr, setPasswordLengthErr] = useState(false)
   const [passwordCharErr, setPasswordCharErr] = useState(false)
   const [confirmPasswordErr, setConfirmPasswordErr] = useState(false)
-  const [isButtonDisabled, setButtonState] = useState(true)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const responseHandler = getResponseHandler(showToast, t)
+
+  const disclaimer = t('terms-and-conditions:disclaimer', { returnObjects: true })
+  const disclaimerTranslationConfig: any = {
+    returnObjects: true
+  }
+  if (Array.isArray(disclaimer)) {
+    disclaimerTranslationConfig.joinArrays = '\n'
+  }
+
   useEffect(() => {
     if (!touched.email) return
     setEmailErr(!isEmailValid(values.email))
@@ -81,9 +96,9 @@ const SignUp = (): JSX.Element => {
   useEffect(() => {
     const hasErrors = emailErr || passwordLengthErr || passwordCharErr || confirmPasswordErr ||
       isEmpty(values.email) || isEmpty(values.password) || isEmpty(values.confirmPassword) ||
-      isEmpty(values.firstName) || isEmpty(values.lastName)
-    setButtonState(hasErrors)
-  }, [values.password, values.confirmPassword, values.firstName, values.lastName, values.email, emailErr, passwordLengthErr, passwordCharErr, confirmPasswordErr])
+      isEmpty(values.firstName) || isEmpty(values.lastName) || !values.acceptedTerms
+    setIsButtonDisabled(hasErrors)
+  }, [values, emailErr, passwordLengthErr, passwordCharErr, confirmPasswordErr])
 
   const _showToast = (): void => {
     showToast({
@@ -147,10 +162,10 @@ const SignUp = (): JSX.Element => {
   const setPropTouchedDebounced = useMemo(() => debounce(setPropTouched, 1000), [touched])
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    const { name, value } = e.target
+    const { name, value, checked, type } = e.target
     setValues({
       ...values,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     })
     setPropTouchedDebounced(name)
   }
@@ -200,6 +215,12 @@ const SignUp = (): JSX.Element => {
             lineHeight='normal'
           >
             <h1>{t('buttons:sign-up')}</h1>
+            {i18n.exists('terms-and-conditions:disclaimer') &&
+              <div className='border-2 border-gray-500 border-solid p-3 mt-3 text-justify whitespace-pre-line'>
+                <Trans t={t}>
+                  <Text>{t('terms-and-conditions:disclaimer', disclaimerTranslationConfig)}</Text>
+                </Trans>
+              </div>}
           </Box>
           <Box my={4} textAlign='left'>
             <FormControl isRequired isInvalid={emailErr}>
@@ -279,11 +300,19 @@ const SignUp = (): JSX.Element => {
               </InputGroup>
               {confirmPasswordErr && <Text size='xs' color='red'>{t('validations:passwords-unmatch')}</Text>}
             </FormControl>
+
+            <FormControl display='flex' alignItems='center'>
+              <Switch id='acceptedTerms' p='0' mt='1.5' isChecked={values.acceptedTerms} onChange={(e) => { void handleChange(e) }} name='acceptedTerms' className='m-0 p-0' />
+              <Text className='m-0 ml-2 text-sm cursor-pointer underline' onClick={onOpen}>
+                {t('signup:accept-terms-and-conditions')}
+              </Text>
+            </FormControl>
+
             <Button
               fontWeight='semibold'
               width='full'
               mt={4}
-              disabled={isButtonDisabled}
+              isDisabled={isButtonDisabled}
               bg='success'
               color='white'
               onClick={(e) => { void registerUser(e) }}
@@ -300,6 +329,9 @@ const SignUp = (): JSX.Element => {
           </Box>
         </Box>
       </Flex>
+
+      <LegalModal isOpen={isOpen} onClose={onClose} />
+
     </>
   )
 }

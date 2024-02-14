@@ -20,7 +20,7 @@
   },
   "part3": {
     "title1": "TEST HET IN DE DEMO-OMGEVING",
-    "txt1": "De demo-omgeving is een publiekelijk beschikbare omgeving om de AI Ethics Assessment Tool uit te proberen en is te vinden op <0>altai.ai4belgium.be</0>.<br/><br/>Hoewel projecten en accounts in de demo-omgeving niet periodiek worden verwijderd, moet je <strong>niet vertrouwen</strong> op de demo-omgeving voor productiegebruik. We kunnen niet garanderen dat je projecten niet verloren zullen gaan. Dit komt voornamelijk doordat deze omgeving draait op een kleine virtuele machine met beperkte middelen. We raden over het algemeen aan om je eigen omgeving te hosten.",
+    "txt1": "De demo-omgeving is een publiekelijk beschikbare omgeving om de AI Ethics Assessment Tool uit te proberen.<br/><br/>Projecten en accounts in de demo-omgeving worden periodiek verwijderd, u moet <strong>niet vertrouwen</strong> op de demo-omgeving voor productiegebruik. We kunnen niet garanderen dat je projecten niet verloren zullen gaan. We raden over het algemeen aan om uw eigen omgeving te hosten.",
     "action1": "Probeer het hier"
   },
   "team": {

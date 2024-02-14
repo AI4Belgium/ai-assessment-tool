@@ -1,5 +1,6 @@
 {
   "account-created-title": "Compte créé.",
   "account-created-description": "Nous avons créé votre compte. Vous serez redirigé vers la page de connexion dans 3 secondes",
-  "registering": "Enregistrement"
+  "registering": "Enregistrement",
+  "accept-terms-and-conditions": "J'accepte les conditions d'utilisation et la politique de confidentialité"
 }

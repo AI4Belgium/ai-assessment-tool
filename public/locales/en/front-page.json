@@ -20,7 +20,7 @@
   },
   "part3": {
     "title1": "TRY THE DEMO INSTANCE",
-    "txt1": "The demo instance is a publicly available instance for trying out the AI Ethics Assessment Tool and can be found at <0>altai.ai4belgium.be</0>.<br/><br/>While projects and accounts on the demo instance are not deleted periodically, you should <strong>not rely</strong> on the demo instance for production use. We cannot guarantee that your projects won't be lost. This is mainly due to the fact that this instance runs on a small virtual machine with limited resources. We generally recommend hosting your own instance.",
+    "txt1": "The demo instance is a publicly available instance for trying out the AI Ethics Assessment Tool.<br/><br/>Projects and accounts on the demo instance are deleted periodically, you should <strong>not rely</strong> on the demo instance for production use. We cannot guarantee that your projects won't be lost. We recommend hosting your own instance.",
     "action1": "Try it here"
   },
   "team": {

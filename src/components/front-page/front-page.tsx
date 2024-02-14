@@ -1,8 +1,9 @@
 import { Flex, Box } from '@chakra-ui/react'
 import React from 'react'
-import { Content } from './content'
-import { Footer } from './footer'
-import { AI4BelgiumHeader } from './header'
+
+import { Content } from '@/src/components/front-page/content'
+import { Footer } from '@/src/components/front-page/footer'
+import { AI4BelgiumHeader } from '@/src/components/front-page/header'
 // import { Waves } from './waves'
 
 /* TODO frontpage

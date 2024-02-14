@@ -1,8 +1,8 @@
 
 import { Box, BoxProps } from '@chakra-ui/react'
-import style from './altai-sections.module.scss'
-import { Heading1, Heading2, TextBody } from './content'
 import { useTranslation } from 'next-i18next'
+import style from '@/src/components/front-page/altai-sections.module.scss'
+import { Heading1, Heading2, TextBody } from '@/src/components/front-page/content'
 
 export const AltaiSections = (props: BoxProps): JSX.Element => {
   const { t } = useTranslation('front-page')
