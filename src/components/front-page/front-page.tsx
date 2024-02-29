@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Content } from '@/src/components/front-page/content'
 import { Footer } from '@/src/components/front-page/footer'
-import { AI4BelgiumHeader } from '@/src/components/front-page/header'
+import { Header } from '@/src/components/front-page/header'
 // import { Waves } from './waves'
 
 /* TODO frontpage
@@ -42,7 +42,7 @@ const FrontPage = (props: any): JSX.Element => {
         {css}
       </style>
       <Box maxWidth='1200px' margin='0 auto' width='100%'>
-        <AI4BelgiumHeader />
+        <Header />
         <Flex flexDirection='column' alignItems='center' justifyContent='center'>
           <Content />
           <Footer />

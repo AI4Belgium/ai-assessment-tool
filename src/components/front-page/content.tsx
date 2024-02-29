@@ -73,9 +73,10 @@ const Part2 = (): JSX.Element => {
         </Trans>
       </TextBody>
       <TextBody><Trans t={t}>{t('part2.txt6')}</Trans></TextBody>
-      <Center mt='2rem'>
-        <LinkButton link={GITHUB_URL} label={t('part2.action1')} />
-      </Center>
+      {GITHUB_URL != null &&
+        <Center mt='2rem'>
+          <LinkButton link={GITHUB_URL} label={t('part2.action1')} />
+        </Center>}
     </Box>
   )
 }

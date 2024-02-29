@@ -59,9 +59,10 @@ export const Footer = (): JSX.Element => {
         </Trans>
       </TextBody>
       <Box mt='1em' />
-      <SocialButton label='GitHub' href={GITHUB_URL}>
-        <FaGithub />
-      </SocialButton>
+      {GITHUB_URL != null &&
+        <SocialButton label='GitHub' href={GITHUB_URL}>
+          <FaGithub />
+        </SocialButton>}
       <div className='flex flex-wrap underline mt-3 justify-center'>
         <LegalCookieButton index={0}><Box className='mr-2 mb-2 cursor-pointer'>{t('terms-and-conditions:title')}</Box></LegalCookieButton>
         <LegalCookieButton><Box className='mr-2 mb-2 cursor-pointer'>{t('privacy-policy:title')}</Box></LegalCookieButton>
