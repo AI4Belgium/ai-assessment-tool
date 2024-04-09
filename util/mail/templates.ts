@@ -138,6 +138,17 @@ export function deletedUserAccountHtml (): string {
   `
 }
 
+export function deletedUserAccountNotificationHtml (): string {
+  return `
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
+      ${htmlLogo}
+      <span>
+        Accounts on the demo platform are temporary. Your account arrived at the expiration time. Your account will be deleted in 24h. If you don't want this to happen, please login to your account and cancel the deletion in your settings.
+      </span>
+    </div>
+  `
+}
+
 const templates = {
   getInvitationHtml,
   getResetPasswordHtml,
@@ -146,7 +157,8 @@ const templates = {
   getProjectActivityHtml,
   userRemovedProjectHtml,
   deletedUserAccountHtml,
-  notificationDeletedUserHtml
+  notificationDeletedUserHtml,
+  deletedUserAccountNotificationHtml
 }
 
 export default templates

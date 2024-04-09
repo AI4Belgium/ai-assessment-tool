@@ -101,3 +101,7 @@ export const timeIt = async (callback: () => Promise<void>): Promise<number> => 
   const end = Date.now()
   return end - start
 }
+
+export const MAX_USER_AGED_DAYS = +(process.env.MAX_USER_AGED_DAYS ?? 60)
+
+export const daysToMilliseconds = (days: number): number => days * 24 * 60 * 60 * 1000

@@ -1,21 +1,51 @@
 import { ObjectId } from 'mongodb'
-import { Job as JobInterface } from '@/src/types/job'
-import isEmpty from 'lodash.isempty'
-import Activity from '@/src/models/activity'
-import { Activity as ActivityTypeDef } from '@/src/types/activity'
+import { Job as JobInterface, JobStatus } from '@/src/types/job'
+import templates from '@/util/mail/templates'
+import { sendMail } from '@/util/mail'
 import Job from '@/src/models/job'
-import UserModel from '@/src/models/user'
-import { getUserProjectIds, getUserProjects } from '@/src/models/project'
-import { getProjectActivityHtml } from '@/util/mail/templates'
-import { sendMailWithSelfInBcc } from '@/util/mail'
-import { User } from '@/src/types/user'
-import { toObjectId } from '@/src/models/mongodb'
-import { getNotificationSetting } from '@/src/models/notification-setting'
+import UserModel, { getUser, updateDeletionFields } from '@/src/models/user'
+import { MAX_USER_AGED_DAYS, daysToMilliseconds } from '@/util/index'
+import { DAYS_BETWEEN_NOTIFICATION_AND_DELETE } from '@/src/models/job/job-delete-user-data'
 
-export type PartialActivityTypeDef = Pick<ActivityTypeDef, 'createdAt' | '_id' | 'projectId' | 'type' | 'createdBy'> & { sent?: boolean }
+function getUserQuery (): any {
+  const startDate = new Date().setHours(0, 0, 0, 0)
+  // last MAX_USER_AGED_DAYS - DAYS_BETWEEN_NOTIFICATION_AND_DELETE days because we need to send notification before deletion
+  const maxAgeDate = new Date(+startDate - daysToMilliseconds(MAX_USER_AGED_DAYS - DAYS_BETWEEN_NOTIFICATION_AND_DELETE))
+  const where = {
+    $and: [
+      {
+        $or: [
+          {
+            deletePreventionDate: { $lt: maxAgeDate, $exists: true },
+            deleteNotificationSentDate: { $exists: false }
+          },
+          {
+            deletePreventionDate: { $lt: maxAgeDate, $exists: true },
+            deleteNotificationSentDate: { $exists: true, $lt: maxAgeDate }
+          },
+          // no deletePreventionDate but deleteNotificationSentDate exists
+          {
+            deletePreventionDate: { $exists: false },
+            deleteNotificationSentDate: { $exists: true, $lt: maxAgeDate },
+            createdAt: { $lt: maxAgeDate }
+          },
+          // no deleteNotificationSentDate and deletePreventionDate
+          {
+            deletePreventionDate: { $exists: false },
+            deleteNotificationSentDate: { $exists: false },
+            createdAt: { $lt: maxAgeDate }
+          }
+        ]
+      },
+      {
+        isDeleted: { $ne: true }
+      }
+    ]
+  }
+  return where
+}
 
 export interface JobDeleteNotificationData {
-  latestActivityPerProject: PartialActivityTypeDef[]
   userId: string
 }
 
@@ -23,118 +53,38 @@ export class JobDeleteNotification extends Job {
   static JOB_TYPE = 'data-delete-notification'
   data?: JobDeleteNotificationData
 
-  // TODO break this up into smaller functions
-  static async createProjectActivityNotificationJobs (): Promise<ObjectId[]> {
-    const startDate = new Date().setHours(0, 0, 0, 0)
-    const maxAgeDate = new Date(+startDate - 60 * 60 * 1000 * 24 * 60) // last 60 days
-    let userResult = await UserModel.find({
-      $or: [
-        {
-          deletePreventionDate: { $lt: maxAgeDate.toISOString() }
-        },
-        {
-          deletePreventionDate: { $exists: false },
-          createdAt: { $lt: maxAgeDate.toISOString() }
-        }
-      ]
-    }, 500) // loop over all users with a limit of 500
+  /**
+   * @returns ObjectId[] - array of job ids of jobs that should run based on the user query
+   */
+  static async createDeleteNotificationIfNotExistingJobs (): Promise<ObjectId[]> {
+    const where = getUserQuery()
+    const generator = UserModel.findGenerator(where)
     const jobIds = []
-    while (!isEmpty(userResult?.data)) {
-      for (const user of userResult.data) {
-        const projectIds = await getUserProjectIds(user._id)
-        if (!isEmpty(projectIds)) {
-          const latestJob = await this.getLatestJobForUser(user._id)
-          const jobId = await this.createJobIfNecessary(latestActivityPerProject, latestJob as JobProjectActivityNotification, user)
-          if (jobId != null) jobIds.push(jobId)
+    for await (const user of generator) {
+      const job: Partial<JobInterface> = {
+        data: {
+          userId: user._id
         }
       }
-      if (!isEmpty(userResult.page)) userResult = await UserModel.find({}, UserModel.DEFAULT_LIMIT, Activity.DEFAULT_SORT, userResult.page)
-      else break
+      const existingJobs = await Job.find({ type: this.JOB_TYPE, 'data.userId': user._id, status: { $in: [JobStatus.EXECUTING, JobStatus.PENDING] } })
+      let jobId
+      if (existingJobs?.data?.length > 0) {
+        jobId = existingJobs.data[0]._id
+      } else {
+        jobId = await this.createJob(job, this.JOB_TYPE)
+      }
+      if (jobId != null) jobIds.push(jobId)
     }
     return jobIds
   }
 
-  static mapNotSeenActivity (latestActivityPerProject: PartialActivityTypeDef[], latestJob: JobProjectActivityNotification | null): any[] {
-    if (latestJob == null || latestJob.data == null || latestJob.data.latestActivityPerProject == null) return latestActivityPerProject
-    const { latestActivityPerProject: seenActivitiesPerProject } = latestJob.data
-    return latestActivityPerProject.map((latestProjectActivity: PartialActivityTypeDef) => {
-      const { projectId, _id, createdAt } = latestProjectActivity
-      const seenActivity = seenActivitiesPerProject.find((seenProjectActivity: PartialActivityTypeDef) => String(seenProjectActivity.projectId) === String(projectId))
-      if (seenActivity == null) return latestProjectActivity // no activity seen for this project
-      if (+seenActivity.createdAt < +createdAt) return latestProjectActivity // new activity for this project
-      if (String(seenActivity._id) === String(_id)) return { ...latestProjectActivity, sent: true } // activity already seen, we need to keep it in the list to avoid sending it again
-      return { ...latestProjectActivity, sent: true } // new activity for this project, but we already sent a notification for it for an older activity, should not happen
-    })
-  }
-
-  static async createJobIfNecessary (latestActivityPerProject: PartialActivityTypeDef[], latestJob: JobProjectActivityNotification | null, user: User): Promise<ObjectId | null> {
-    const mappedLatestActivityPerProject = this.mapNotSeenActivity(latestActivityPerProject, latestJob)
-    if (isEmpty(mappedLatestActivityPerProject)) return null
-    if (mappedLatestActivityPerProject.some((activity: PartialActivityTypeDef) => activity.sent !== true)) {
-      const job: Partial<JobInterface> = {
-        data: {
-          latestActivityPerProject: mappedLatestActivityPerProject,
-          userId: user._id
-        }
-      }
-      return await this.createJob(job, this.JOB_TYPE)
-    } else {
-      return null
-    }
-  }
-
-  static async getLatestActivityPerProject (user: User, activityMaxAgeDate: Date): Promise<PartialActivityTypeDef[]> {
-    if (user?._id == null) return []
-    const userProjectIds = await getUserProjectIds(user._id)
-    if (isEmpty(userProjectIds)) return []
-    const where = {
-      createdAt: { $gt: activityMaxAgeDate },
-      createdBy: { $ne: user._id },
-      seenBy: { $ne: user._id },
-      projectId: { $in: userProjectIds }
-    }
-    const projectIdActivityObj: { [key: string]: PartialActivityTypeDef } = { }
-    let activitieResult = await Activity.find(where, Activity.DEFAULT_LIMIT)
-    while (!isEmpty(activitieResult?.data)) {
-      for (const activity of activitieResult.data) {
-        const { projectId, createdAt, _id, type, createdBy } = activity
-        const strProjectId = String(projectId)
-        if (projectIdActivityObj[strProjectId] == null || +projectIdActivityObj[strProjectId].createdAt < +createdAt) projectIdActivityObj[strProjectId] = { projectId, createdAt, _id, type, createdBy }
-      }
-      if (!isEmpty(activitieResult.page)) activitieResult = await Activity.find(where, Activity.DEFAULT_LIMIT, Activity.DEFAULT_SORT, activitieResult.page)
-      else break
-    }
-    return Object.values(projectIdActivityObj)
-  }
-
-  static async getLatestJobForUser (userId: ObjectId | string): Promise<JobInterface | null> {
-    userId = toObjectId(userId)
-    const resultObj = await this.find({ type: this.JOB_TYPE, 'data.userId': userId }, 1, ['createdAt', -1])
-    return resultObj?.data?.[0] ?? null
-  }
-
-  async run (): Promise<any> {
-    const { latestActivityPerProject, userId } = this.data as JobProjectActivityNotificationData
-    const latestActivityPerProjectToSend = latestActivityPerProject.filter((activity: PartialActivityTypeDef) => activity.sent !== true)
-    const projectIds = latestActivityPerProjectToSend.map((activity: PartialActivityTypeDef) => activity.projectId)
-    if (isEmpty(projectIds)) {
-      this.result = 'No projects to notify'
-      return
-    }
-    const user = await UserModel.get(userId)
-    if (user == null) throw Error(`User not found: ${userId}`)
-    if (user.emailVerified !== true) {
-      this.result = 'User email not verified'
-      return
-    }
-    const notification = await getNotificationSetting(user._id)
-    if (notification == null || !notification.projectActivity) {
-      this.result = 'User has disabled project activity notifications'
-      return
-    }
-    const projects = await getUserProjects(userId, projectIds)
-    if (isEmpty(projects)) throw Error(`No projects found for user: ${userId}`)
-    const html = getProjectActivityHtml(projects)
-    this.result = await sendMailWithSelfInBcc(user.email, 'New Project Activity', html)
+  async run (): Promise<any | null> {
+    const { userId } = this.data as JobDeleteNotificationData
+    const user = await getUser({ _id: userId })
+    if (user == null || user.isDeleted === true) return null
+    if (user.email == null) throw new Error('User email is missing')
+    const htmlContent = templates.deletedUserAccountNotificationHtml()
+    await sendMail(user.email, 'Your account and data will be deleted', htmlContent)
+    await updateDeletionFields(userId, null, new Date())
   }
 }
