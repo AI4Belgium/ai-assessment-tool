@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb'
-import { Job as JobInterface } from '@/src/types/job'
+import { Job as JobInterface, JobStatus } from '@/src/types/job'
 import isEmpty from 'lodash.isempty'
 import Activity from '@/src/models/activity'
 import { Activity as ActivityTypeDef } from '@/src/types/activity'
@@ -103,6 +103,11 @@ export class JobProjectActivityNotification extends Job {
   }
 
   async run (): Promise<any> {
+    if (Date.now() - +this.createdAt > 60 * 60 * 1000 * 24) {
+      this.status = JobStatus.CANCELLED
+      this.result = 'Job too old'
+      return
+    }
     const { latestActivityPerProject, userId } = this.data as JobProjectActivityNotificationData
     const latestActivityPerProjectToSend = latestActivityPerProject.filter((activity: PartialActivityTypeDef) => activity.sent !== true)
     const projectIds = latestActivityPerProjectToSend.map((activity: PartialActivityTypeDef) => activity.projectId)

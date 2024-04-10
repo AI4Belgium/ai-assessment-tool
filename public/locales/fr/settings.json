@@ -38,5 +38,11 @@
   "delete-account-message1": "Votre compte sera supprimé immédiatement.",
   "delete-account-message2": "En supprimant votre compte, vous ne recevrez plus d'alertes par e-mail.",
   "delete-account-message3": "En plus, vous ne pourrez pas récupérer les activités passées, même si un nouveau compte avec votre ancien e-mail est créé.",
-  "account-deleted-successfully": "Le compte a été supprimé avec succès. Vous serez rediriger vers la page de connexion..."
+  "account-deleted-successfully": "Le compte a été supprimé avec succès. Vous serez rediriger vers la page de connexion...",
+
+  "auto-account-deletion-title": "La suppression automatique de compte est activée dans cette version",
+  "auto-account-deletion-days-left": "Votre compte sera automatiquement supprimé dans {{daysBeforeDeletion}} jours",
+  "auto-account-reset-deletion-counter": "Réinitialiser le compteur de suppression",
+  "auto-account-disabled-btn-info": "Le bouton est désactivé si les jours avant la suppression sont égaux à {{daysToDisableButton}}",
+
 }

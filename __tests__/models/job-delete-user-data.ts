@@ -177,5 +177,22 @@ describe('JobDeleteUserData', () => {
         expect(job.status).toEqual(JobStatus.FINISHED)
       }
     })
+
+    it('Job gets canceled if meanwhile between job creation and run the user updates the deletePreventionDate', async () => {
+      const jobIds = await JobDeleteUserData.createJobsIfNotExisting()
+      expect(jobIds.length).toEqual(2)
+      const { user1 } = context
+      await updateDeletionFields(String(user1._id), new Date()) // prevent deletion
+      await JobDeleteUserData.findAndExecuteJobs()
+      const jobResuslts = await JobDeleteUserData.find({})
+      expect(jobResuslts.count).toEqual(2)
+      for (const job of jobResuslts.data) {
+        if (String(job.data.userId) === String(user1._id)) {
+          expect(job.status).toEqual(JobStatus.CANCELLED)
+        } else {
+          expect(job.status).toEqual(JobStatus.FINISHED)
+        }
+      }
+    })
   })
 })

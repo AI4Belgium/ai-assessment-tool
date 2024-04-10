@@ -8,10 +8,10 @@ import { useTranslation } from 'next-i18next'
 import DeleteAccountSettings from './delete-account'
 import styles from './index.module.css'
 
-const Settings = (): JSX.Element => {
+const Settings = ({ autoDeleteAccount }: { autoDeleteAccount: boolean }): JSX.Element => {
   const { t } = useTranslation()
   return (
-    <Tabs m='3' maxW={['90vw', 500]} size='sm' variant='enclosed'>
+    <Tabs m='3' maxW={['90vw', '100%']} size='sm' variant='enclosed'>
       <TabList className={styles.tablist} overflowX='scroll'>
         <Tab outline='none'>{t('settings:profile')}</Tab>
         <Tab outline='none'>{t('settings:password')}</Tab>
@@ -34,7 +34,7 @@ const Settings = (): JSX.Element => {
             <NotificationSettings />
           </TabPanel>
           <TabPanel>
-            <DeleteAccountSettings />
+            <DeleteAccountSettings autoDeleteAccount={autoDeleteAccount} />
           </TabPanel>
         </TabPanels>
       </Center>

@@ -103,5 +103,8 @@ export const timeIt = async (callback: () => Promise<void>): Promise<number> => 
 }
 
 export const MAX_USER_AGED_DAYS = +(process.env.MAX_USER_AGED_DAYS ?? 60)
+export const DAYS_BETWEEN_NOTIFICATION_AND_DELETE = 4
 
 export const daysToMilliseconds = (days: number): number => days * 24 * 60 * 60 * 1000
+
+export const millisecondsToDays = (milliseconds: number): number => Math.floor(milliseconds / (24 * 60 * 60 * 1000))

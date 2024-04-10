@@ -5,9 +5,8 @@ import Job from '@/src/models/job'
 import UserModel, { updateToDeletedUser, getUser } from '@/src/models/user'
 import { deleteUserProjects } from '@/src/models/project'
 import { deleteProjectActivities } from '@/src/models/activity'
-import { MAX_USER_AGED_DAYS, daysToMilliseconds } from '@/util/index'
+import { MAX_USER_AGED_DAYS, DAYS_BETWEEN_NOTIFICATION_AND_DELETE, daysToMilliseconds } from '@/util/index'
 
-export const DAYS_BETWEEN_NOTIFICATION_AND_DELETE = 4
 export const DAYS_TO_SEND_DELETE_NOTIFICATION = MAX_USER_AGED_DAYS + DAYS_BETWEEN_NOTIFICATION_AND_DELETE
 
 function getUserQuery (): any {
@@ -82,6 +81,11 @@ export class JobDeleteUserData extends Job {
   async run (): Promise<any> {
     const { userId } = this.data as JobDeleteUserDataData
     const user = await getUser({ _id: userId })
+    if (user?.deletePreventionDate instanceof Date && +new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS)) < +user?.deletePreventionDate) {
+      this.result = 'User has a upated deletion prevention date'
+      this.status = JobStatus.CANCELLED
+      return
+    }
     if (isEmpty(user?._id)) return
     for await (const projectId of deleteUserProjects(String(user?._id))) {
       await deleteProjectActivities(projectId)

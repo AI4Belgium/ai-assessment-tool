@@ -4,8 +4,7 @@ import templates from '@/util/mail/templates'
 import { sendMail } from '@/util/mail'
 import Job from '@/src/models/job'
 import UserModel, { getUser, updateDeletionFields } from '@/src/models/user'
-import { MAX_USER_AGED_DAYS, daysToMilliseconds } from '@/util/index'
-import { DAYS_BETWEEN_NOTIFICATION_AND_DELETE } from '@/src/models/job/job-delete-user-data'
+import { MAX_USER_AGED_DAYS, daysToMilliseconds, DAYS_BETWEEN_NOTIFICATION_AND_DELETE } from '@/util/index'
 
 function getUserQuery (): any {
   const startDate = new Date().setHours(0, 0, 0, 0)
@@ -83,6 +82,11 @@ export class JobDeleteNotification extends Job {
     const user = await getUser({ _id: userId })
     if (user == null || user.isDeleted === true) return null
     if (user.email == null) throw new Error('User email is missing')
+    if (user?.deletePreventionDate instanceof Date && +new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS)) < +user?.deletePreventionDate) {
+      this.result = 'User has a upated deletion prevention date'
+      this.status = JobStatus.CANCELLED
+      return
+    }
     const htmlContent = templates.deletedUserAccountNotificationHtml()
     await sendMail(user.email, 'Your account and data will be deleted', htmlContent)
     await updateDeletionFields(userId, null, new Date())
