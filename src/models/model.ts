@@ -2,6 +2,7 @@ import { ObjectId } from 'mongodb'
 import { connectToDatabase, toObjectId } from './mongodb'
 import { sanitize } from '@/src/models/mongodb'
 import clonedeep from 'lodash.clonedeep'
+import isEmpty from 'lodash.isempty'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default abstract class Model {
@@ -54,6 +55,20 @@ export default abstract class Model {
       limit,
       page: nextKeyFn(data),
       data: await res.toArray()
+    }
+  }
+
+  static async * findGenerator (where: any, limit: number | null = null, sort: [field: string, dir: number] | null = null): AsyncGenerator<any, void, unknown> {
+    limit = limit ?? this.DEFAULT_LIMIT
+    sort = sort ?? this.DEFAULT_SORT
+    let results = await this.find(where, limit, sort) // loop over all users with a limit of 500
+
+    while (!isEmpty(results?.data)) {
+      for (const entity of results.data) {
+        yield entity
+      }
+      if (!isEmpty(results.page)) results = await this.find(where, limit, sort, results.page)
+      else break
     }
   }
 }

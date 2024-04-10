@@ -27,9 +27,9 @@
 
   "notifications-by-email": "Notifications by e-mail",
   "project-activities": "Project activities",
-  "project-activities-caption": "New activities on projects you’re watching",
+  "project-activities-caption": "New activities on projects you're watching",
   "mentions": "Mentions",
-  "mentions-caption": "New comments added on cards you’re watching",
+  "mentions-caption": "New comments added on cards you're watching",
   "notifications-change-success-message": "Notifications changed successfully",
   "notifications-change-error-message": "Notifications change failed",
 
@@ -38,5 +38,10 @@
   "delete-account-message1": "Your account will be deleted immediately.",
   "delete-account-message2": "By deleting your account you will no longer receive email alerts.",
   "delete-account-message3": "Also, you won't be able to retrieve past activities, even if a new account with your former e-mail is created.",
-  "account-deleted-successfully": "Account has been deleted successfully. Redirecting you to login page..."
+  "account-deleted-successfully": "Account has been deleted successfully. Redirecting you to login page...",
+
+  "auto-account-deletion-title": "Auto Account Deletion is enabled in this version",
+  "auto-account-deletion-days-left": "Your account will be automatically deleted in {{daysBeforeDeletion}} days",
+  "auto-account-reset-deletion-counter": "Reset deletion counter",
+  "auto-account-disabled-btn-info": "The button is disabled if the days before deletion are equal to {{daysToDisableButton}}"
 }

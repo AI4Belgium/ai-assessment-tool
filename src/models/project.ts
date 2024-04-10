@@ -9,9 +9,14 @@ import Activity from '@/src/models/activity'
 import { ActivityType } from '@/src/types/activity'
 import { Project } from '@/src/types/project'
 import { User } from '@/src/types/user'
+import Model from '@/src/models/model'
 import industries from '@/src/data/industries.json'
 
 export const TABLE_NAME = 'projects'
+
+export default class ProjectModel extends Model {
+  static TABLE_NAME = TABLE_NAME
+}
 
 export const createProject = async ({ name, createdBy, description, industryId }: { name: string, createdBy: ObjectId | string, description?: string, industryId?: string | ObjectId }, addDefaultColumns = true): Promise<string> => {
   const { db } = await connectToDatabase()
@@ -219,4 +224,13 @@ export const getProjectRoles = async (_id: ObjectId | string): Promise<any[]> =>
   _id = toObjectId(_id)
   const project = await db.collection(TABLE_NAME).findOne({ _id }, { projection: { roles: 1 } })
   return project?.roles
+}
+
+export async function * deleteUserProjects (userId: string | ObjectId, queryLimit = ProjectModel.DEFAULT_LIMIT): AsyncGenerator<ObjectId> {
+  const where = { createdBy: toObjectId(userId) }
+  const generator = ProjectModel.findGenerator(where, queryLimit)
+  for await (const project of generator) {
+    await deleteProject(project._id)
+    yield project._id
+  }
 }

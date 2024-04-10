@@ -38,5 +38,10 @@
   "delete-account-message1": "Uw account wordt onmiddellijk verwijderd.",
   "delete-account-message2": "Door uw account te verwijderen, ontvangt u geen e-mailwaarschuwingen meer.",
   "delete-account-message3": "Ook kunt u eerdere activiteiten niet meer terughalen, zelfs niet als er een nieuw account met uw oude e-mailadres is aangemaakt.",
-  "account-deleted-successfully": "Account is succesvol verwijderd. U wordt omgeleid naar de inlogpagina..."
+  "account-deleted-successfully": "Account is succesvol verwijderd. U wordt omgeleid naar de inlogpagina...",
+
+  "auto-account-deletion-title": "Auto Account Verwijdering is ingeschakeld in deze versie",
+  "auto-account-deletion-days-left": "Uw account wordt automatisch verwijderd over {{daysBeforeDeletion}} dagen",
+  "auto-account-disabled-btn-info": "De knop is uitgeschakeld als de dagen voor verwijdering gelijk zijn aan {{daysToDisableButton}}",
+  "auto-account-reset-deletion-counter": "Reset verwijderingscounter"
 }

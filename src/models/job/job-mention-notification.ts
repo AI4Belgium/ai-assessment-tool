@@ -53,6 +53,11 @@ export class JobMentionNotification extends Job {
       this.result = result
       return false
     }
+    if (Date.now() - +this.createdAt > 60 * 60 * 1000 * 24) {
+      this.status = JobStatus.CANCELLED
+      this.result = 'Job too old'
+      return
+    }
     if (projectId == null || userId == null || text == null) throw Error('Invalid comment')
     const emails: string[] = []
     for (const uid of userIds) {

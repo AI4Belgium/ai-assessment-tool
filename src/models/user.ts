@@ -46,6 +46,7 @@ export const createUser = async ({ email, password, firstName, lastName, emailVe
   lastName = cleanText(lastName)
   if (emailVerified !== true) emailVerified = false
   const createdAt = new Date()
+  // console.log('createUser', { email, password, firstName, lastName, emailVerified, createdAt })
   const res = await db.collection(TABLE_NAME).insertOne({ email, password, firstName, lastName, createdAt, emailVerified })
   return { email, password, firstName, lastName, _id: res.insertedId }
 }
@@ -91,6 +92,17 @@ export const updateUser = async (_id: string | ObjectId, updateData: Partial<Use
   if (isEmpty(update)) return false
 
   const res = await db.collection(TABLE_NAME).updateOne({ _id }, { $set: update })
+  return res.modifiedCount === 1
+}
+
+export const updateDeletionFields = async (_id: string | ObjectId, deletePreventionDate: null | Date = null, deleteNotificationSentDate: null | Date = null): Promise<boolean> => {
+  const { db } = await connectToDatabase()
+  _id = toObjectId(_id)
+  const updateData: any = { }
+  if (deletePreventionDate != null && deletePreventionDate instanceof Date) updateData.deletePreventionDate = deletePreventionDate
+  if (deleteNotificationSentDate != null && deleteNotificationSentDate instanceof Date) updateData.deleteNotificationSentDate = deleteNotificationSentDate
+  if (isEmpty(updateData)) return false
+  const res = await db.collection(TABLE_NAME).updateOne({ _id }, { $set: updateData })
   return res.modifiedCount === 1
 }
 

@@ -138,6 +138,18 @@ export function deletedUserAccountHtml (): string {
   `
 }
 
+export function deletedUserAccountNotificationHtml (baseUrl: string = BASE_URL): string {
+  return `
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
+      ${htmlLogo}
+      <span>
+        Accounts on the platform are temporary. Your account arrived at the expiration time. Your account will be deleted soon.<br />
+        If you don't want this to happen, please <a href='${trimAndRemoveLastSlash(baseUrl)}/login'>log in</a> into your account and cancel the deletion in your settings.
+      </span>
+    </div>
+  `
+}
+
 const templates = {
   getInvitationHtml,
   getResetPasswordHtml,
@@ -146,7 +158,8 @@ const templates = {
   getProjectActivityHtml,
   userRemovedProjectHtml,
   deletedUserAccountHtml,
-  notificationDeletedUserHtml
+  notificationDeletedUserHtml,
+  deletedUserAccountNotificationHtml
 }
 
 export default templates

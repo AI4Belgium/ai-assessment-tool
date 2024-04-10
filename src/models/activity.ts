@@ -13,6 +13,18 @@ import { getUser } from '@/src/models/user'
 import { getUserDisplayName } from '@/util/users'
 import industries from '@/src/data/industries.json'
 
+export async function deleteActivity (activityId: string | ObjectId): Promise<boolean> {
+  const { db } = await connectToDatabase()
+  const res = await db.collection(Activity.TABLE_NAME).deleteOne({ _id: toObjectId(activityId) })
+  return res.deletedCount === 1
+}
+
+export async function deleteProjectActivities (projectId: string | ObjectId): Promise<boolean> {
+  const { db } = await connectToDatabase()
+  const res = await db.collection(Activity.TABLE_NAME).deleteMany({ projectId: toObjectId(projectId) })
+  return (res?.deletedCount ?? 0) > 0
+}
+
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class Activity extends Model {
   static TABLE_NAME = 'activities'

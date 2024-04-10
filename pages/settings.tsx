@@ -12,7 +12,7 @@ const mdVariant = { navigation: 'sidebar', navigationButton: false }
 
 const PAGE = 'settings'
 
-export default function SettingsPage ({ session }: { session: Session }): JSX.Element {
+export default function SettingsPage ({ session, autoDeleteAccount }: { session: Session, autoDeleteAccount: boolean }): JSX.Element {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant })
 
@@ -28,13 +28,14 @@ export default function SettingsPage ({ session }: { session: Session }): JSX.El
       onShowSidebar={toggleSidebar}
     >
       <Box>
-        <Settings />
+        <Settings autoDeleteAccount={autoDeleteAccount ?? false} />
       </Box>
     </SideBar>
   )
 }
 
 export async function getServerSideProps (ctx: any): Promise<any> {
+  const { AUTO_DELETE_ACCOUNT = false } = process.env
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (session == null) {
@@ -48,6 +49,7 @@ export async function getServerSideProps (ctx: any): Promise<any> {
   return {
     props: {
       session: JSON.parse(JSON.stringify(session)),
+      autoDeleteAccount: ['true', true, 1, '1'].includes(AUTO_DELETE_ACCOUNT),
       ...await serverSideTranslations(ctx.locale as string, ['buttons', 'cookies', 'navbar', 'validations', 'settings', 'placeholders', 'img-input', 'api-messages'])
     }
   }

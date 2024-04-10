@@ -9,12 +9,12 @@ import i18n from 'i18next'
 import i18NextConfig from '../../next-i18next.config'
 import i18nextFSBackend from 'i18next-fs-backend'
 import { faker } from '@faker-js/faker'
-import { createUser } from '@/src/models/user'
+import { createUser, updateDeletionFields } from '@/src/models/user'
 import { createProject, getProject, createProjectWithDefaultColumnsAndCardsAndActivity } from '@/src/models/project'
 import { User } from '@/src/types/user'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import { connectToDatabase } from '@/src/models/mongodb'
-import { MongoClient } from 'mongodb'
+import { Db, MongoClient } from 'mongodb'
 import { hashPassword } from '@/util/auth'
 import { encode } from 'next-auth/jwt'
 import industries from '@/src/data/industries.json'
@@ -24,11 +24,14 @@ import { defaultCards, defaultRoles } from '@/src/data'
 import { addRoles } from '@/src/models/role'
 import { upsertNotificationSetting } from '@/src/models/notification-setting'
 import { NotificationSetting } from '@/src/types/notification-setting'
+import { MAX_USER_AGED_DAYS, daysToMilliseconds } from '@/util/index'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConfig } = require('next-i18next/dist/commonjs/config/createConfig')
 
 const { JWT_SECRET_KEY } = process.env
+
+const RealDate = Date
 
 const namespaces = [
   'api-messages',
@@ -90,23 +93,25 @@ export const renderWithThemeAndTranslations = async (ui: JSX.Element, locale = '
 }
 
 export const setupMongoDB = (): { mongoServer: MongoMemoryServer | null, client: MongoClient | null } => {
-  const context: { mongoServer: MongoMemoryServer | null, client: MongoClient | null } = {
+  const context: { mongoServer: MongoMemoryServer | null, client: MongoClient | null, db: Db | null } = {
     mongoServer: null,
-    client: null
+    client: null,
+    db: null
   }
   beforeAll(async () => {
     // https://dev.to/remrkabledev/testing-with-mongodb-memory-server-4ja2
     context.mongoServer = await MongoMemoryServer.create()
     const uri = context.mongoServer.getUri()
-    const clientAndDB = await connectToDatabase(uri, faker.random.alphaNumeric(10))
-    context.client = clientAndDB.client
+    const { client, db } = await connectToDatabase(uri, faker.random.alphaNumeric(10))
+    context.client = client
+    context.db = db
   })
   // beforeEach(async () => {
   //   await context.client?.db().dropDatabase()
   // })
   afterEach(async () => {
+    await context.db?.dropDatabase()
     await context.client?.db().dropDatabase()
-    // console.log('Dropped database')
   })
   afterAll(async () => {
     await context.client?.close()
@@ -139,11 +144,32 @@ export const givenProjectData = (data: any = {}): Partial<Project> => {
   }
 }
 
-export const givenAUser = async (data = {}): Promise<User> => {
+export const givenAUser = async (data: any = {}): Promise<User> => {
   const user = givenUserData(data) as User
+  // console.log('givenAUser', user)
   const hashedPassword = await hashPassword(String(user.password))
+  if (data.createdAt != null) setDateContructorToDate(data.createdAt)
   const createdUser = await createUser({ ...user, password: hashedPassword })
+  if (data.createdAt != null) resetDateConstructor()
+  let deleteNotificationSentDate = null
+  let deletePreventionDate = null
+  if (data.deleteNotificationSentDate != null) deleteNotificationSentDate = data.deleteNotificationSentDate
+  if (data.deletePreventionDate != null) deletePreventionDate = data.deletePreventionDate
+  if (deleteNotificationSentDate != null || deletePreventionDate != null) await updateDeletionFields(String(createdUser._id), deletePreventionDate, deleteNotificationSentDate)
   return { ...createdUser, password: user.password }
+}
+
+export const givenAUserWithDeleteNotificationSentPastMaxTime = async (data: any = {}): Promise<User> => {
+  if (data.createdAt == null) data.createdAt = new Date(Date.now() - daysToMilliseconds(300))
+  if (data.deleteNotificationSentDate == null) data.deleteNotificationSentDate = new Date(new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 4)).setHours(0, 0, 0, 0))
+  return await givenAUser(data)
+}
+
+export const givenAUserWithDeleteNotificationSentAndDeletePreventionDatePastMaxtime = async (data: any = {}): Promise<User> => {
+  if (data.createdAt == null) data.createdAt = new Date(Date.now() - daysToMilliseconds(300))
+  if (data.deleteNotificationSentDate == null) data.deleteNotificationSentDate = new Date(new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 4)).setHours(0, 0, 0, 0))
+  if (data.deletePreventionDate == null) data.deletePreventionDate = new Date(new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 1)).setHours(0, 0, 0, 0))
+  return await givenAUser(data)
 }
 
 export const givenAUserAcceptingNotifications = async (userData: Partial<User> = {}, notificationData: Partial<NotificationSetting> = { projectActivity: true, mentions: true }): Promise<User> => {
@@ -204,4 +230,17 @@ export const givenCommentTextData = (users: User[]): string => {
     commentText = `${commentText} @[${user.firstName} ${user.lastName}](${String(user._id)})`
   }
   return `${commentText} ${faker.lorem.paragraph()}`
+}
+
+export const setDateContructorToDate = (date: Date): void => {
+  (global as any).Date = class extends RealDate {
+    constructor () {
+      super()
+      return date
+    }
+  }
+}
+
+export const resetDateConstructor = (): void => {
+  (global as any).Date = RealDate
 }

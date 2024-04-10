@@ -21,10 +21,21 @@ const fetchOptions = {
   method: 'POST'
 }
 
-cron.schedule('0 20 * * *', async () => {
-  const url = `${BASE_URL}/api/jobs/digest`
+const callApi = async (url) => {
   console.log('running a task', url)
   const response = await fetch(url, { ...fetchOptions })
   const data = await response.json()
   console.log(data)
+}
+
+cron.schedule('0 20 * * *', async () => {
+  await callApi(`${BASE_URL}/api/jobs/digest`)
+})
+
+cron.schedule('0 50 * * *', async () => {
+  await callApi(`${BASE_URL}/api/jobs/auto-delete-account`)
+})
+
+cron.schedule('1 50 * * *', async () => {
+  await callApi(`${BASE_URL}/api/jobs/trigger`)
 })
