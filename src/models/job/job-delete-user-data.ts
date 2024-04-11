@@ -11,30 +11,32 @@ export const DAYS_TO_SEND_DELETE_NOTIFICATION = MAX_USER_AGED_DAYS + DAYS_BETWEE
 
 function getUserQuery (): any {
   const nowMilliseconds: number = new Date().setHours(0, 0, 0, 0)
-  const maxAgeDate = new Date(nowMilliseconds - daysToMilliseconds(MAX_USER_AGED_DAYS)) // last MAX_USER_AGED_DAYS days
-  const maxAgeDateNotification = new Date(+nowMilliseconds - daysToMilliseconds(MAX_USER_AGED_DAYS + (2 * DAYS_BETWEEN_NOTIFICATION_AND_DELETE))) // times two to be safe
+  const deletionDaysOld = new Date(nowMilliseconds - daysToMilliseconds(MAX_USER_AGED_DAYS)) // last MAX_USER_AGED_DAYS days
+  const notificationDaysOld = new Date(+nowMilliseconds - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE)) // times two to be safe
   const where = {
     $and: [
       {
         $or: [
           {
             deletePreventionDate: {
-              $lt: maxAgeDate,
+              $lt: deletionDaysOld,
               $exists: true
-            }, // example: deletePreventionDate: { $lt: '2021-09-01T00:00:00.000Z' } # delete prevention date
+            },
             // need to specify the date range because we could match with the previous deleteNotificationSentDate
-            deleteNotificationSentDate: { // should be sent before the MAX_USER_AGED_DAYS
+            deleteNotificationSentDate: { // should be after the MAX_USER_AGED_DAYS but older then the days between notification and delete
               $exists: true,
-              $lt: maxAgeDate,
-              $gt: maxAgeDateNotification
+              $lt: notificationDaysOld, // older than the notification date number of days before deletion
+              $gt: deletionDaysOld // after the MAX_USER_AGED_DAYS
             } // more than 4 days before deletion but not the previous deleteNotificationSentDate
           },
           {
-            deletePreventionDate: { $exists: false },
+            deletePreventionDate: {
+              $exists: false
+            },
             deleteNotificationSentDate: {
               $exists: true,
-              $lt: maxAgeDate,
-              $gt: maxAgeDateNotification
+              $lt: notificationDaysOld, // older than the notification date number of days before deletion. Example notifcation should be at least 7 days old
+              $gt: deletionDaysOld // after the MAX_USER_AGED_DAYS
             }
           }
         ]
