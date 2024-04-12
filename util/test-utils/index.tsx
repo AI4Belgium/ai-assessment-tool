@@ -24,7 +24,7 @@ import { defaultCards, defaultRoles } from '@/src/data'
 import { addRoles } from '@/src/models/role'
 import { upsertNotificationSetting } from '@/src/models/notification-setting'
 import { NotificationSetting } from '@/src/types/notification-setting'
-import { MAX_USER_AGED_DAYS, daysToMilliseconds } from '@/util/index'
+import { MAX_USER_AGED_DAYS, daysToMilliseconds, DAYS_BETWEEN_NOTIFICATION_AND_DELETE } from '@/util/index'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createConfig } = require('next-i18next/dist/commonjs/config/createConfig')
@@ -160,14 +160,14 @@ export const givenAUser = async (data: any = {}): Promise<User> => {
 }
 
 export const givenAUserWithDeleteNotificationSentPastMaxTime = async (data: any = {}): Promise<User> => {
-  if (data.createdAt == null) data.createdAt = new Date(Date.now() - daysToMilliseconds(300))
-  if (data.deleteNotificationSentDate == null) data.deleteNotificationSentDate = new Date(new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 4)).setHours(0, 0, 0, 0))
+  if (data.createdAt == null) data.createdAt = new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 1))
+  if (data.deleteNotificationSentDate == null) data.deleteNotificationSentDate = new Date(new Date(Date.now() - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE + 4)).setHours(0, 0, 0, 0))
   return await givenAUser(data)
 }
 
 export const givenAUserWithDeleteNotificationSentAndDeletePreventionDatePastMaxtime = async (data: any = {}): Promise<User> => {
   if (data.createdAt == null) data.createdAt = new Date(Date.now() - daysToMilliseconds(300))
-  if (data.deleteNotificationSentDate == null) data.deleteNotificationSentDate = new Date(new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 4)).setHours(0, 0, 0, 0))
+  if (data.deleteNotificationSentDate == null) data.deleteNotificationSentDate = new Date(new Date(Date.now() - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE + 1)).setHours(0, 0, 0, 0))
   if (data.deletePreventionDate == null) data.deletePreventionDate = new Date(new Date(Date.now() - daysToMilliseconds(MAX_USER_AGED_DAYS + 1)).setHours(0, 0, 0, 0))
   return await givenAUser(data)
 }

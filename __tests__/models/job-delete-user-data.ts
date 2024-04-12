@@ -6,7 +6,7 @@ import { JobDeleteUserData } from '@/src/models/job/job-delete-user-data'
 // import waitForExpect from 'wait-for-expect'
 import * as Mail from '@/util/mail/index'
 import { JobStatus } from '@/src/types/job'
-import { MAX_USER_AGED_DAYS, daysToMilliseconds } from '@/util/index'
+import { MAX_USER_AGED_DAYS, daysToMilliseconds, DAYS_BETWEEN_NOTIFICATION_AND_DELETE } from '@/util/index'
 import { getUser, getUsers, updateDeletionFields, updateToDeletedUser } from '@/src/models/user'
 import ProjectModel from '@/src/models/project'
 
@@ -86,7 +86,7 @@ describe('JobDeleteUserData', () => {
     it('Does not create a job for a user with a deletePreventionDate that is not old enough', async () => {
       let userX: any = await givenAUserWithDeleteNotificationSentAndDeletePreventionDatePastMaxtime()
       userX = await getUser({ _id: userX?._id })
-      expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
+      expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE)))
       expect(+(userX?.deletePreventionDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
       await updateDeletionFields(String(userX._id), new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS / 2))) // prevent deletion
       userX = await getUser({ _id: userX?._id })
@@ -106,9 +106,9 @@ describe('JobDeleteUserData', () => {
     it('Does not create a job for a user with a deleteNotificationSentDate that is not old enough', async () => {
       let userX: any = await givenAUserWithDeleteNotificationSentAndDeletePreventionDatePastMaxtime()
       userX = await getUser({ _id: userX?._id })
-      expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
+      expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE)))
       expect(+(userX?.deletePreventionDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
-      await updateDeletionFields(String(userX._id), null, new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS / 2)))
+      await updateDeletionFields(String(userX._id), null, new Date(now - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE / 2)))
       userX = await getUser({ _id: userX?._id })
       expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeGreaterThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
       const jobIds = await JobDeleteUserData.createJobsIfNotExisting()
@@ -126,11 +126,31 @@ describe('JobDeleteUserData', () => {
     it('Does not create a job for an already deleted user', async () => {
       let userX: any = await givenAUserWithDeleteNotificationSentAndDeletePreventionDatePastMaxtime()
       userX = await getUser({ _id: userX?._id })
-      expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
+      expect(+(userX?.deleteNotificationSentDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(DAYS_BETWEEN_NOTIFICATION_AND_DELETE)))
       expect(+(userX?.deletePreventionDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS)))
       await updateToDeletedUser(userX._id)
       userX = await getUser({ _id: userX?._id })
       expect(+(userX?.isDeleted)).toBeTruthy()
+      const jobIds = await JobDeleteUserData.createJobsIfNotExisting()
+      expect(jobIds.length).toEqual(2)
+      const jobResuslts = await JobDeleteUserData.find({})
+      expect(jobResuslts.count).toEqual(2)
+      const userIds: any = []
+      for (const job of jobResuslts.data) {
+        expect(job.status).toEqual(JobStatus.PENDING)
+        userIds.push(String(job.data.userId))
+      }
+      expect(userIds.includes(String(userX._id))).toBeFalsy()
+    })
+
+    it('Does not create a job for an user without deleteNotificationSentDate', async () => {
+      let userX: any = await givenAUser({
+        deletePreventionDate: new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS + 10)),
+        createdAt: new Date(now - 300)
+      })
+      userX = await getUser({ _id: userX?._id })
+      expect(userX?.deleteNotificationSentDate).toBeUndefined()
+      expect(+(userX?.deletePreventionDate ?? Infinity)).toBeLessThan(+new Date(now - daysToMilliseconds(MAX_USER_AGED_DAYS + 2)))
       const jobIds = await JobDeleteUserData.createJobsIfNotExisting()
       expect(jobIds.length).toEqual(2)
       const jobResuslts = await JobDeleteUserData.find({})

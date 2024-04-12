@@ -20,10 +20,10 @@ function getUserQuery (): any {
           },
           {
             deletePreventionDate: { $lt: maxAgeDate, $exists: true },
-            deleteNotificationSentDate: { $exists: true, $lt: maxAgeDate }
+            deleteNotificationSentDate: { $lt: maxAgeDate, $exists: true }
           },
           // no deletePreventionDate but deleteNotificationSentDate exists
-          {
+          { // shouldn't exist but just in case => should be deleted
             deletePreventionDate: { $exists: false },
             deleteNotificationSentDate: { $exists: true, $lt: maxAgeDate },
             createdAt: { $lt: maxAgeDate }

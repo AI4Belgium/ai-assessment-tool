@@ -26,19 +26,16 @@ export class JobProjectActivityNotification extends Job {
   // TODO break this up into smaller functions
   static async createProjectActivityNotificationJobs (): Promise<ObjectId[]> {
     const maxAgeDate = new Date(Date.now() - 60 * 60 * 1000 * 24) // last 24 hours
-    let userResult = await UserModel.find({}, 500)
+    const where = { isDeleted: { $ne: true } }
+    const generator = UserModel.findGenerator(where)
     const jobIds = []
-    while (!isEmpty(userResult?.data)) {
-      for (const user of userResult.data) {
-        const latestActivityPerProject = await this.getLatestActivityPerProject(user, maxAgeDate)
-        if (!isEmpty(latestActivityPerProject)) {
-          const latestJob = await this.getLatestJobForUser(user._id)
-          const jobId = await this.createJobIfNecessary(latestActivityPerProject, latestJob as JobProjectActivityNotification, user)
-          if (jobId != null) jobIds.push(jobId)
-        }
+    for await (const user of generator) {
+      const latestActivityPerProject = await this.getLatestActivityPerProject(user, maxAgeDate)
+      if (!isEmpty(latestActivityPerProject)) {
+        const latestJob = await this.getLatestJobForUser(user._id)
+        const jobId = await this.createJobIfNecessary(latestActivityPerProject, latestJob as JobProjectActivityNotification, user)
+        if (jobId != null) jobIds.push(jobId)
       }
-      if (!isEmpty(userResult.page)) userResult = await UserModel.find({}, UserModel.DEFAULT_LIMIT, Activity.DEFAULT_SORT, userResult.page)
-      else break
     }
     return jobIds
   }
@@ -83,15 +80,11 @@ export class JobProjectActivityNotification extends Job {
       projectId: { $in: userProjectIds }
     }
     const projectIdActivityObj: { [key: string]: PartialActivityTypeDef } = { }
-    let activitieResult = await Activity.find(where, Activity.DEFAULT_LIMIT)
-    while (!isEmpty(activitieResult?.data)) {
-      for (const activity of activitieResult.data) {
-        const { projectId, createdAt, _id, type, createdBy } = activity
-        const strProjectId = String(projectId)
-        if (projectIdActivityObj[strProjectId] == null || +projectIdActivityObj[strProjectId].createdAt < +createdAt) projectIdActivityObj[strProjectId] = { projectId, createdAt, _id, type, createdBy }
-      }
-      if (!isEmpty(activitieResult.page)) activitieResult = await Activity.find(where, Activity.DEFAULT_LIMIT, Activity.DEFAULT_SORT, activitieResult.page)
-      else break
+    const generator = Activity.findGenerator(where)
+    for await (const activity of generator) {
+      const { projectId, createdAt, _id, type, createdBy } = activity
+      const strProjectId = String(projectId)
+      if (projectIdActivityObj[strProjectId] == null || +projectIdActivityObj[strProjectId].createdAt < +createdAt) projectIdActivityObj[strProjectId] = { projectId, createdAt, _id, type, createdBy }
     }
     return Object.values(projectIdActivityObj)
   }
