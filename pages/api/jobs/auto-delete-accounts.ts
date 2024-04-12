@@ -12,13 +12,14 @@ async function handler (req: NextApiRequest, res: NextApiResponse): Promise<void
           void JobDeleteNotification.createDeleteNotificationIfNotExistingJobs()
           void JobDeleteUserData.createJobsIfNotExisting()
         }
+        res.status(204).end()
       } catch (error) {
-        return res.status(400).send({ message: (error as any).message })
+        res.status(400).send({ message: (error as any).message })
       }
-      return res.status(204).end()
+      break
     }
     default:
-      return res.status(400).send({ message: 'Invalid request', code: 9002 })
+      res.status(400).send({ message: 'Invalid request', code: 9002 })
   }
 }
 
