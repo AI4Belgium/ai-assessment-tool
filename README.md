@@ -82,7 +82,7 @@ All contributions are welcome!
 
 ## License
 
-This project is licensed under the **MIT license**. Feel free to edit and distribute this template as you like.
+This project is licensed under the **EUPL**.
 
 See [LICENSE](LICENSE) for more information.
 
