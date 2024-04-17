@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Altai is a free and open-source AI assesment tool.",
   "scripts": {
-    "dev": "next dev",
+    "dev": "ts-node migrations/index.ts up && next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "ts-node migrations/index.ts up && next start",
     "lint": "ts-standard .",
     "start-cron": "source .env.local && node cron/index.js",
     "test": "NODE_ENV=test && jest --runInBand --detectOpenHandles --transformIgnorePatterns \"node_modules/(?!jose|@panva/hkdf)/\""
@@ -33,6 +33,7 @@
     "jsonwebtoken": "^9.0.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isempty": "^4.4.0",
+    "mongo-migrate-ts": "^1.4.0",
     "mongodb": "^3.6.10",
     "next": "13.5.6",
     "next-auth": "^4.24.5",
