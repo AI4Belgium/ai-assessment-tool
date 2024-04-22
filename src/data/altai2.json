@@ -124,11 +124,11 @@
                     "isScored":1,
                     "answers" :
                     [
-                        { "answer":"non-existent","score":4 },
-                        { "answer":"low","score":3 },
+                        { "answer":"non-existent","score":0 },
+                        { "answer":"low","score":1 },
                         { "answer":"moderate","score":2 },
-                        { "answer":"significant","score":1 },
-                        { "answer":"high","score":0 }
+                        { "answer":"significant","score":3 },
+                        { "answer":"high","score":4 }
 
                     ]
                 },

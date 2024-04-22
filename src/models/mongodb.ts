@@ -3,6 +3,7 @@ import {
   Db, MongoClient, ObjectId
 } from 'mongodb'
 import isEmpty from 'lodash.isempty'
+import { Umzug, MongoDBStorage, MigrationParams } from 'umzug'
 
 const { MONGODB_URI, MONGODB_DB } = process.env
 
@@ -21,6 +22,28 @@ if (cached == null) {
   cached = { conn: null, promise: null, uri: null }
 }
 
+function createUmzug (db: Db, client: MongoClient): Umzug {
+  const umzug = new Umzug({
+    migrations: {
+      glob: 'migrations/*.ts'
+    },
+    storage: new MongoDBStorage({
+      connection: db
+    }),
+    context: { db, client },
+    logger: console
+  })
+
+  function logUmzugEvent (eventName: string): (eventData: MigrationParams<any>) => void {
+    return (eventData: MigrationParams<any>): void => console.log(`${String(eventData.path)} ${eventName}`)
+  }
+  umzug.on('migrating', logUmzugEvent('migrating'))
+  umzug.on('migrated', logUmzugEvent('migrated'))
+  umzug.on('reverting', logUmzugEvent('reverting'))
+  umzug.on('reverted', logUmzugEvent('reverted'))
+  return umzug as Umzug<object>
+}
+
 export async function isConnected (client: MongoClient): Promise<boolean> {
   if (client instanceof MongoClient) {
     let res = null
@@ -32,6 +55,17 @@ export async function isConnected (client: MongoClient): Promise<boolean> {
     return res?.ok === 1
   }
   return false
+}
+
+export async function runMigrations (db: Db, client: MongoClient): Promise<void> {
+  const umzug = createUmzug(db, client)
+  require('ts-node/register')
+  try {
+    await umzug.up()
+  } catch (e: any) {
+    console.error('Error running migrations:', e)
+    console.error('Migrations not applied', e.reason)
+  }
 }
 
 export async function connectToDatabase (mongoDbUri?: string, dbName?: string | null): Promise<{ client: MongoClient, db: Db }> {
@@ -57,13 +91,14 @@ export async function connectToDatabase (mongoDbUri?: string, dbName?: string | 
       useUnifiedTopology: true
     }
 
-    cached.promise = MongoClient.connect(mongoDbUri, opts).then(client => {
+    cached.promise = MongoClient.connect(mongoDbUri, opts).then(async (client) => {
       const db = typeof dbName === 'string' && dbName.length > 0 ? client.db(dbName) : client.db()
-      return {
+      const returnObj = {
         client,
         db,
         uri: mongoDbUri
       }
+      return await runMigrations(db, client).then(() => returnObj)
     })
   }
   // Logger.setLevel('debug')
